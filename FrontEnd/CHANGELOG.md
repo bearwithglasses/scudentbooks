@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 	Renee: Added
 		- Created FrontEnd folder 
 		- Added demo pages of website pages: homepage.html, booklisting.html, and userprofile.html with corresponding CSS files and JS file
-
+	Christina: Added
+		- Created BackEnd folder
+		- Uploaded current code for creating book database, adding books, and searching for books. Will be changed accordingly.
 	Renee: FrontEnd Updates
 		- Basic styling
 		- Made pages responsive for mobile dimensions
