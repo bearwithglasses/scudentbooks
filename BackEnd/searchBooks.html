@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta content="text/javascript" http-equiv="Content-Script-Type" />
+	<meta content="text/css" http-equiv="Content-Style-Type" />
+	<title>Search Books</title>
+    <style>
+    	body {
+			background-color: #f5eee0;
+			font-family: Verdana, sans-serif;
+		}
+    	h1 {
+    		text-align: center;
+    		font-family: Verdana, sans-serif;
+    		color: #748566;
+    	}
+    	#regBox {
+    		border: solid 2px gray;
+    		margin: auto;
+    		background-color: #e0f5ee;
+    		padding: 1%;
+    		width: 62%;
+    	}
+    	#directions, .refLink, #id, #totes, #confirm {
+    		text-align: center;
+    	}
+    	form {
+    		margin: auto;
+    		text-align: left;
+    	}
+    	h4{
+    		margin: auto;
+    		text-align: center;
+    	}
+    	.form {
+		    width: 90%;
+    		margin: auto;
+    		padding: 10px;
+    		text-align: left;
+		}
+		.form ul {
+    		width: 100%;
+    		list-style-type:none;
+		}
+		.form li {
+    		padding:10px; 
+    		position:relative;
+    		font: .9em Verdana, sans-serif;
+		}
+		.form label {
+    		width: 200px;
+    		margin-top: 5px;
+    		padding: 3px;
+    		display: inline-block;
+    		float: left;
+		}
+		.form input {
+   		 	width: 250px; 
+    		padding: 5px;
+		}
+		.form .range {
+			width: 50px;
+			padding: 5px;
+		}
+		#searchButton {
+			text-align: center;
+    		margin-left: 50px;
+    		margin-bottom: -20px;
+    		font: .9em Verdana, sans-serif;
+    		color: white;
+    		background-color: gray;
+    		padding: 10px 15px;
+		}
+		#errmsgbox {
+			height: 15px;
+		}
+		#divError {
+			color: red;
+			font-weight: bold;
+		}
+    </style>
+</head>
+<body>
+<h1>Search for Books</h1>
+<div id="regBox">
+<fieldset>
+<legend>Search</legend>
+<form id="edit_info" action="search_submit.php" method="post" onsubmit="return checkform(this);">
+ 	<div class="form">    
+ 		<h4>Book Information</h4>     
+ 		<br>
+ 		<ul>
+ 			<li><label>Book Title: </label><input type="text" name="book_title"></li>
+  			<li><label>Department Name: </label>
+  				<select id="deptNameIdx" name="book_deptName">
+  					<option value="ARTS" selected="selected">ARTS</option>
+  					<option value="CHIN">CHIN</option>
+  					<option value="COEN">COEN</option>
+  					<option value="CORN">CORN</option>
+  					<option value="ENGL">ENGL</option>
+  					<option value="HIST">HIST</option>
+  					<option value="ITAL">ITAL</option>
+  					<option value="JAPN">JAPN</option>
+  					<option value="PKMN">PKMN</option>
+  					<option value="Other">Other</option>
+  				</select>
+  			</li>
+  			<!--
+  			<li><label>Class Number: </label><input type="text" name="book_classNo"></li>
+  			<li><label>Condition: </label>
+  				<select id="condIdx" name="book_condition">
+  					<option value="New">New</option>
+  					<option value="Used">Used</option>
+  			</select>
+  			</li>
+  			<li><label>Price Range: </label> $<input type="text" name="book_price_low" class="range"> to 
+  			$<input type="text" name="book_price_high" class="range"></li>
+  			-->
+  			<li><label></label><button id="searchButton" input type="submit" value="Search" />Search</button></li>
+  		</ul>
+  		<br>
+  	</div>
+</form>
+</fieldset>
+</div>
+</body>
+</html>

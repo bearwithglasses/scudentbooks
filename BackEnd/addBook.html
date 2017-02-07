@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta content="text/javascript" http-equiv="Content-Script-Type" />
+	<meta content="text/css" http-equiv="Content-Style-Type" />
+
+      <title>Add Books</title>
+    <style>
+    	body {
+			background-color: #f5eee0;
+			font-family: Verdana, sans-serif;
+		}
+    	h1 {
+    		text-align: center;
+    		font-family: Verdana, sans-serif;
+    		color: #748566;
+    	}
+    	#regBox {
+    		border: solid 2px gray;
+    		margin: auto;
+    		background-color: #e0f5ee;
+    		padding: 1%;
+    		width: 62%;
+    	}
+    	#directions, .refLink, #id, #totes, #confirm {
+    		text-align: center;
+    	}
+    	form {
+    		margin: auto;
+    		text-align: left;
+    	}
+    	h4{
+    		margin: auto;
+    		text-align: center;
+    	}
+    	.form {
+		    width: 90%;
+    		margin: auto;
+    		padding: 10px;
+    		text-align: left;
+		}
+		.form ul {
+    		width: 100%;
+    		list-style-type:none;
+		}
+		.form li {
+    		padding:10px; 
+    		position:relative;
+    		font: .9em Verdana, sans-serif;
+		}
+		.form label {
+    		width: 200px;
+    		margin-top: 5px;
+    		padding: 3px;
+    		display: inline-block;
+    		float: left;
+		}
+		.form input {
+   		 	width: 250px; 
+    		padding: 5px;
+		}
+		#addButton {
+			text-align: center;
+    		margin-left: 50px;
+    		font: .9em Verdana, sans-serif;
+    		color: white;
+    		background-color: gray;
+    		padding: 10px 15px;
+		}
+		#errmsgbox {
+			height: 15px;
+		}
+		#divError {
+			color: red;
+			font-weight: bold;
+		}
+    </style>
+</head>
+
+<body>
+
+<h1>Add a Book</h1>
+<div id="regBox">
+<fieldset>
+<legend>Book Form</legend>
+<h5 id="directions">Enter your book and contact information in the fields marked with an asterisk (*) below.</br></h5>
+<form id="edit_info" action="ProcessBook.php" method="post" onsubmit="return checkform(this);">
+ 	<div class="form">    
+ 		<h4>Book Information</h4>     
+ 		<br>
+ 		<ul>
+  			<li><label>Department Name*: </label>
+  				<select id="deptNameIdx" name="book_deptName">
+  					<option value="ARTS" selected="selected">ARTS</option>
+  					<option value="CHIN">CHIN</option>
+  					<option value="COEN">COEN</option>
+  					<option value="CORN">CORN</option>
+  					<option value="ENGL">ENGL</option>
+  					<option value="HIST">HIST</option>
+  					<option value="ITAL">ITAL</option>
+  					<option value="JAPN">JAPN</option>
+  					<option value="PKMN">PKMN</option>
+  					<option value="Other">Other</option>
+  				</select>
+  			</li>
+  			<li><label>Class Number*: </label><input type="text" name="book_classNo"></li>
+  			<li><label>Book Title*: </label><input type="text" name="book_title"></li>
+  			<li><label>Book Author*: </label><input type="text" name="book_author"></li>
+  			<li><label>Edition*: </label><input type="text" name="book_edition"></li>
+  			<li><label>Condition*: </label><input type="text" name="book_condition"></li>
+  			<li><label>Asking Price*: </label><input type="text" name="book_price"></li>
+  		</ul>
+  		<br>
+  		<h4>Contact Information</h4>
+  		</br>
+  		<ul>
+  			<li><label>Full Name*: </label><input type="text" name="seller_name"></li>
+  			<li><label>Email Address*: </label><input type="text" name="seller_email"></li>
+  			<li><label>Phone Number: </label><input type="text" name="seller_phone"></li>
+  			<li><div id="errmsgbox">
+                	<!--insert errors here in this box... for now-->
+                	<div id="divError"></div>
+                </div>
+            </li>
+  			<li><label></label><button id="addButton" input type="submit" value="Add" />Add</button></li>
+  		</ul>
+  	</div>
+</form>
+</fieldset>
+</div>
+</br>
+   </body>
+</html>
+
+<script language="javascript" type="text/javascript">
+function checkform(pform1){
+	//alert ("checkform is called 1");
+	//var deptName = pform1.book_deptName.value;
+	var classNo = pform1.book_classNo.value;
+	var title = pform1.book_title.value;
+	var author = pform1.book_author.value;
+	var edition = pform1.book_edition.value;
+	var condition = pform1.book_condition.value;
+	var price = pform1.book_price.value;
+	var name = pform1.seller_name.value;
+	var email = pform1.seller_email.value;
+	//optional entries
+	var phone = pform1.seller_phone.value;
+	var cleanstr = phone.replace(/[\(\)\.\-\ ]/g, '');
+	var err={}; 
+	var validemail =/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	var errorFlag=0;
+	//alert ("checkform is called 2 " + deptName);
+	//check required fields
+	//check department name
+	//var e = document.getElementById(deptNameIdx);
+	var e = pform1.book_deptName;
+	var deptName = e.options[e.selectedIndex].text;
+	if (deptName.length <= 0){
+		err.message="Please fill in a Department Name.\n"; 
+		err.field=pform1.book_deptName; 
+		errorFlag=1;
+	}
+	
+	//check class number
+	if ((classNo.length<=0) && (errorFlag==0)){
+		err.message="Class Number not entered.\n"
+		err.field=pform1.book_classNo;
+		errorFlag=1;
+	}
+	
+	//check title
+	if ((title.length<=0) && (errorFlag==0)){
+		err.message="Title not given.\n"
+		err.field=pform1.book_title;
+		errorFlag=1;
+	}
+	
+	//check author
+	if ((author.length<=0) && (errorFlag==0)){
+		err.message="Author not entered.\n"
+		err.field=pform1.book_author;
+		errorFlag=1;
+	}
+	
+	//check edition
+	if ((edition.length<=0) && (errorFlag==0)){
+		err.message="Edition not entered.\n"
+		err.field=pform1.book_edition;
+		errorFlag=1;
+	}
+	
+	//check condition
+	if ((condition.length<=0) && (errorFlag==0)){
+		err.message="Condition not given.\n"
+		err.field=pform1.book_condition;
+		errorFlag=1;
+	}
+	
+	//check price
+	if ((price.length<=0) && (errorFlag==0)){
+		err.message="Asking Price not given.\n"
+		err.field=pform1.book_price;
+		errorFlag=1;
+	}
+	
+	//check name
+	if ((name.length<=0) && (errorFlag==0)){
+		err.message="Seller Name not given.\n"
+		err.field=pform1.seller_name;
+		errorFlag=1;
+	}
+
+	//validate email
+	if ((!(validemail.test(email))) && (errorFlag==0)){
+		err.message="Invalid email\n"; 
+		err.field=pform1.seller_email; 
+		errorFlag=1;
+	}
+
+	//alert ("alert3 " + errorFlag + " " + err.message);
+	if(err.message) 
+	{ 
+		//alert ("alert for error" + err.message);
+    	document.getElementById('divError').innerHTML = err.message;
+    	err.field.focus();
+    	return false;        
+	} 
+	//alert("no error value"); 
+	return true;
+}
+</script>
