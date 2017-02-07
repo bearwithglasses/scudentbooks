@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCUdent Books Book Listing Demo</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="booksusers.css" />
+    <script src="sendmessage.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<!-- Navigation -->
+    <div class="web_nav">
+        <header class="logo">
+            <div id="logo"><a href="homepage.html"><img alt="eCampus logo" src="images/eCampusLogo.png"></a></div>
+        </header>
+
+        <form class="searchbar">
+            <span class="searchicon"><i></i></span>
+            <input type="text" name="search" placeholder="Search...">
+            <input type="button" class="button" value="Search">
+            <a href="/" class="advancedsearch">Advanced</a>
+        </form>
+
+        <nav>
+        <ul class="navlinks">
+            <li><a href="/" class="web_link">Home</a></li>
+            <li><a href="#" class="web_link">Sell</a></li>
+            <li><a href="#" class="web_link">Inbox</a></li>
+            <li><!--<div class="username_dropdown">
+                <button onclick="userNameMenu()" class="usernamebutton">You</button></div>-->
+            <a href="#" class="web_link">You</a>
+            </li>
+        </nav>
+    </div>
+
+<!-- Popup Message Demo -->
+<div id="popupbox" class="popup">
+    <div class="popupmessage">
+    <form action="#" id="messageform" method="post" name="form">
+        <h2>Send a Message to <b>wchang</b> about <b>ESSENTIALS OF SOFTWARE ENGINEERING</b></h2>
+        <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
+        <input type="button" class="button" id="sendmessage" value="Send Message">
+        <input type="button" class="button" id="closemessage" value="Close Message">
+    </form>
+</div>
+</div>
+
+<!-- Container that holds Main and Side divs -->
+<div id="container">
+
+<div id="listing">
+    <div class="listingimage">
+        <div class="listpic pic"><img src="images/500px.png"></div>
+    </div>
+
+    <div class="listinginfo">
+        <h1>ESSENTIALS OF SOFTWARE ENGINEERING</h1>
+        <div class="listingstatus">$150</div>
+        <div class="listinginfotext">
+            <p><b>Seller:</b> <a href="/">wchang</a></p>
+            <p><b>Edition:</b> 3RD 14</p>
+            <p><b>Author:</b> TSUI</p>
+            <p><b>ISBN:</b> 9781449691998</p>
+        </div>
+
+        <div class="listingdescription">
+            There's a coffee stain on page 235 but the page is still readable. There is also another stain on page 111. There is also a bug inbetween pages 123 and 124 so be careful about that. There is also a nice picture of dogs on page 190. There are no issues on that page but I just thought I should mention it to you.
+        </div>
+    </div>
+
+        <div class="sendmessage"><a id="messagebutton" href="/">Send Message</a></p></div>
+</div>
+
+
+<!-- Footer  -->
+    <footer>
+        <a href="/" class="footer_info">Help</a>
+        <a href="/" class="footer_info">Contact Us</a>
+        <a href="/" class="footer_info">FAQ</a>
+    </footer>
+</body>
+
+
+
+    <script src="sendmessage.js"></script>
+</html>

@@ -1,0 +1,451 @@
+body {
+    font: 1.1em Calibri;
+    background-color: white;
+    margin: 0 auto;
+    width: 85%;
+}
+
+a{
+    color: #2EA3C9;
+}
+
+a:hover{
+    color: #128AB3;
+    border-bottom: 1px solid #128AB3;
+}
+
+ul, li{
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: inline;
+    padding: none;
+}
+
+h1, h2, h3{
+    color: #BF3939;
+    font-family: 'Montserrat', Calibri;
+    border-bottom: 2px solid #BF3939;
+    padding: 10px 0;
+    margin-top: -10px;
+}
+
+
+input[type=text] {
+    width: 50%;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 10px 50px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    border: 1px solid #A33C3C;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.searchbar .button, .advancedsearch{
+    background-color: #BF3939;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.searchbar .button{
+    position: relative;
+    display: inline-block;
+    left: -18px;
+    color:#fafafa;
+}
+
+.advancedsearch{
+    padding: 10px 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+.button:hover, .advancedsearch:hover{
+    background-color: #7D7D7D;
+    cursor: pointer;
+}
+
+.searchicon{
+    position: relative;
+    z-index: 1;
+    left: 40px;
+    top: 1px;
+    color: #7B7B7B;
+    cursor:pointer;
+    width: 0 10px;
+}
+
+/******************** Header and Navigation ********************************/
+
+#logo{
+    display: inline-block;
+    margin: 0 10px 0 0;
+    float:left;
+}
+
+
+.web_nav {
+    background-color: white;
+    padding: 30px;
+    width: 100%;
+    border-bottom: 1px solid #C4C4C4;
+}
+
+.web_nav ul{
+    list-style-type: none;
+    margin: -45px 0 0 0;
+    padding: 0;
+    overflow: hidden;
+    z-index: 100;
+    display: inline;
+    float: right;
+}
+
+.web_nav form{
+    display: inline-block;
+}
+
+.web_nav li {
+    float: left;
+    margin: 0 5px;
+}
+
+.web_nav li a{
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+a.web_link:hover {
+    background-color: #450101;
+}
+
+/******************** Photo Grid ********************************/
+
+#container{
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 30px;
+    width: 100%;
+}
+
+.booklist ul{
+    list-style: none;
+    margin: 0 auto;
+    overflow: auto;
+    text-align: center;
+}
+
+.booklist ul a{
+    text-decoration: none;
+}
+
+.booklist li{
+    display: inline-block;
+    text-align: left;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 10px 20px 10px 0;
+}
+
+
+.buybutton{
+    float: right;
+    margin-top: -35px;
+}
+
+.buybutton a{
+    background-color: #9C9C9C;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.buybutton a:hover{
+    background-color: #7D7D7D;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pending a{
+    background-color: #9C9C9C;
+}
+.buy a{
+    background-color: #2EA3C9;
+}
+.swap a{
+    background-color: #75D15E;
+}
+
+.listtitle{
+    font-family: 'Montserrat', Calibri;
+    letter-spacing: -1px;
+}
+
+.bookinfo{
+    clear: both;
+    color: #9C9C9C;
+}
+
+.listusername{
+    font-weight: bold;
+    margin: 15px 0 0 0;
+    font-size: 1.5em;
+}
+
+.location{
+    color: #9C9C9C;
+    margin: 0 0 5px 0;
+}
+
+.pic { 
+  max-height: 400px;
+  max-width: 400px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.listpic img{
+    max-height: 100%;
+    max-width: 100%; 
+  -webkit-transition: all .5s ease;
+     -moz-transition: all .5s ease;
+       -o-transition: all .5s ease;
+      -ms-transition: all .5s ease;
+          transition: all .5s ease;
+}
+
+.listpic img:hover{
+    transform: scale(1.1,1.1);
+    cursor: pointer;
+}
+
+.listtitle{
+    font-size: 2em;
+}
+
+
+
+/******************** Popup Styling ********************************/
+
+.popup{
+    display: none; /* Hidden by default */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    z-index: 1000;
+}
+
+.popupmessage{
+    position: relative;
+    background-color: white;
+    padding: 80px;
+    width: 50%;
+    margin: 100px auto;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.3s
+}
+
+textarea{
+    width: 100%;
+    font-family: Calibri, sans-serif;  
+    font-size: 1.5em;   
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 10px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+textarea:focus {
+    border: 1px solid #A33C3C;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top: 300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+@keyframes animatetop {
+    from {top: 300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+
+
+/******************** Footer ********************************/
+
+footer {
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 20px;
+    margin: 20px 0;
+    clear: both;
+
+}
+
+a.footer_info:link, a.footer_info:visited, a.footer_info:active {
+    text-decoration: none;
+    margin: 0 10px;
+    color: #003399;
+}
+
+a.footer_info:hover {
+    color: #69ABCF;
+}
+
+/********* Mobile View ***********/
+
+
+@media (max-width: 980px) {
+
+        body{
+            /*border: 1px solid red;*/
+            margin: 10px auto;
+        }
+
+        .searchbar, .navlinks, #logo{
+            display: block;
+            overflow: auto;
+            /*border: 1px solid blue;*/
+            width: 100%;
+        }
+
+        .web_nav{
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+            z-index: 100;
+            display: block;
+        }
+
+        #logo{
+            text-align: center;
+        }
+
+        .searchbar{
+            position: relative;
+            display: block;
+            margin: 10px 0 50px 0;
+            text-align: center;
+            color: #fafafa;
+            /*border: 1px solid orange;*/
+        }
+
+        .navlinks{
+            text-align: center;
+            position: relative;
+            float: none;
+            padding: 50px;
+            overflow: auto;
+        }
+
+        .navlinks li{
+            text-align: center;
+            font-size: 1.5em;
+            float: none;
+        }
+
+        #container{
+            width: 100%;
+            margin: none;
+            /*border: 1px solid black;*/
+            overflow: auto;
+            padding: 0;
+        }
+
+        .booklist ul {
+            margin: 0;
+        }
+        .booklist li {
+            width: 50% !important; /* over-ride all li styles */
+            margin: 0;
+            padding: 20px;
+            float: left;
+        }
+
+        .pic { 
+          max-height: 100%;
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        .listpic{
+            margin: 0 auto;
+        }
+
+        .listpic img{
+            max-height: 100%;
+            max-width: 100%; 
+          -webkit-transition: all 1s ease;
+             -moz-transition: all 1s ease;
+               -o-transition: all 1s ease;
+              -ms-transition: all 1s ease;
+                  transition: all 1s ease;
+        }
+
+    }
+
+@media (max-width: 650px) {
+        .booklist li {
+            width: 100% !important; /* over-ride all li styles */
+            margin: 0 0 20px;
+            padding: 20px;
+        }
+        .buybutton{
+            float: none;
+            display: inline-block;
+            position: relative;
+            margin-top: 25px;
+        }
+
+        .advancedsearch{
+            display: block;
+            position: relative;
+            margin: 10px 0;
+        }
+}
