@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 2/6/2017
+	
 	Renee: Added
 		- Created FrontEnd folder 
 		- Added demo pages of website pages: homepage.html, booklisting.html, and userprofile.html with corresponding CSS files and JS file
