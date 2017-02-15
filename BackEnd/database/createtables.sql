@@ -23,7 +23,7 @@ CREATE TABLE UserInfo(
 --Book posts
 CREATE TABLE BookPost(
 	bookid int NOT NULL AUTO_INCREMENT,
-	userid int NOT NULL AUTO_INCREMENT,
+	userid int NOT NULL,
 	title varchar(100) NOT NULL,
 	author text NOT NULL,
 	edition smallint,
@@ -66,7 +66,7 @@ CREATE TABLE Message(
 	recipient int NOT NULL,
 	subject varchar(100),
 	body text,
-	messageDate date DEFAULT GETDATE(),
+	messageDate date DEFAULT NULL,
 	PRIMARY KEY(messageid),
 	FOREIGN KEY(creator) REFERENCES UserInfo(userid),
 	FOREIGN KEY(recipient) REFERENCES UserInfo(userid)
@@ -78,7 +78,7 @@ CREATE TABLE MessageReply(
 	replyUserid int NOT NULL,
 	replyMessageid int NOT NULL,
 	reply text,
-	replyDate date DEFAULT GETDATE(),
+	replyDate date DEFAULT NULL,
 	PRIMARY KEY(replyid),
 	FOREIGN KEY(replyUserid) REFERENCES UserInfo(userid),
 	FOREIGN KEY(replyMessageid) REFERENCES Message(messageid)
