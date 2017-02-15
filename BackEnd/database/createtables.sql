@@ -51,11 +51,11 @@ CREATE TABLE BookDescription(
 );
 
 --Book post photos
-CREATE TABLE BookPhoto(
+CREATE TABLE BookPicture(
 	bookid int NOT NULL AUTO_INCREMENT,
-	photo1 image NOT NULL,
-	photo2 image,
-	photo3 image,
+	pic1 image NOT NULL,
+	pic2 image,
+	pic3 image,
 	FOREIGN KEY(bookid) REFERENCES BookPost
 );
 
