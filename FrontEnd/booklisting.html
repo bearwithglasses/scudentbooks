@@ -8,7 +8,7 @@
     <title>SCUdent Books Book Listing Demo</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
-    <script src="sendmessage.js"></script>
+    <script src="popups-photos.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -49,7 +49,13 @@
         <input type="button" class="button" id="sendmessage" value="Send Message">
         <input type="button" class="button" id="closemessage" value="Close Message">
     </form>
+    </div>
 </div>
+
+<!-- Popup Image Demo -->
+
+<div id="popupimage" class="popup">
+  <img class="popupmessage" id="mainimagepopup">
 </div>
 
 <!-- Container that holds Main and Side divs -->
@@ -57,8 +63,25 @@
 
 <div id="listing">
     <div class="listingimage">
-        <div class="listpic pic"><img src="images/500px.png"></div>
+    <div id="mainimage">
+        <div class="listpic pic bookpic" id="img1"><img src="images/500px.png" onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img2"><img src="images/500-2.png" onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img3"><img src="images/500-3.png" onclick="openImage(this)"></div>
     </div>
+
+        <div class="bookphotonav">
+            <div class="bookthumbnail">
+              <img class="opacity opacity-off" src="images/500px.png" style="width:100%" onclick="currentDiv(1)">
+            </div>
+            <div class="bookthumbnail">
+              <img class="opacity opacity-off" src="images/500-2.png" style="width:100%" onclick="currentDiv(2)">
+            </div>
+            <div class="bookthumbnail">
+              <img class="opacity opacity-off" src="images/500-3.png" style="width:100%" onclick="currentDiv(3)">
+            </div>
+          </div>
+    </div>
+
 
     <div class="listinginfo">
         <h1>ESSENTIALS OF SOFTWARE ENGINEERING</h1>
@@ -87,7 +110,6 @@
     </footer>
 </body>
 
+    <script src="popups-photos.js"></script>
 
-
-    <script src="sendmessage.js"></script>
 </html>
