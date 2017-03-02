@@ -51,34 +51,42 @@
                     <li>
                         <label for="username">*Username:</label>
                         <input type="text" id="username" name="username" placeholder="Username">
+                        <span id="usernameError"></span> <!-- Username error will be inserted here -->
                     </li>
                     <li>
                         <label for="password">*Password:</label>
                         <input type="password" id="password" name="password" placeholder="Password">
+                        <span id="passwordError"></span> <!-- Password error will be inserted here -->
                     </li>
                     <li>
                         <label for="confirmPassword">*Confirm Password:</label>
                         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+                        <span id="confirmPasswordError"></span> <!-- Confirm password error will be inserted here -->
                     </li>
                     <li>
                         <label for="firstName">*First Name:</label>
                         <input type="text" id="firstName" name="firstName" placeholder="First Name">
+                        <span id="firstNameError"></span> <!-- First name error will be inserted here -->
                     </li>
                     <li>
                         <label for="middleName">Middle Name:</label>
                         <input type="text" id="middleName" name="middleName" placeholder="Middle Name">
+                        <span id="middleNameError"></span> <!-- Middle name error will be inserted here -->
                     </li>
                     <li>
                         <label for="lastName">*Last Name:</label>
                         <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+                        <span id="lastNameError"></span> <!-- Last name error will be inserted here -->
                     </li>
                     <li>
                         <label for="emailAddress">*Email Address:</label>
                         <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address">
+                        <span id="emailAddressError"></span> <!-- Email address error will be inserted here -->
                     </li>
                     <li>
                         <label for="phoneNumber">Phone Number:</label>
                         <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
+                        <span id="phoneNumberError"></span> <!-- Phone number error will be inserted here -->
                     </li>
                     <li>
                         <label for="major1">*Major:</label>
@@ -90,6 +98,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
+                        <span id="major1Error"></span> <!-- Major 1 error will be inserted here -->
                     </li>
                     <li>
                         <label for="major2">Major:</label>
@@ -101,6 +110,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
+                        <span id="major2Error"></span> <!-- Major 2 error will be inserted here -->
                     </li>
                     <li>
                         <label for="major3">Major:</label>
@@ -112,6 +122,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
+                        <span id="major3Error"></span> <!-- Major 3 error will be inserted here -->
                     </li>
                     <li>
                         <label for="minor1">Minor:</label>
@@ -134,6 +145,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
+                        <span id="minor2Error"></span> <!-- Minor 2 error will be inserted here -->
                     </li>
                     <li>
                         <label for="minor3">Minor:</label>
@@ -145,6 +157,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
+                        <span id="minor3Error"></span> <!-- Minor 3 error will be inserted here -->
                     </li>
                     <li>
                         <label for="year">Year:</label>
@@ -169,7 +182,7 @@
                         </select>
                     </li>
                 </ul>
-                <button type="submit" id="submitButton">Submit</button>
+                <button type="submit" id="submitButton" onclick="submission()">Submit</button>
             </div>
         </form>
     </div>

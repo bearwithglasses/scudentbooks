@@ -1,3 +1,49 @@
+<?php
+session_start(); //Start the session before you write your HTML page 
+ini_set('display_errors','On');
+error_reporting(E_ALL);
+$db_host = "dbserver.engr.scu.edu";
+$db_user = "wchang";
+$db_pass = "00000955018";
+$db_name = "sdb_wchang";
+$con = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+
+//Check connection
+if (mysqli_connect_errno())
+{
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+$sql = "SELECT * FROM UserInfo";
+
+$result = $con->query($sql);
+if (!$result)
+{
+    die('Error: ' . mysqli_error($con));
+}
+
+$errorMessage = ""; //Initialize error message variable as empty value
+
+$username = $_POST['username']; //Get username from UserInfo
+$password = $_POST['password']; //Get password from UserInfo                 
+$sqll = "SELECT * FROM UserInfo 
+         WHERE username = '$username'
+         AND password = '$password'"; //Select values from UserInfo  
+$result = $con->query($sqll);
+
+if (!$result)
+{
+    die('Error: ' . mysqli_error($con));
+}
+//Fetch the information from UserInfo
+$row = mysqli_fetch_assoc($result);
+
+//No match for username or password
+if (!$row)
+{
+    echo "<span class='nomember'>There is no member with that member code.</span>";
+}
+?> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,6 +96,11 @@
             <label for="inputPassword">Password</label>
             <input type="password" id="inputPassword" placeholder="Password" required>
             <button type="submit" id="loginButton">Login</button>
+            <p id="loginError">
+                <?php 
+                    echo $errorMessage; //Prints error message
+                ?>
+            </p>
         </form>
         <a href="userregistrationpage.php">Don't have an account? Register here</a>
     </div>
