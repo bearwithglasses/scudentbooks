@@ -36,7 +36,7 @@ CREATE TABLE BookPost(
 	postDate date DEFAULT GETDATE(),
 	condition varchar(5),
 	status varchar(20) DEFAULT 'available' NOT NULL,
-	CHECK (purpose in ('buy','swap')),
+	CHECK (purpose in ('sell','swap')),
 	CHECK (condition in ('new','good','bad')),
 	CHECK (status in ('available','sale pending','unavailable')),
 	PRIMARY KEY(bookid),
