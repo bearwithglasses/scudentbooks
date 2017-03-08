@@ -1,6 +1,11 @@
+DROP TABLE BookPicture;
+DROP TABLE BookDescription;
+DROP TABLE BookPost;
+DROP TABLE UserInfo;
+
 --User info
 CREATE TABLE UserInfo(
-	userid int NOT NULL AUTO_INCREMENT,
+	userid int NOT NULL,
 	username varchar(50) NOT NULL UNIQUE,
 	password varchar(50) NOT NULL,
 	firstName varchar(50) NOT NULL,
@@ -18,14 +23,14 @@ CREATE TABLE UserInfo(
 	location varchar(50),
 	CHECK (year in ('freshman','sophomore','junior','senior','graduate')),
 	PRIMARY KEY(userid)
-);
+) TABLESPACE STUDENTBOOKS;
 
 --Book posts
 CREATE TABLE BookPost(
-	bookid int NOT NULL AUTO_INCREMENT,
+	bookid int NOT NULL,
 	userid int NOT NULL,
 	title varchar(100) NOT NULL,
-	author text NOT NULL,
+	author clob NOT NULL,
 	edition smallint,
 	purpose varchar(4) NOT NULL,
 	price decimal(5,2),
@@ -33,7 +38,7 @@ CREATE TABLE BookPost(
 	major varchar(50),
 	courseNumber smallint,
 	professor varchar(50),
-	postDate date DEFAULT GETDATE(),
+	postDate date DEFAULT NULL,
 	condition varchar(5),
 	status varchar(20) DEFAULT 'available' NOT NULL,
 	CHECK (purpose in ('sell','swap')),
@@ -41,45 +46,20 @@ CREATE TABLE BookPost(
 	CHECK (status in ('available','sale pending','unavailable')),
 	PRIMARY KEY(bookid),
 	FOREIGN KEY(userid) REFERENCES UserInfo
-);
+) TABLESPACE STUDENTBOOKS;
 
 --Book post description
 CREATE TABLE BookDescription(
-	bookid int NOT NULL AUTO_INCREMENT,
-	description text,
+	bookid int NOT NULL,
+	description clob,
 	FOREIGN KEY(bookid) REFERENCES BookPost
-);
+) TABLESPACE STUDENTBOOKS;
 
 --Book post photos
 CREATE TABLE BookPicture(
-	bookid int NOT NULL AUTO_INCREMENT,
-	pic1 image NOT NULL,
-	pic2 image,
-	pic3 image,
+	bookid int NOT NULL,
+	pic1 blob NOT NULL,
+	pic2 blob,
+	pic3 blob,
 	FOREIGN KEY(bookid) REFERENCES BookPost
-);
-
---Email message
-CREATE TABLE Message(
-	messageid int NOT NULL AUTO_INCREMENT,
-	creator int NOT NULL,
-	recipient int NOT NULL,
-	subject varchar(100),
-	body text,
-	messageDate date DEFAULT NULL,
-	PRIMARY KEY(messageid),
-	FOREIGN KEY(creator) REFERENCES UserInfo(userid),
-	FOREIGN KEY(recipient) REFERENCES UserInfo(userid)
-);
-
---Email message reply
-CREATE TABLE MessageReply(
-	replyid int NOT NULL AUTO_INCREMENT,
-	replyUserid int NOT NULL,
-	replyMessageid int NOT NULL,
-	reply text,
-	replyDate date DEFAULT NULL,
-	PRIMARY KEY(replyid),
-	FOREIGN KEY(replyUserid) REFERENCES UserInfo(userid),
-	FOREIGN KEY(replyMessageid) REFERENCES Message(messageid)
-);
+) TABLESPACE STUDENTBOOKS;
