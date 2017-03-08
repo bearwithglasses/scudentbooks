@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 3/7/2017
+
 	Renee: 
 		- BackEnd folder
 			- showData.php shows current entries for the USERINFO and BOOKPOST tables in the database
@@ -9,6 +10,10 @@ All notable changes to this project will be documented in this file.
 			- Added demo pages for the search results page at searchpage.html
 			- Created book listing images: clicking on each image in the navigation will make it the main product image + clicking on the main product image will make it appear as a popup module
 			- Updated CSS files and JS files
+	
+	Christina: 
+		- BackEnd folder
+			- Uploaded new code for creating book database, populating tables, and modified addBook.html
 
 2/6/2017
 	
