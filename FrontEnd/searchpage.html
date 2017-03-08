@@ -9,7 +9,6 @@
     <script src="main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css" />
-    <link rel="stylesheet" type="text/css" href="booksusers.css" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -45,42 +44,95 @@
         </div>
     </div>
 
-<!-- Popup Message Demo -->
-<div id="popupbox" class="popup">
-    <div class="popupmessage">
-    <form action="#" id="messageform" method="post" name="form">
-        <h2>Send a Message to <b>wchang</b></h2>
-        <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
-        <input type="button" class="button" id="sendmessage" value="Send Message">
-        <input type="button" class="button" id="closemessage" value="Close Message">
-    </form>
-    </div>
-</div>
-
-
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
-<div id="profile">
-    <div class="profileimage">
-        <div class="listpic pic"><img src="images/500px.png"></div>
-    </div>
+<div id="searchpage" class="form">
+<h1>Search</h1>
+<form id="edit_info" action="search_submit.php" method="post" onsubmit="return checkform(this);">
+    <ul>
+        <li>
+             <label>Title: </label><input type="text" name="book_title">
+        </li>
+        <li>
+            <label>Author: </label><input type="text" name="book_title">
+        </li>
+        <li>
+            <label>Edition: </label><input type="text" name="book_title">
+        </li>
+        <li>
+            <label>ISBN: </label><input type="text" name="book_classNo">
+        </li>
+        <li>
+            <label>Department: </label>
+            <select id="deptNameIdx" name="book_deptName">
+                <option value="ARTS" selected="selected">ARTS</option>
+                <option value="CHIN">CHIN</option>
+                <option value="COEN">COEN</option>
+                <option value="CORN">CORN</option>
+                <option value="ENGL">ENGL</option>
+                <option value="HIST">HIST</option>
+                <option value="ITAL">ITAL</option>
+                <option value="JAPN">JAPN</option>
+                <option value="PKMN">PKMN</option>
+                <option value="Other">Other</option>
+            </select>
+        </li>
+        <li>
+            <label>Course Number: </label><input type="text" name="book_classNo">
+        </li>
+    </ul>
+    <ul>
+        <li>
+                <label>Location: </label>
+            <select id="deptNameIdx" name="book_deptName">
+                <option value="ARTS" selected="selected">On-Campus</option>
+                <option value="X">Residential Learning Communities</option>
+                <option value="CHIN">University Villas</option><option value="CHIN">Neighborhood Units</option>
+                <option value="CHIN">Off-Campus</option>
+            </select>
+        </li>
+        <li>
+            <label>Date Posted: </label>
+            <select id="condIdx" name="book_condition">
+                <option value="New" selected="selected">Newest to Oldest</option>
+                <option value="Used">Oldest to Newest</option>
+            </select>
+        </li>
+        <li>
+        <label>Purpose: </label>
+                <input type="radio" name="gender" value="male">Any
+                <input type="radio" name="gender" value="female"> Sell
+                <input type="radio" name="gender" value="female"> Swap
+        </li>
+        <li>
+            <label>Price: </label>
+            <select id="condIdx" name="book_condition">
+                <option value="New" selected="selected">Any Price</option>
+                <option value="Used">Under $25</option>
+                <option value="Used">$25 to $50</option>
+                <option value="Used">$50 to $100</option>
+                <option value="Used">Over $100</option>
+            </select>
+        </li>
+        <li>
+            <label>Condition: </label>
+            <select id="condIdx" name="book_condition">
+                    <option value="ARTS" selected="selected">Like New</option>
+                    <option value="CHIN">Gently Used</option>
+                    <option value="CHIN">Minor Damages</option>
+            </select>
+        </li>
+    </ul>
 
-    <div class="profileinfo">
-        <h1>wchang</h1>
-        <div class="profileinfotext">
-        <p><b>Year:</b> Freshman</p>
-        <p><b>Location:</b> On-Campus</p>
-        <p><b>Major:</b> Computer Engineering</p>
-        </div>
-    </div>
+<button id="searchButton" input type="submit" value="Search" />Search</button>
 
-        <div class="sendmessage"><a id="messagebutton" href="/">Send Message</a></p></div>
+</form>
 </div>
 
 
-    <div class="booklist">
-    <h1>Book List</h1>
+<div class="booklist searchlist">
+    <h1>Results</h1>
     <ul>
         
         <li>            
@@ -109,6 +161,15 @@
                 <br>Posted 1/23/16
             </div>
             <div class="buybutton swap"><a href="/">For Swap</a></div>
+        </li>
+        <li>            
+            <div class="listpic pic"><a href="/"><img src="images/500px.png"></a></div>
+            <div class="listtitle"><a href="/">Book Title</a></div>
+            <div class="bookinfo">
+                By Author Name
+                <br>Posted 1/23/16
+            </div>
+            <div class="buybutton buy"><a href="/">$120</a></div>
         </li>
         <li>            
             <div class="listpic pic"><a href="/"><img src="images/500px.png"></a></div>

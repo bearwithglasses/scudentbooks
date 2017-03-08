@@ -51,6 +51,10 @@ input[type=text]:focus {
     transition: width 0.4s ease-in-out;
 }
 
+select{
+    padding: 5px 20px;
+}
+
 .searchbar .button, .advancedsearch{
     background-color: #BF3939;
     border: none;
@@ -77,11 +81,6 @@ input[type=text]:focus {
     margin-top: -10px;
 }
 
-.button:hover, .advancedsearch:hover{
-    background-color: #7D7D7D;
-    cursor: pointer;
-}
-
 .searchicon{
     position: relative;
     z-index: 1;
@@ -92,6 +91,24 @@ input[type=text]:focus {
     width: 0 10px;
 }
 
+button{
+    background-color: #BF3939;
+    border: none;
+    color: white;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.button:hover, .advancedsearch:hover, button:hover{
+    background-color: #6B2020;
+    cursor: pointer;
+}
+
 /******************** Header and Navigation ********************************/
 
 #logo{
@@ -100,15 +117,14 @@ input[type=text]:focus {
     float:left;
 }
 
-
-.web_nav {
+#web_nav {
     background-color: white;
     padding: 30px;
     width: 100%;
     border-bottom: 1px solid #C4C4C4;
 }
 
-.web_nav ul{
+#web_nav ul{
     list-style-type: none;
     margin: -45px 0 0 0;
     padding: 0;
@@ -118,16 +134,18 @@ input[type=text]:focus {
     float: right;
 }
 
-.web_nav form{
+#web_nav .icon {display: none;}
+
+#web_nav form{
     display: inline-block;
 }
 
-.web_nav li {
+#web_nav li {
     float: left;
     margin: 0 5px;
 }
 
-.web_nav li a{
+#web_nav li a{
     display: block;
     padding: 10px 15px;
     text-decoration: none;
@@ -137,14 +155,15 @@ a.web_link:hover {
     background-color: #450101;
 }
 
-/******************** Photo Grid ********************************/
-
 #container{
     margin: 0 auto;
     overflow: hidden;
     padding: 30px;
     width: 100%;
 }
+
+/******************** Photo Grid ********************************/
+
 
 .booklist ul{
     list-style: none;
@@ -161,6 +180,7 @@ a.web_link:hover {
     display: inline-block;
     text-align: left;
     padding: 20px;
+    width: 30%;
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -188,8 +208,23 @@ a.web_link:hover {
     font-weight: bold;
 }
 
+
+.pending{
+    float: right;
+    margin-top: -45px;
+    background-color: #9C9C9C;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .buybutton a:hover{
-    background-color: #7D7D7D;
+    background-color: #6B2020;
     border: none;
     color: white;
     padding: 10px 30px;
@@ -198,13 +233,10 @@ a.web_link:hover {
     cursor: pointer;
 }
 
-.pending a{
-    background-color: #9C9C9C;
+.pending:hover{
+    cursor: default;
 }
 
-.pending a:hover{
-    background-color: #9C9C9C;
-}
 .buy a{
     background-color: #2EA3C9;
 }
@@ -292,6 +324,92 @@ legend{
     display: none;
 }
 
+/******************** Search Page Styling ********************************/
+/*
+#searchpage{
+    width: 90%;
+    border: 1px solid lightgray;
+    overflow: auto;
+}
+
+#searchpage h1{
+    font-size: 1.1em;
+}
+
+.twocol{
+    width: 50%;
+    float: left;
+}
+
+.twocol input[type=text] {
+    width: 50%;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 5px 20px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.twocol input[type=text]:focus {
+    border: 1px solid #A33C3C;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+*/
+
+#searchpage{
+    border: 1px solid lightgray;
+    width: 20%;
+    float: left;
+}
+
+#floatright{
+    width: 60%;
+    float: left;
+    margin: 50px;
+}
+
+.booklist {
+    overflow: auto;
+}
+
+.searchlist li{
+    display: inline-block;
+    text-align: left;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 10px 20px 10px 0;
+}
+
+#searchpage h1{
+    font-size: 1.1em;
+}
+
+#searchpage input[type=text] {
+    width: 90%;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 5px 20px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#searchpage input[type=text]:focus {
+    border: 1px solid #A33C3C;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
 
 /******************** Footer ********************************/
 
@@ -314,6 +432,8 @@ a.footer_info:hover {
     color: #69ABCF;
 }
 
+
+
 /********* Mobile View ***********/
 
 
@@ -324,14 +444,18 @@ a.footer_info:hover {
             margin: 10px auto;
         }
 
-        .searchbar, .navlinks, #logo{
+        .searchbar, .navlinks{
             display: block;
             overflow: auto;
             /*border: 1px solid blue;*/
             width: 100%;
         }
 
-        .web_nav{
+        #logo{
+            float: left;
+        }
+
+        #web_nav{
             margin: 0;
             padding: 0;
             overflow: auto;
@@ -341,15 +465,6 @@ a.footer_info:hover {
 
         #logo{
             text-align: center;
-        }
-
-        .searchbar{
-            position: relative;
-            display: block;
-            margin: 10px 0 50px 0;
-            text-align: center;
-            color: #fafafa;
-            /*border: 1px solid orange;*/
         }
 
         .navlinks{
@@ -364,6 +479,26 @@ a.footer_info:hover {
             text-align: center;
             font-size: 1.5em;
             float: none;
+            width: 100%;
+        }
+
+        #links{
+            display: none;
+        }
+
+        #web_nav .icon{
+            float: right;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        .searchbar{
+            position: relative;
+            display: block;
+            margin: 10px 0 50px 0;
+            text-align: center;
+            color: #fafafa;
+            /*border: 1px solid orange;*/
         }
 
         #container{
@@ -406,7 +541,7 @@ a.footer_info:hover {
 
     }
 
-@media (max-width: 650px) {
+@media (max-width: 680px) {
         .booklist li {
             width: 100% !important; /* over-ride all li styles */
             margin: 0 0 20px;
