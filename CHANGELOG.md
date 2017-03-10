@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 3/10/2017
+	Renee
+		- FrontEnd folder
+			- updated showData.php to show BookDescription table
+			- created homepage.php that shows all current books in database
+			- created profile.php for user pages
+			- created listing.php for book pages
+		- created demopages folder
+			- added all html files to this folder
+
+3/10/2017
 
 	Winston:
 		- FrontEnd folder

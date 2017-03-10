@@ -113,6 +113,22 @@ h2 b{
     font-size: 1.1em;
 }
 
+.buy {
+    background-color: #2EA3C9;
+}
+.swap{
+    background-color: #75D15E;
+}
+
+.pending2{
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    font-size: 1.1em;
+    background-color: #9C9C9C;
+}
+
 
 /******************** Popup Styling ********************************/
 
