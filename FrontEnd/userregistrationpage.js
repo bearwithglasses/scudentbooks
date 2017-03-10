@@ -1,5 +1,5 @@
 /************************ Form validation **************************************/
-function validation() {
+function submission() {
     /********* Username **********/
     var username = document.getElementById("username").value; //Retrieves the value entered for username
     /* If username is empty, print a message and return false */
@@ -7,7 +7,7 @@ function validation() {
     {
         document.getElementById("usernameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
         document.getElementById("username").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Checks if username entered is valid. Regex doesn't support spaces or commas and it can only be up to 30 characters
     Referenced source for regex code: http://stackoverflow.com/questions/15933727/javascript-regular-expression-for-usernames-no-spaces */
@@ -15,7 +15,7 @@ function validation() {
     {
         document.getElementById("usernameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
         document.getElementById("username").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else
@@ -30,7 +30,7 @@ function validation() {
     {
         document.getElementById("passwordError").innerHTML = "This field is required"; //Displays error message if nothing is entered
         document.getElementById("password").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -45,7 +45,7 @@ function validation() {
     {
         document.getElementById("confirmPasswordError").innerHTML = "This field is required"; //Displays error message if nothing is entered
         document.getElementById("confirmPassword").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Confirm password doesn't match password */
     else if (confirmPassword != password)
@@ -65,7 +65,7 @@ function validation() {
     {
         document.getElementById("firstNameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
         document.getElementById("firstName").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Checks if first name entered is valid. Regex doesn't support numbers
     Referenced source for regex code: http://stackoverflow.com/questions/275160/regex-for-names */
@@ -73,7 +73,7 @@ function validation() {
     {
         document.getElementById("firstNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
         document.getElementById("firstName").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -89,7 +89,7 @@ function validation() {
     {
         document.getElementById("middleNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
         document.getElementById("middleName").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -104,7 +104,7 @@ function validation() {
     {
         document.getElementById("lastNameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
         document.getElementById("lastName").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Checks if last name entered is valid. Regex doesn't support numbers
     Referenced source for regex code: http://stackoverflow.com/questions/275160/regex-for-names */
@@ -112,7 +112,7 @@ function validation() {
     {
         document.getElementById("lastNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
         document.getElementById("lastName").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -127,7 +127,7 @@ function validation() {
     {
         document.getElementById("emailAddressError").innerHTML = "This field is required"; //Displays error message if nothing is entered
         document.getElementById("emailAddress").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Checks if email entered is valid
     Referenced source for regex code: http://stackoverflow.com/questions/46155/validate-email-address-in-javascript */
@@ -135,7 +135,7 @@ function validation() {
     {
         document.getElementById("emailAddressError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
         document.getElementById("emailAddress").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -151,7 +151,7 @@ function validation() {
     {
         document.getElementById("phoneNumberError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
         document.getElementById("phoneNumber").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -166,7 +166,7 @@ function validation() {
     {
         document.getElementById("major1Error").innerHTML = "This field is required"; //Displays error message if nothing is selected
         document.getElementById("major1").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -181,7 +181,7 @@ function validation() {
     {
         document.getElementById("major2Error").innerHTML = "Cannot have more than one of the same major"; //Displays error message if same major is selected again
         document.getElementById("major2").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -196,14 +196,14 @@ function validation() {
     {
         document.getElementById("major3Error").innerHTML = "Cannot have more than one of the same major"; //Displays error message if same major is selected again
         document.getElementById("major3").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Prints error message if major 3 is selected before 2 */
     else if (major3 != "selectMajor3" && major2 == "selectMajor2")
     {
         document.getElementById("major3Error").innerHTML = "Cannot select a third major before selecting a second major"; //Displays error message if third major is selected before second major
         document.getElementById("major3").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -221,14 +221,14 @@ function validation() {
     {
         document.getElementById("minor2Error").innerHTML = "Cannot have more than one of the same minor"; //Displays error message if same minor is selected again
         document.getElementById("minor2").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Prints error message if minor 2 is selected before 1 */
     else if (minor2 != "selectMinor2" && minor1 == "selectMinor1")
     {
         document.getElementById("minor2Error").innerHTML = "Cannot select a second minor before selecting a first minor"; //Displays error message if second minor is selected before first minor
         document.getElementById("minor2").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -239,18 +239,18 @@ function validation() {
     /********* Minor 3 **********/
     var minor3 = document.getElementById("minor3").value; //Retrieves the value entered for minor 3
     /* Prints error message if minor 3 is the same as 1 or 2 */
-    if (minor3 == minor1 || minor3 == minor1) 
+    if (minor3 == minor1 || minor3 == minor2) 
     {
         document.getElementById("minor3Error").innerHTML = "Cannot have more than one of the same minor"; //Displays error message if same minor is selected again
         document.getElementById("minor3").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Prints error message if minor 3 is selected before 2 */
     else if (minor3 != "selectMinor3" && minor2 == "selectMinor2")
     {
         document.getElementById("minor3Error").innerHTML = "Cannot select a third minor before selecting a second minor"; //Displays error message if third minor is selected before second minor
         document.getElementById("minor3").focus(); //Focuses on text field
-        return false;
+        //return false;
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -258,46 +258,5 @@ function validation() {
         document.getElementById("minor3Error").innerHTML = "";
     }
 
-    return true;
-}
-
-/************************ Form submission **************************************/
-/* Referenced code: http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript */
-function submission() {
-  var valid = validation();
-  if (valid == true)
-  {
-    document.getElementById("confirmButton").disabled = false;
-    var submitButton = document.getElementById("submitButton");
-    submitButton.parentNode.removeChild(submitButton); //Removes submit button
-    /* Selects random 5 digit alphanumeric code */
-    var memberCode = "";
-    var available = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < 5; i++)
-    {
-      memberCode += available.charAt(Math.floor(Math.random() * available.length));
-    }
-    document.getElementById("memberCodeMessage1").innerHTML = "Thank you for signing up! Here's your member code! Remember this as you can earn discounts for shopping in our catalog.";
-    document.getElementById("memberCodeMessage2").innerHTML = "Please review your information before confirming.";
-    document.getElementById("reviewInfo").innerHTML = "Information Review";
-    document.getElementById("memberCode").value = memberCode;
-    var firstName = document.getElementById("firstName").value; //Retrieves the value entered for first name
-    document.getElementById("reviewFirstName").value = firstName;
-    var lastName = document.getElementById("lastName").value; //Retrieves the value entered for last name
-    document.getElementById("reviewLastName").value = lastName;
-    var streetAddress = document.getElementById("streetAddress").value; //Retrieves the value entered for street address
-    document.getElementById("reviewStreetAddress").value = streetAddress;
-    var city = document.getElementById("city").value; //Retrieves the value entered for city
-    document.getElementById("reviewCity").value = city;
-    var state = document.getElementById("state").value; //Retrieves the value entered for state
-    document.getElementById("reviewState").value = state;
-    var country = document.getElementById("country").value; //Retrieves the value entered for country
-    document.getElementById("reviewCountry").value = country;
-    var zipCode = document.getElementById("zipCode").value; //Retrieves the value entered for ZIP Code
-    document.getElementById("reviewZipCode").value = zipCode;
-    var email = document.getElementById("email").value; //Retrieves the value entered for email
-    document.getElementById("reviewEmail").value = email;
-    var phoneNumber = document.getElementById("phoneNumber").value; //Retrieves the value entered for phone number
-    document.getElementById("reviewPhoneNumber").value = phoneNumber;
-  }
+    //return true;
 }

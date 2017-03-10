@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+3/10/2017
+
+	Winston:
+		- FrontEnd folder
+			- Added user registration complete page
+			- Updated regex validation for user registration page to include client and server side validation (still incomplete)
+
 3/7/2017
 
 	Renee: 
