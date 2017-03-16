@@ -1,21 +1,17 @@
 /************************ Form validation **************************************/
-function submission() {
+function validation() {
     /********* Username **********/
     var username = document.getElementById("username").value; //Retrieves the value entered for username
     /* If username is empty, print a message and return false */
     if (username == "") 
     {
-        document.getElementById("usernameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
-        document.getElementById("username").focus(); //Focuses on text field
-        //return false;
+        return "usernameError1";
     }
     /* Checks if username entered is valid. Regex doesn't support spaces or commas and it can only be up to 30 characters
     Referenced source for regex code: http://stackoverflow.com/questions/15933727/javascript-regular-expression-for-usernames-no-spaces */
     else if (username.match(/^[-\w\.\$@\*\!]{1,30}$/) == null)
     {
-        document.getElementById("usernameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
-        document.getElementById("username").focus(); //Focuses on text field
-        //return false;
+        return "usernameError2";
     }
     /* Error is fixed, error message dissappears */
     else
@@ -28,9 +24,7 @@ function submission() {
     /* If password is empty, print a message and return false */
     if (password == "") 
     {
-        document.getElementById("passwordError").innerHTML = "This field is required"; //Displays error message if nothing is entered
-        document.getElementById("password").focus(); //Focuses on text field
-        //return false;
+        return "passwordError";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -43,14 +37,12 @@ function submission() {
     /* If confirm password is empty, print a message and return false */
     if (confirmPassword == "") 
     {
-        document.getElementById("confirmPasswordError").innerHTML = "This field is required"; //Displays error message if nothing is entered
-        document.getElementById("confirmPassword").focus(); //Focuses on text field
-        //return false;
+        return "confirmPasswordError1";
     }
     /* Confirm password doesn't match password */
     else if (confirmPassword != password)
     {
-        document.getElementById("confirmPasswordError").innerHTML = "Passwords do not match"; //Displays error message if passwords don't match
+        return "confirmPasswordError2";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -63,17 +55,13 @@ function submission() {
     /* If first name is empty, print a message and return false */
     if (firstName == "") 
     {
-        document.getElementById("firstNameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
-        document.getElementById("firstName").focus(); //Focuses on text field
-        //return false;
+        return "firstNameError1";
     }
     /* Checks if first name entered is valid. Regex doesn't support numbers
     Referenced source for regex code: http://stackoverflow.com/questions/275160/regex-for-names */
     else if (firstName.match(/^[a-zA-Z]'?[- a-zA-Z]+$/) == null)
     {
-        document.getElementById("firstNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
-        document.getElementById("firstName").focus(); //Focuses on text field
-        //return false;
+        return "firstNameError2";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -87,9 +75,7 @@ function submission() {
     Referenced source for regex code: http://stackoverflow.com/questions/275160/regex-for-names */
     if (middleName.match(/^[a-zA-Z]'?[- a-zA-Z]+$/) == null)
     {
-        document.getElementById("middleNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
-        document.getElementById("middleName").focus(); //Focuses on text field
-        //return false;
+        return "middleNameError";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -102,17 +88,13 @@ function submission() {
     /* If last name is empty, print a message and return false */
     if (lastName == "") 
     {
-        document.getElementById("lastNameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
-        document.getElementById("lastName").focus(); //Focuses on text field
-        //return false;
+        return "lastNameError1";
     }
     /* Checks if last name entered is valid. Regex doesn't support numbers
     Referenced source for regex code: http://stackoverflow.com/questions/275160/regex-for-names */
     else if (lastName.match(/^[a-zA-Z]'?[- a-zA-Z]+$/) == null)
     {
-        document.getElementById("lastNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
-        document.getElementById("lastName").focus(); //Focuses on text field
-        //return false;
+        return "lastNameError2";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -125,17 +107,13 @@ function submission() {
     /* If email is empty, print a message and return false */
     if (emailAddress == "") 
     {
-        document.getElementById("emailAddressError").innerHTML = "This field is required"; //Displays error message if nothing is entered
-        document.getElementById("emailAddress").focus(); //Focuses on text field
-        //return false;
+        return "emailAddressError1";
     }
     /* Checks if email entered is valid
     Referenced source for regex code: http://stackoverflow.com/questions/46155/validate-email-address-in-javascript */
     else if (emailAddress.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/) == null)
     {
-        document.getElementById("emailAddressError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
-        document.getElementById("emailAddress").focus(); //Focuses on text field
-        //return false;
+        return "emailAddressError2";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -149,9 +127,7 @@ function submission() {
     Referenced source for regex code: http://www.authorcode.com/how-to-validate-phone-number-in-javascript/ */
     if (phoneNumber.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) == null)
     {
-        document.getElementById("phoneNumberError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
-        document.getElementById("phoneNumber").focus(); //Focuses on text field
-        //return false;
+        return "phoneNumberError";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -164,9 +140,7 @@ function submission() {
     /* If major 1 hasn't been selected, print a message and return false */
     if (major1 == "" || major1 == "selectMajor1") 
     {
-        document.getElementById("major1Error").innerHTML = "This field is required"; //Displays error message if nothing is selected
-        document.getElementById("major1").focus(); //Focuses on text field
-        //return false;
+        return "major1Error";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -179,9 +153,7 @@ function submission() {
     /* Prints error message if major 2 is the same as 1 or 3 */
     if (major2 == major1 || major2 == major3) 
     {
-        document.getElementById("major2Error").innerHTML = "Cannot have more than one of the same major"; //Displays error message if same major is selected again
-        document.getElementById("major2").focus(); //Focuses on text field
-        //return false;
+        return "major2Error";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -194,16 +166,12 @@ function submission() {
     /* Prints error message if major 3 is the same as 1 or 2 */
     if (major3 == major1 || major3 == major2) 
     {
-        document.getElementById("major3Error").innerHTML = "Cannot have more than one of the same major"; //Displays error message if same major is selected again
-        document.getElementById("major3").focus(); //Focuses on text field
-        //return false;
+        return "major3Error1";
     }
     /* Prints error message if major 3 is selected before 2 */
     else if (major3 != "selectMajor3" && major2 == "selectMajor2")
     {
-        document.getElementById("major3Error").innerHTML = "Cannot select a third major before selecting a second major"; //Displays error message if third major is selected before second major
-        document.getElementById("major3").focus(); //Focuses on text field
-        //return false;
+        return "major3Error2";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -219,16 +187,12 @@ function submission() {
     /* Prints error message if minor 2 is the same as 1 or 3 */
     if (minor2 == minor1 || minor2 == minor3) 
     {
-        document.getElementById("minor2Error").innerHTML = "Cannot have more than one of the same minor"; //Displays error message if same minor is selected again
-        document.getElementById("minor2").focus(); //Focuses on text field
-        //return false;
+        return "minor2Error1";
     }
     /* Prints error message if minor 2 is selected before 1 */
     else if (minor2 != "selectMinor2" && minor1 == "selectMinor1")
     {
-        document.getElementById("minor2Error").innerHTML = "Cannot select a second minor before selecting a first minor"; //Displays error message if second minor is selected before first minor
-        document.getElementById("minor2").focus(); //Focuses on text field
-        //return false;
+        return "minor2Error2";
     }
     /* Error is fixed, error message dissappears */
     else 
@@ -241,22 +205,125 @@ function submission() {
     /* Prints error message if minor 3 is the same as 1 or 2 */
     if (minor3 == minor1 || minor3 == minor2) 
     {
-        document.getElementById("minor3Error").innerHTML = "Cannot have more than one of the same minor"; //Displays error message if same minor is selected again
-        document.getElementById("minor3").focus(); //Focuses on text field
-        //return false;
+        return "minor3Error1";
     }
     /* Prints error message if minor 3 is selected before 2 */
     else if (minor3 != "selectMinor3" && minor2 == "selectMinor2")
     {
-        document.getElementById("minor3Error").innerHTML = "Cannot select a third minor before selecting a second minor"; //Displays error message if third minor is selected before second minor
-        document.getElementById("minor3").focus(); //Focuses on text field
-        //return false;
+        return "minor3Error2";
     }
     /* Error is fixed, error message dissappears */
     else 
     {
         document.getElementById("minor3Error").innerHTML = "";
     }
+}
 
-    //return true;
+/************************ Form submission **************************************/
+function submission() {
+    var valid = validation();
+    if (valid == "usernameError1")
+    {
+        document.getElementById("usernameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
+        document.getElementById("username").focus(); //Focuses on text field
+    }
+    else if (valid == "usernameError2")
+    {
+        document.getElementById("usernameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
+        document.getElementById("username").focus(); //Focuses on text field
+    }
+    else if (valid == "passwordError")
+    {
+        document.getElementById("passwordError").innerHTML = "This field is required"; //Displays error message if nothing is entered
+        document.getElementById("password").focus(); //Focuses on text field
+    }
+    else if (valid == "confirmPasswordError1")
+    {
+        document.getElementById("confirmPasswordError").innerHTML = "This field is required"; //Displays error message if nothing is entered
+        document.getElementById("confirmPassword").focus(); //Focuses on text field
+    }
+    else if (valid == "confirmPasswordError2")
+    {
+        document.getElementById("confirmPasswordError").innerHTML = "Passwords do not match"; //Displays error message if passwords don't match
+    }
+    else if (valid == "firstNameError1")
+    {
+        document.getElementById("firstNameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
+        document.getElementById("firstName").focus(); //Focuses on text field
+    }
+    else if (valid == "firstNameError2")
+    {
+        document.getElementById("firstNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
+        document.getElementById("firstName").focus(); //Focuses on text field
+    }
+    else if (valid == "middleNameError")
+    {
+        document.getElementById("middleNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
+        document.getElementById("middleName").focus(); //Focuses on text field
+    }
+    else if (valid == "lastNameError1")
+    {
+        document.getElementById("lastNameError").innerHTML = "This field is required"; //Displays error message if nothing is entered
+        document.getElementById("lastName").focus(); //Focuses on text field
+    }
+    else if (valid == "lastNameError2")
+    {
+        document.getElementById("lastNameError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
+        document.getElementById("lastName").focus(); //Focuses on text field
+    }
+    else if (valid == "emailAddressError1")
+    {
+        document.getElementById("emailAddressError").innerHTML = "This field is required"; //Displays error message if nothing is entered
+        document.getElementById("emailAddress").focus(); //Focuses on text field
+    }
+    else if (valid == "emailAddressError2")
+    {
+        document.getElementById("emailAddressError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
+        document.getElementById("emailAddress").focus(); //Focuses on text field
+    }
+    else if (valid == "phoneNumberError")
+    {
+        document.getElementById("phoneNumberError").innerHTML = "Invalid entry"; //Displays error message if regex is entered incorrectly
+        document.getElementById("phoneNumber").focus(); //Focuses on text field
+    }
+    else if (valid == "major1Error")
+    {
+        document.getElementById("major1Error").innerHTML = "This field is required"; //Displays error message if nothing is selected
+        document.getElementById("major1").focus(); //Focuses on text field
+    }
+    else if (valid == "major2Error")
+    {
+        document.getElementById("major2Error").innerHTML = "Cannot have more than one of the same major"; //Displays error message if same major is selected again
+        document.getElementById("major2").focus(); //Focuses on text field
+    }
+    else if (valid == "major3Error1")
+    {
+        document.getElementById("major3Error").innerHTML = "Cannot have more than one of the same major"; //Displays error message if same major is selected again
+        document.getElementById("major3").focus(); //Focuses on text field
+    }
+    else if (valid == "major3Error2")
+    {
+        document.getElementById("major3Error").innerHTML = "Cannot select a third major before selecting a second major"; //Displays error message if third major is selected before second major
+        document.getElementById("major3").focus(); //Focuses on text field
+    }
+    else if (valid == "minor2Error1")
+    {
+        document.getElementById("minor2Error").innerHTML = "Cannot have more than one of the same minor"; //Displays error message if same minor is selected again
+        document.getElementById("minor2").focus(); //Focuses on text field
+    }
+    else if (valid == "minor2Error2")
+    {
+        document.getElementById("minor2Error").innerHTML = "Cannot select a second minor before selecting a first minor"; //Displays error message if second minor is selected before first minor
+        document.getElementById("minor2").focus(); //Focuses on text field
+    }
+    else if (valid == "minor3Error1")
+    {
+        document.getElementById("minor3Error").innerHTML = "Cannot have more than one of the same minor"; //Displays error message if same minor is selected again
+        document.getElementById("minor3").focus(); //Focuses on text field
+    }
+    else if (valid == "minor3Error2")
+    {
+        document.getElementById("minor3Error").innerHTML = "Cannot select a third minor before selecting a second minor"; //Displays error message if third minor is selected before second minor
+        document.getElementById("minor3").focus(); //Focuses on text field
+    }
 }
