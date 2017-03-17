@@ -1,49 +1,49 @@
 <?php
-session_start(); //Start the session before you write your HTML page 
+session_start();
 ini_set('display_errors','On');
 error_reporting(E_ALL);
-$db_host = "dbserver.engr.scu.edu";
+$db_host = "dbserver.engr.scu.edu/db11g";
 $db_user = "wchang";
-$db_pass = "00000955018";
-$db_name = "sdb_wchang";
-$con = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-//Check connection
-if (mysqli_connect_errno())
+$db_pass = "winstonchang";
+$db_name = "STUDENTBOOKS";
+$conn = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
+if ($conn)
 {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    print "Connection successful<br>";
 }
-
-$sql = "SELECT * FROM UserInfo";
-
-$result = $con->query($sql);
-if (!$result)
+else
 {
-    die('Error: ' . mysqli_error($con));
+    print "Connection failed<br>";
+    exit;
 }
 
 $errorMessage = ""; //Initialize error message variable as empty value
+$username = $_GET["username"]; //Retrieves username from database
+$password = $_GET["password"]; //Retrieves password from database
 
-$username = $_POST['username']; //Get username from UserInfo
-$password = $_POST['password']; //Get password from UserInfo                 
-$sqll = "SELECT * FROM UserInfo 
-         WHERE username = '$username'
-         AND password = '$password'"; //Select values from UserInfo  
-$result = $con->query($sqll);
-
-if (!$result)
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    die('Error: ' . mysqli_error($con));
-}
-//Fetch the information from UserInfo
-$row = mysqli_fetch_assoc($result);
-
-//No match for username or password
-if (!$row)
-{
-    echo "<span class='nomember'>There is no member with that member code.</span>";
-}
-?> 
+    if (!empty($_POST['username']) && !empty($_POST['password']))
+    {
+        $sql = "SELECT * FROM USERINFO WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+        $sql_statement = oci_parse($conn, $sql);
+        oci_execute($sql_statement);
+        if (!empty($row['username'] && !empty($row['password'])))
+        {
+            $_SESSION['username'] = $row['PASSWORD'];
+            header('Location: homepage.php');
+        }
+        else
+        {
+            $errorMessage = "Login failed";
+        }
+    }
+    else
+    {
+        header('Location: loginpage.php');
+    }
+} 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,10 +92,10 @@ if (!$row)
         <h1>Welcome to SCUdent Books!</h1>
         <form id="login" method="post">
             <label for="inputUsername">Username</label>
-            <input type="text" id="inputUsername" placeholder="Username" required autofocus>
+            <input type="text" id="inputUsername" placeholder="Username" name="username" required autofocus>
             <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" placeholder="Password" required>
-            <button type="submit" id="loginButton">Login</button>
+            <input type="password" id="inputPassword" placeholder="Password" name="password" required>
+            <button type="submit" id="loginButton" name="submit">Login</button>
             <p id="loginError">
                 <?php 
                     echo $errorMessage; //Prints error message

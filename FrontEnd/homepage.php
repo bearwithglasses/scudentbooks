@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ini_set('display_errors','On');
 error_reporting(E_ALL);
 $db_host = "dbserver.engr.scu.edu/db11g";
@@ -8,10 +8,15 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
+if (!isset($_SESSION['USERNAME']) && !isset($_SESSION['PASSWORD']))
+{
+    header('Location: loginpage.php');
+    die();
+}
+
 $sql="SELECT * FROM BOOKPOST";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
-
 ?>
 
 

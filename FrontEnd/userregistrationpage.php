@@ -16,6 +16,7 @@
 <body>
 
 <?php
+    /*
     $usernameError = $passwordError = $confirmPasswordError = $firstNameError = $middleNameError = $lastNameError = $emailAddressError = $phoneNumberError = $major1Error = $major2Error = $major3Error = $minor2Error = $minor3Error = "";
     $username = $password = $confirmPassword = $firstName = $middleName = $lastName = $emailAddress = $phoneNumber = $major1 = $major2 = $major3 = $minor1 = $minor2 = $minor3 = $year = $location = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -260,6 +261,7 @@
             $location = test_input($_POST["location"]);
         }
     }
+    */
 ?>
 
 <!-- Navigation -->
@@ -290,7 +292,7 @@
 <!-- Container that holds Main and Side divs -->
 <div id="container">
     <div class="registrationForm">
-        <form id="registration" action="userregistrationsubmitpage.php" method="post">
+        <form id="registration" method="post">
             <h1>Sign Up to Become a Member here</h1>
             <p>* Required Field</p>
             <div id="formRegister">
@@ -298,42 +300,42 @@
                     <li>
                         <label for="username">*Username:</label>
                         <input type="text" id="username" name="username" placeholder="Username">
-                        <span id="usernameError"><?php echo $usernameError; ?></span> <!-- Username error will be inserted here -->
+                        <span id="usernameError"><?php //echo $usernameError; ?></span> <!-- Username error will be inserted here -->
                     </li>
                     <li>
                         <label for="password">*Password:</label>
                         <input type="password" id="password" name="password" placeholder="Password">
-                        <span id="passwordError"><?php echo $passwordError; ?></span> <!-- Password error will be inserted here -->
+                        <span id="passwordError"><?php //echo $passwordError; ?></span> <!-- Password error will be inserted here -->
                     </li>
                     <li>
                         <label for="confirmPassword">*Confirm Password:</label>
                         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
-                        <span id="confirmPasswordError"><?php echo $confirmPasswordError; ?></span> <!-- Confirm password error will be inserted here -->
+                        <span id="confirmPasswordError"><?php //echo $confirmPasswordError; ?></span> <!-- Confirm password error will be inserted here -->
                     </li>
                     <li>
                         <label for="firstName">*First Name:</label>
                         <input type="text" id="firstName" name="firstName" placeholder="First Name">
-                        <span id="firstNameError"><?php echo $firstNameError; ?></span> <!-- First name error will be inserted here -->
+                        <span id="firstNameError"><?php //echo $firstNameError; ?></span> <!-- First name error will be inserted here -->
                     </li>
                     <li>
                         <label for="middleName">Middle Name:</label>
                         <input type="text" id="middleName" name="middleName" placeholder="Middle Name">
-                        <span id="middleNameError"><?php echo $middleNameError; ?></span> <!-- Middle name error will be inserted here -->
+                        <span id="middleNameError"><?php //echo $middleNameError; ?></span> <!-- Middle name error will be inserted here -->
                     </li>
                     <li>
                         <label for="lastName">*Last Name:</label>
                         <input type="text" id="lastName" name="lastName" placeholder="Last Name">
-                        <span id="lastNameError"><?php echo $lastNameError; ?></span> <!-- Last name error will be inserted here -->
+                        <span id="lastNameError"><?php //echo $lastNameError; ?></span> <!-- Last name error will be inserted here -->
                     </li>
                     <li>
                         <label for="emailAddress">*Email Address:</label>
                         <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address">
-                        <span id="emailAddressError"><?php echo $emailAddressError; ?></span> <!-- Email address error will be inserted here -->
+                        <span id="emailAddressError"><?php //echo $emailAddressError; ?></span> <!-- Email address error will be inserted here -->
                     </li>
                     <li>
                         <label for="phoneNumber">Phone Number:</label>
                         <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
-                        <span id="phoneNumberError"><?php echo $phoneNumberError; ?></span> <!-- Phone number error will be inserted here -->
+                        <span id="phoneNumberError"><?php //echo $phoneNumberError; ?></span> <!-- Phone number error will be inserted here -->
                     </li>
                     <li>
                         <label for="major1">*Major:</label>
@@ -345,7 +347,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
-                        <span id="major1Error"><?php echo $major1Error; ?></span> <!-- Major 1 error will be inserted here -->
+                        <span id="major1Error"><?php //echo $major1Error; ?></span> <!-- Major 1 error will be inserted here -->
                     </li>
                     <li>
                         <label for="major2">Major:</label>
@@ -357,7 +359,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
-                        <span id="major2Error"><?php echo $major2Error; ?></span> <!-- Major 2 error will be inserted here -->
+                        <span id="major2Error"><?php //echo $major2Error; ?></span> <!-- Major 2 error will be inserted here -->
                     </li>
                     <li>
                         <label for="major3">Major:</label>
@@ -369,7 +371,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
-                        <span id="major3Error"><?php echo $major3Error; ?></span> <!-- Major 3 error will be inserted here -->
+                        <span id="major3Error"><?php //echo $major3Error; ?></span> <!-- Major 3 error will be inserted here -->
                     </li>
                     <li>
                         <label for="minor1">Minor:</label>
@@ -392,7 +394,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
-                        <span id="minor2Error"><?php echo $minor2Error; ?></span> <!-- Minor 2 error will be inserted here -->
+                        <span id="minor2Error"><?php //echo $minor2Error; ?></span> <!-- Minor 2 error will be inserted here -->
                     </li>
                     <li>
                         <label for="minor3">Minor:</label>
@@ -404,7 +406,7 @@
                             <option value="Biology">Biology</option>
                             <option value="Marketing">Marketing</option>
                         </select>
-                        <span id="minor3Error"><?php echo $minor3Error; ?></span> <!-- Minor 3 error will be inserted here -->
+                        <span id="minor3Error"><?php //echo $minor3Error; ?></span> <!-- Minor 3 error will be inserted here -->
                     </li>
                     <li>
                         <label for="year">Year:</label>
@@ -429,7 +431,7 @@
                         </select>
                     </li>
                 </ul>
-                <button type="submit" id="submitButton" onclick="submission()">Submit</button>
+                <input type="button" id="submitButton" value="Submit" onclick="submission()">
             </div>
         </form>
     </div>
