@@ -159,7 +159,7 @@ oci_execute($stid);
             $bookstatus = "pending2";
             $bookstatusText = "Sale Pending";
             $disable = "disabled";
-            $bstyle = "messagebutton"; //edit to be disabledbutton
+            $bstyle = "messagebutton";
         }
 
         echo "<h1>".$row['TITLE']."</h1>";
@@ -179,7 +179,7 @@ oci_execute($stid);
         echo "</div>";
 
 
-        echo "<div class='sendmessage'><button id='$bstyle' $disable>Send Message</button></div>";
+        echo "<div class='sendmessage'><button id='$bstyle' $disable>Send Message</button></p></div>";
 
     }
 

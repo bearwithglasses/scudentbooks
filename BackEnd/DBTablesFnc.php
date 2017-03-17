@@ -3,10 +3,10 @@
 // 
 //   
 function makeConnection(){
-	$db_host = "dbserver.engr.scu.edu";
+	$db_host = "dbserver.engr.scu.edu/db11g";
 	$db_user = "wchang";
-	$db_pass = "00000955018";
-	$db_name = "sdb_wchang";
+	$db_pass = "winstonchang";
+	$db_name = "STUDENTBOOKS";
 	//Create connection
 	$con = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
@@ -21,10 +21,10 @@ function makeConnection(){
 //
 function CreateDataBase()
 {  
-	$db_host = "dbserver.engr.scu.edu";
+	$db_host = "dbserver.engr.scu.edu.db11g";
 	$db_user = "wchang";
-	$db_pass = "00000955018";
-	$db_name = "sdb_wchang";
+	$db_pass = "winstonchang";
+	$db_name = "STUDENTBOOKS";
 	$con = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 	
 	// Check connection
@@ -73,14 +73,14 @@ function closeConnection($con){
 	//
 	// 13 input variables for BookPost_insertValues
 	//
-	function BookPost_insertValues($m_userid,$m_title,$m_author,$m_edition,$m_purpose,$m_price,$m_isbn,$m_major,$m_courseNumber,$m_professor,$m_postDate,$m_conditions,$m_status)
+	function BookPost_insertValues($book_id,$book_userid,$book_title,$book_author,$book_edition,$book_purpose,$book_price,$book_isbn,$book_major,$book_courseNo,$book_prof,$book_date,$book_condition,$book_status)
+	//$m_userid,$m_title,$m_author,$m_edition,$m_purpose,$m_price,$m_isbn,$m_major,$m_courseNumber,$m_professor,$m_postDate,$m_conditions,$m_status)
 	{
 			
 		$con = makeConnection();
-		// REMEMBER .. 13 fields for BookEntry
-		$sql = "INSERT INTO BookPost (userid,title,author,edition,purpose,price,isbn,major,courseNumber,professor,postDate,conditions,status)
+		/*$sql = "INSERT INTO BookPost (userid,title,author,edition,purpose,price,isbn,major,courseNumber,professor,postDate,conditions,status)
 		    VALUES ('$m_userid','$m_title','$m_author','$m_edition','$m_purpose','$m_price','$m_isbn','$m_major','$m_courseNumber','$m_professor','$m_postDate','$m_conditions','$m_status')";
-	
+		    */
 	
 		if (mysqli_query($con, $sql)) {
 		echo "New record  for BookPost table created successfully<br>";

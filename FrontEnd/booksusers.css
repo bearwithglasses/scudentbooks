@@ -95,7 +95,6 @@ h2 b{
     display: inline-block;
     font-size: 1.1em;
     margin: 5px 10px;
-    cursor: pointer;
     float: right;
 }
 
@@ -104,7 +103,7 @@ h2 b{
     cursor: pointer;
 }
 
-#disablebutton{
+.disablebutton{
     background-color: #7D7D7D;
     border: none;
     color: white;
@@ -118,8 +117,9 @@ h2 b{
     float: right;
 }
 
-#disablebutton:hover{
-    cursor: default;
+#messagebutton:hover{
+    background-color: #7D7D7D;
+    cursor: pointer;
 }
 
 .listingstatus{

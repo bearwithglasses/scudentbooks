@@ -18,19 +18,39 @@ else
 }
 
 $errorMessage = ""; //Initialize error message variable as empty value
-$username = $_GET["username"]; //Retrieves username from database
-$password = $_GET["password"]; //Retrieves password from database
+// $username = $_GET["username"]; //Retrieves username from database
+// $password = $_GET["password"]; //Retrieves password from database
+
+// if ($_SERVER['REQUEST_METHOD'] == 'POST')
+// {
+//     if (!empty($_POST['username']) && !empty($_POST['password']))
+//     {
+//         $sql = "SELECT * FROM USERINFO WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+//         $sql_statement = oci_parse($conn, $sql);
+//         oci_execute($sql_statement);
+//         if (!empty($row['username'] && !empty($row['password'])))
+//         {
+//             $_SESSION['username'] = $row['PASSWORD'];
+//             header('Location: homepage.php');
+//         }
+//         else
+//         {
+//             $errorMessage = "Login failed";
+//         }
+//     }
+//     else
+//     {
+//         header('Location: loginpage.php');
+//     }
+// }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    if (!empty($_POST['username']) && !empty($_POST['password']))
+    if (!empty($_POST["username"]) AND !empty($_POST["password"]))
     {
-        $sql = "SELECT * FROM USERINFO WHERE USERNAME = '$username' AND PASSWORD = '$password'";
-        $sql_statement = oci_parse($conn, $sql);
-        oci_execute($sql_statement);
-        if (!empty($row['username'] && !empty($row['password'])))
+        if ($_POST["username"] == "john123" AND $_POST["password"] == "apple456")
         {
-            $_SESSION['username'] = $row['PASSWORD'];
+            $_SESSION["user"] = true;
             header('Location: homepage.php');
         }
         else
@@ -42,7 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         header('Location: loginpage.php');
     }
-} 
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
