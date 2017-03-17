@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 ini_set('display_errors','On');
 error_reporting(E_ALL);
 $db_host = "dbserver.engr.scu.edu/db11g";
@@ -8,15 +8,10 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
-if (!isset($_SESSION['USERNAME']) && !isset($_SESSION['PASSWORD']))
-{
-    header('Location: loginpage.php');
-    die();
-}
-
-$sql="SELECT * FROM BOOKPOST";
+$sql="SELECT * FROM BOOKPOST ORDER BY POSTDATE DESC";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
+
 ?>
 
 
@@ -104,6 +99,9 @@ oci_execute($stid);
                 while($row2 = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
                     $username = $row2['USERNAME'];
                     $location = $row2['LOCATION'];
+                    $date = $row['POSTDATE'];
+                    $bookid = $row['BOOKID'];
+                    $author = $row['AUTHOR']->load();
                 }
 
 
@@ -111,9 +109,9 @@ oci_execute($stid);
                 echo "<li>";        
                     echo "<div class='listusername'><a href='profile.php?username=".$username."'>".$username."</a></div>";
                     echo "<div class='location'>".$location."</div>";    
-                    echo "<div class='listpic pic'><a href='listing.php?id=".$row['BOOKID']."'><img src='images/500px.png'></a></div>";
-                    echo "<div class='listtitle'><a href='listing.php?id=".$row['BOOKID']."'>".$row['TITLE']."</a></div>";
-                    echo "<div class='bookinfo'>Author: ".$row['AUTHOR']->load()."<br>Posted 1/23/16";
+                    echo "<div class='listpic pic'><a href='listing.php?id=".$bookid."'><img src='images/500px.png'></a></div>";
+                    echo "<div class='listtitle'><a href='listing.php?id=".$bookid."'>".$row['TITLE']."</a></div>";
+                    echo "<div class='bookinfo'>Author: ".$author."<br>".$date;
                     echo "</div>";
                     echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
                 echo "</li>";

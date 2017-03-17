@@ -104,6 +104,24 @@ h2 b{
     cursor: pointer;
 }
 
+#disablebutton{
+    background-color: #7D7D7D;
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 5px 10px;
+    cursor: default;
+    float: right;
+}
+
+#disablebutton:hover{
+    cursor: default;
+}
+
 .listingstatus{
     background-color: #BF3939;
     border: none;

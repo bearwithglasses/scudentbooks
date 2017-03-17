@@ -146,14 +146,20 @@ oci_execute($stid);
         if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){
             $bookstatus = "buy";
             $bookstatusText = "$".$row['PRICE'];
+            $disable = "";
+            $bstyle = "messagebutton";
         }
         if($row['STATUS'] == "available" && $row['PURPOSE'] == "swap"){
             $bookstatus = "swap";
             $bookstatusText = "For Swap";
+            $disable = "";
+            $bstyle = "messagebutton";
         }
         if($row['STATUS'] == "sale pending"){
             $bookstatus = "pending2";
             $bookstatusText = "Sale Pending";
+            $disable = "disabled";
+            $bstyle = "messagebutton"; //edit to be disabledbutton
         }
 
         echo "<h1>".$row['TITLE']."</h1>";
@@ -171,11 +177,13 @@ oci_execute($stid);
         echo "<div class='listingdescription'>";
         echo $description;
         echo "</div>";
+
+
+        echo "<div class='sendmessage'><button id='$bstyle' $disable>Send Message</button></div>";
+
     }
 
     ?>
-
-        <div class="sendmessage"><button id="messagebutton">Send Message</button></p></div>
 </div>
 
 
