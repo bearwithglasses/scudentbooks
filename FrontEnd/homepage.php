@@ -8,7 +8,13 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
-if (!isset($_SESSION['USERNAME']) && !isset($_SESSION['PASSWORD']))
+// if (!isset($_SESSION['USERNAME']) && !isset($_SESSION['PASSWORD']))
+// {
+//     header('Location: loginpage.php');
+//     die();
+// }
+
+if (!isset($_SESSION["user"]))
 {
     header('Location: loginpage.php');
     die();
