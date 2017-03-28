@@ -3,7 +3,8 @@
 	//if(isset($_POST['submit']))
 	{
 		$title = $_POST['book_title'];
-		$deptName = $_POST['book_deptName'];
+		$major = $_POST['book_major'];
+		//$deptName = $_POST['book_deptName'];
 		searchForBooks($title,$deptName);
 	}
 	//else

@@ -37,7 +37,7 @@ function insertFormValues($mDeptName,$mClassNo,$mTitle,$mAuthor,$mEdition,$mCond
 }
 function showBookData(){
 	$conn = makeConnection();
-	$sql = "SELECT *  FROM BookForm";
+	$sql = "SELECT *  FROM BOOKPOST";
 	$result = mysqli_query($conn,$sql) or die (mysql_error());
 	if (mysqli_num_rows($result) > 0) {
     	// output data of each row
@@ -92,16 +92,19 @@ function showSearchResults($results){
 	//echo "<br>Deleted data successfully<br/>";
 	closeConnection($conn);
 }*/
-function searchForBooks($title,$deptName) {
+function searchForBooks($title,$author,$edition,$isbn,$major,$courseno,$condition,$price) {		//missing location and purpose, and is isbn really necessary?
 	//echo "from searchForBooks... deptName: " . $deptName . " and title: " . $title . "\n";
 	$conn = makeConnection();
-	$sql =  $sql="SELECT  mDeptName, mClassNo, mTitle, mAuthor, mEdition, mCondition, mPrice, mSellerName, mEmail, mPhone 
-	FROM BookForm WHERE mDeptName LIKE '%" . $deptName .  "%' AND mTitle LIKE '%" . $title ."%'"; 
+	$sql =  $sql="SELECT  book_title,book_author,book_edition,book_isbn,book_major,book_courseno,book_condition,book_price
+	FROM BOOKPOST WHERE book_title LIKE '%" . $title .  "%' AND book_author LIKE '%" . $author . 
+	"%' AND book_edition LIKE '%" . $edition . "%' AND book_isbn LIKE '%" . $isbn .
+	"%' AND book_major LIKE '%" . $major . "%' AND book_courseno LIKE '%" . $courseno .
+	"%' AND book_condition LIKE '%" . $condition . "%' AND book_price LIKE '%" . $price . "%'"; 
 	$result = mysqli_query($conn,$sql) or die (mysql_error());
 	$count = mysqli_num_rows($result);
 	//echo $count . "</br>";
 	if ($count > 0){
-		showSearchResults($result);
+		showSearchResults($result);		//update to use format on searchpage.html
 	}
 	else
 		echo "No results found.\n";
