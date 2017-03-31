@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+3/30/2017
+	Renee
+		- recreated BookPicture table and added dummy data to it
+		- updated homepage and listing page to show pictures from the BookPicture table
+		- updated showData.php to show the BookPicture data
+		- created bookimages folder and added pictures
+
 3/10/2017
 	Renee
 		- FrontEnd folder

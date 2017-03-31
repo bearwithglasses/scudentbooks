@@ -55,17 +55,17 @@
              <label>Title: </label><input type="text" name="book_title">
         </li>
         <li>
-            <label>Author: </label><input type="text" name="book_author">
+            <label>Author: </label><input type="text" name="book_title">
         </li>
         <li>
-            <label>Edition: </label><input type="text" name="book_edition">
+            <label>Edition: </label><input type="text" name="book_title">
         </li>
         <li>
-            <label>ISBN: </label><input type="text" name="book_isbn">
+            <label>ISBN: </label><input type="text" name="book_classNo">
         </li>
         <li>
             <label>Department: </label>
-            <select id="deptNameIdx" name="book_major">
+            <select id="deptNameIdx" name="book_deptName">
                 <option value="ARTS" selected="selected">ARTS</option>
                 <option value="CHIN">CHIN</option>
                 <option value="COEN">COEN</option>
@@ -79,18 +79,17 @@
             </select>
         </li>
         <li>
-            <label>Course Number: </label><input type="text" name="book_courseno">
+            <label>Course Number: </label><input type="text" name="book_classNo">
         </li>
     </ul>
     <ul>
         <li>
                 <label>Location: </label>
-                <!--location isn't part of the table yet/is part of a different table-->
-            <select id="deptNameIdx" name="book_location">
-                <option value="OnC" selected="selected">On-Campus</option>
-                <option value="RLC">Residential Learning Communities</option>
-                <option value="UV">University Villas</option><option value="NU">Neighborhood Units</option>
-                <option value="OffC">Off-Campus</option>
+            <select id="deptNameIdx" name="book_deptName">
+                <option value="ARTS" selected="selected">On-Campus</option>
+                <option value="X">Residential Learning Communities</option>
+                <option value="CHIN">University Villas</option><option value="CHIN">Neighborhood Units</option>
+                <option value="CHIN">Off-Campus</option>
             </select>
         </li>
         <li>
@@ -102,13 +101,13 @@
         </li>
         <li>
         <label>Purpose: </label>
-                <input type="radio" name="purpose" value="any">Any
-                <input type="radio" name="purpose" value="sell"> Sell
-                <input type="radio" name="purpose" value="swap"> Swap
+                <input type="radio" name="gender" value="male">Any
+                <input type="radio" name="gender" value="female"> Sell
+                <input type="radio" name="gender" value="female"> Swap
         </li>
         <li>
             <label>Price: </label>
-            <select id="condIdx" name="book_price">
+            <select id="condIdx" name="book_condition">
                 <option value="New" selected="selected">Any Price</option>
                 <option value="Used">Under $25</option>
                 <option value="Used">$25 to $50</option>

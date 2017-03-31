@@ -8,17 +8,20 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
-$bookid = $_GET["id"];
+$bookid = $_GET["id"]; //Get the bookid from the URL
 
+//Select the Book that is the same as the Book's bookid
 $sql="SELECT * FROM BOOKPOST WHERE BOOKID = '$bookid'";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
 
+//Set the userid and the booktitle from the BOOKPOST table
 while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
     $userid = $row['USERID'];
     $booktitle = $row['TITLE'];
 };
 
+//Select the User from the USERINFO table using the userid
 $sql2="SELECT * FROM USERINFO WHERE USERID = '$userid'";
 $stid2 = oci_parse($con, $sql2);
 oci_execute($stid2);
@@ -27,15 +30,20 @@ while($row2 = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
     $username = $row2['USERNAME'];
 };
 
+//Gets the book's description
 $sql3="SELECT * FROM BOOKDESCRIPTION WHERE BOOKID = '$bookid'";
 $stid3 = oci_parse($con, $sql3);
 oci_execute($stid3);
 
-
+//Set up the sql statement to be used in later code to checking the price/status
 $sql="SELECT * FROM BOOKPOST WHERE BOOKID = '$bookid'";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
 
+//Set up the sql statement to be used later in the code to get the book pictures
+$sqlPic="SELECT * FROM BOOKPICTURE WHERE BOOKID = '$bookid'";
+$stidPic = oci_parse($con, $sqlPic);
+oci_execute($stidPic);
 ?>
 
 <!DOCTYPE html>
@@ -89,10 +97,10 @@ oci_execute($stid);
 <div id="popupbox" class="popup">
     <div class="popupmessage">
     <form action="#" id="messageform" method="post" name="form">
+        <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
         <h2>Send a Message to <b><?php echo $username ?></b> about <b><?php echo $booktitle ?></b></h2>
         <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
         <input type="button" class="button" id="sendmessage" value="Send Message">
-        <input type="button" class="button" id="closemessage" value="Close Message">
     </form>
     </div>
 </div>
@@ -106,23 +114,34 @@ oci_execute($stid);
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
+<?php
+
+    // Get and save all book pictures to variables
+    while($row = oci_fetch_array($stidPic, OCI_ASSOC+OCI_RETURN_NULLS)){
+        $pic1 = $row['PIC1']->load();
+        $pic2 = $row['PIC2']->load();
+        $pic3 = $row['PIC3']->load();
+    }
+
+?>
+
 <div id="listing">
     <div class="listingimage">
     <div id="mainimage">
-        <div class="listpic pic bookpic" id="img1"><img src="images/500px.png" onclick="openImage(this)"></div>
-        <div class="listpic pic bookpic" id="img2"><img src="images/500-2.png" onclick="openImage(this)"></div>
-        <div class="listpic pic bookpic" id="img3"><img src="images/500-3.png" onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img1"><img src="bookimages/<?php echo $pic1 ?>" onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img2"><img src="bookimages/<?php echo $pic2 ?>" onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img3"><img src="bookimages/<?php echo $pic3 ?>" onclick="openImage(this)"></div>
     </div>
 
         <div class="bookphotonav">
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" src="images/500px.png" style="width:100%" onclick="currentDiv(1)">
+              <img class="opacity opacity-off" src="bookimages/<?php echo $pic1 ?>" style="width:100%" onclick="currentDiv(1)">
             </div>
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" src="images/500-2.png" style="width:100%" onclick="currentDiv(2)">
+              <img class="opacity opacity-off" src="bookimages/<?php echo $pic2 ?>" style="width:100%" onclick="currentDiv(2)">
             </div>
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" src="images/500-3.png" style="width:100%" onclick="currentDiv(3)">
+              <img class="opacity opacity-off" src="bookimages/<?php echo $pic3 ?>" style="width:100%" onclick="currentDiv(3)">
             </div>
           </div>
     </div>
@@ -132,10 +151,12 @@ oci_execute($stid);
 
     <?php
 
+        //Get the book description
         while($row = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
             $description = $row['DESCRIPTION']->load();
          }
 
+        //Go through the previous sql statement to get the status/price
         while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
 
         $bookedition = $row['PRICE'];
@@ -162,6 +183,7 @@ oci_execute($stid);
             $bstyle = "messagebutton";
         }
 
+        //Display the book information
         echo "<h1>".$row['TITLE']."</h1>";
         echo "<div class='listingstatus ".$bookstatus."'>".$bookstatusText."</div>";
         echo "<div class='listinginfotext'>";

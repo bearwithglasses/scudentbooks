@@ -14,6 +14,15 @@ oci_execute($stid);
 $sql2="SELECT * FROM BOOKPOST ORDER BY BOOKID";
 $stid2 = oci_parse($con, $sql2);
 oci_execute($stid2);
+
+$sql3="SELECT * FROM BOOKDESCRIPTION ORDER BY BOOKID";
+$stid3 = oci_parse($con, $sql3);
+oci_execute($stid3);
+
+$sql4="SELECT * FROM BOOKPICTURE ORDER BY BOOKID";
+$stid4 = oci_parse($con, $sql4);
+oci_execute($stid4);
+
 ?>
 
 <head>
@@ -112,6 +121,41 @@ oci_execute($stid2);
 	echo "<td>" . $row['POSTDATE'] . "</td>";
 	echo "<td>" . $row['CONDITION'] . "</td>";
 	echo "<td>" . $row['STATUS'] . "</td>";
+	echo "</tr>";
+	}
+	echo "</table>";
+
+
+	echo "<h1>BOOKDESCRIPTION table</h1><p><table border='1'>
+	<tr>
+	<th>BOOKID</th>
+	<th>DESCRIPTION</th>
+	</tr>";
+
+	while($row = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
+	{
+	echo "<tr>";
+	echo "<td>" . $row['BOOKID'] . "</td>";
+	echo "<td>" . $row['DESCRIPTION']->load() . "</td>";
+	echo "</tr>";
+	}
+	echo "</table>";
+
+	echo "<h1>BOOKPICTURE table</h1><p><table border='1'>
+	<tr>
+	<th>BOOKID</th>
+	<th>PIC1</th>
+	<th>PIC2</th>
+	<th>PIC3</th>
+	</tr>";
+
+	while($row = oci_fetch_array($stid4, OCI_ASSOC+OCI_RETURN_NULLS))
+	{
+	echo "<tr>";
+	echo "<td>" . $row['BOOKID'] . "</td>";
+	echo "<td>" . $row['PIC1']->load() . "</td>";
+	echo "<td>" . $row['PIC2']->load() . "</td>";
+	echo "<td>" . $row['PIC3']->load() . "</td>";
 	echo "</tr>";
 	}
 	echo "</table>";

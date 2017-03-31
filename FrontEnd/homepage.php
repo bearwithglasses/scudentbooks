@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ini_set('display_errors','On');
 error_reporting(E_ALL);
 $db_host = "dbserver.engr.scu.edu/db11g";
@@ -8,9 +8,17 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
+
+if(!isset($_SESSION["user"])){
+    header('Location: loginpage.php');
+    die();
+}
+
 $sql="SELECT * FROM BOOKPOST ORDER BY POSTDATE DESC";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
+
+
 
 ?>
 
@@ -70,6 +78,7 @@ oci_execute($stid);
         <ul>
             <?php
 
+            // Choose the correct display text/links for the book
             while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
 
                 if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){
@@ -91,11 +100,13 @@ oci_execute($stid);
                     $booklinkend = "";
                 }
 
+                // Get user info based off of the userid from the books
                 $userid = $row['USERID'];
                 $sql2="SELECT * FROM USERINFO WHERE USERID = '$userid'";
                 $stid2 = oci_parse($con, $sql2);
                 oci_execute($stid2);
 
+                // Save user data to variables
                 while($row2 = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
                     $username = $row2['USERNAME'];
                     $location = $row2['LOCATION'];
@@ -104,12 +115,23 @@ oci_execute($stid);
                     $author = $row['AUTHOR']->load();
                 }
 
+                //Set up the sql statement to be used later in the code to get the book pictures
+                $sql3="SELECT * FROM BOOKPICTURE WHERE BOOKID = '$bookid'";
+                $stid3 = oci_parse($con, $sql3);
+                oci_execute($stid3);
+
+                //Save the picture text to a variable
+                while($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
+                    $pic1 = $row3['PIC1']->load();
+                }
 
 
+
+                //Display the book listing with the location, user, date, author, and book status button
                 echo "<li>";        
                     echo "<div class='listusername'><a href='profile.php?username=".$username."'>".$username."</a></div>";
                     echo "<div class='location'>".$location."</div>";    
-                    echo "<div class='listpic pic'><a href='listing.php?id=".$bookid."'><img src='images/500px.png'></a></div>";
+                    echo "<div class='listpic pic'><a href='listing.php?id=".$bookid."'><img src='bookimages/".$pic1."'></a></div>";
                     echo "<div class='listtitle'><a href='listing.php?id=".$bookid."'>".$row['TITLE']."</a></div>";
                     echo "<div class='bookinfo'>Author: ".$author."<br>".$date;
                     echo "</div>";
