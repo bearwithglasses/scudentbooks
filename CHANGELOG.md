@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 3/31/2017
+
 	Christina
 		- FrontEnd/demopages folder
 			- updated addbook.html to match createtables.sql tables.
@@ -12,6 +13,7 @@ All notable changes to this project will be documented in this file.
 			- deleted old files from beginning of project to avoid confusion (still on my local drive though)
 
 3/10/2017
+
 	Renee
 		- FrontEnd folder
 			- updated showData.php to show BookDescription table
