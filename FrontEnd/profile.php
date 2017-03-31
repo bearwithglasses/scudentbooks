@@ -10,14 +10,16 @@ $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
 $username = $_GET["username"];
 
+//Select the User from the USERINFO table
 $sql="SELECT * FROM USERINFO WHERE USERNAME = '$username'";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
 
 while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
-    $userid = $row['USERID'];
+    $userid = $row['USERID']; //Set the User's USERID as userid to be used to find books
 };
 
+//Select all the books where the USERID is the same as the User's
 $sql2="SELECT * FROM BOOKPOST WHERE USERID = '$userid'";
 $stid2 = oci_parse($con, $sql2);
 oci_execute($stid2);
@@ -79,10 +81,11 @@ oci_execute($stid);
 <div id="popupbox" class="popup">
     <div class="popupmessage">
     <form action="#" id="messageform" method="post" name="form">
+        <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
         <h2>Send a Message to <b><?php echo $username ?></b></h2>
+        <label></label><input type="text" name="book_title" placeholder="Message Title">
         <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
         <input type="button" class="button" id="sendmessage" value="Send Message">
-        <input type="button" class="button" id="closemessage" value="Close Message">
     </form>
     </div>
 </div>
@@ -96,6 +99,7 @@ oci_execute($stid);
         <div class="listpic pic"><img src="images/500px.png"></div>
     </div>
 
+    <!--Display the User information-->
     <div class="profileinfo">
         <h1><?php echo $username ?></h1>
         <div class="profileinfotext">
@@ -124,6 +128,7 @@ oci_execute($stid);
 
     <?php
 
+    //Display the list of books of that User
     while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
 
         if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){

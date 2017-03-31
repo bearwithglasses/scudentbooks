@@ -5,7 +5,6 @@ h2 b{
 #profile, #listing{
 	margin: 0 0 20px 0;
 	overflow: auto;
-    border: 1px solid #ddd;
     padding: 20px 0;
 }
 
@@ -224,7 +223,6 @@ textarea:focus {
 		#profileprofile{
 			margin: 0 0 20px 0;
 			overflow: auto;
-		    border: 1px solid #ddd;
 		    padding: 20px 0;
 		}
 

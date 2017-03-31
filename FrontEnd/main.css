@@ -55,6 +55,13 @@ select{
     padding: 5px 20px;
 }
 
+#closemessage{
+    float: right;
+    margin-right: -100px;
+    margin-top: -80px;
+    cursor: pointer;
+}
+
 .searchbar .button, .advancedsearch{
     background-color: #BF3939;
     border: none;
@@ -107,6 +114,26 @@ button{
 .button:hover, .advancedsearch:hover, button:hover{
     background-color: #6B2020;
     cursor: pointer;
+    text-decoration: none;
+}
+
+.minorbutton{
+    background-color: lightgray;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.minorbutton:hover{
+    background-color: darkgrey;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /******************** Header and Navigation ********************************/
@@ -365,6 +392,8 @@ legend{
     border: 1px solid lightgray;
     width: 20%;
     float: left;
+    padding-top: 30px;
+    margin: 0px 20px 0px 20px;
 }
 
 #floatright{
