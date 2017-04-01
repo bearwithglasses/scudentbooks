@@ -78,6 +78,7 @@ oci_execute($stid);
         <ul>
             <?php
 
+            
             // Choose the correct display text/links for the book
             while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
 
@@ -115,6 +116,7 @@ oci_execute($stid);
                     $author = $row['AUTHOR']->load();
                 }
 
+                $pic1 = "nopic.jpg";
                 //Set up the sql statement to be used later in the code to get the book pictures
                 $sql3="SELECT * FROM BOOKPICTURE WHERE BOOKID = '$bookid'";
                 $stid3 = oci_parse($con, $sql3);
@@ -122,7 +124,12 @@ oci_execute($stid);
 
                 //Save the picture text to a variable
                 while($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
-                    $pic1 = $row3['PIC1']->load();
+                    if ($row3['PIC1'] != NULL){
+                        $pic1 = $row3['PIC1']->load();
+                    }
+                    else{
+                        $pic1 = "nopic.jpg";
+                    }
                 }
 
 

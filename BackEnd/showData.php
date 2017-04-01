@@ -134,9 +134,17 @@ oci_execute($stid4);
 
 	while($row = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
 	{
+
+		if ($row['DESCRIPTION'] != NULL){
+			$bookdesc = $row['DESCRIPTION']->load();
+		}
+		else{
+			$bookdesc = "<i>NULL</i>";
+		}
+
 	echo "<tr>";
 	echo "<td>" . $row['BOOKID'] . "</td>";
-	echo "<td>" . $row['DESCRIPTION']->load() . "</td>";
+	echo "<td>" . $bookdesc ."</td>";
 	echo "</tr>";
 	}
 	echo "</table>";
@@ -151,11 +159,32 @@ oci_execute($stid4);
 
 	while($row = oci_fetch_array($stid4, OCI_ASSOC+OCI_RETURN_NULLS))
 	{
+		if ($row['PIC1'] != NULL){
+			$pic1 = $row['PIC1']->load();
+		}
+		else{
+			$pic1 = "<i>NULL</i>";
+		}
+
+		if ($row['PIC2'] != NULL){
+			$pic2 = $row['PIC2']->load();
+		}
+		else{
+			$pic2 = "<i>NULL</i>";
+		}
+
+		if ($row['PIC3'] != NULL){
+			$pic3 = $row['PIC3']->load();
+		}
+		else{
+			$pic3 = "<i>NULL</i>";
+		}
+		
 	echo "<tr>";
 	echo "<td>" . $row['BOOKID'] . "</td>";
-	echo "<td>" . $row['PIC1']->load() . "</td>";
-	echo "<td>" . $row['PIC2']->load() . "</td>";
-	echo "<td>" . $row['PIC3']->load() . "</td>";
+	echo "<td>" . $pic1 . "</td>";
+	echo "<td>" . $pic2 . "</td>";
+	echo "<td>" . $pic3 . "</td>";
 	echo "</tr>";
 	}
 	echo "</table>";

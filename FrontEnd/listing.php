@@ -116,11 +116,25 @@ oci_execute($stidPic);
 
 <?php
 
+    $pic1 = "nopic.jpg";
+    $pic2 = "nopic.jpg";
+    $pic3 = "nopic.jpg";
+    $description = "No description.";
+
+
     // Get and save all book pictures to variables
     while($row = oci_fetch_array($stidPic, OCI_ASSOC+OCI_RETURN_NULLS)){
-        $pic1 = $row['PIC1']->load();
-        $pic2 = $row['PIC2']->load();
-        $pic3 = $row['PIC3']->load();
+        if ($row['PIC1'] != NULL){
+            $pic1 = $row['PIC1']->load();
+        }
+
+        if ($row['PIC2'] != NULL){
+            $pic2 = $row['PIC2']->load();
+        }
+
+        if ($row['PIC3'] != NULL){
+            $pic3 = $row['PIC3']->load();
+        }
     }
 
 ?>
@@ -153,7 +167,9 @@ oci_execute($stidPic);
 
         //Get the book description
         while($row = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
-            $description = $row['DESCRIPTION']->load();
+            if ($row['DESCRIPTION'] != NULL){
+                $description = $row['DESCRIPTION']->load();
+            }
          }
 
         //Go through the previous sql statement to get the status/price
@@ -186,15 +202,15 @@ oci_execute($stidPic);
         //Display the book information
         echo "<h1>".$row['TITLE']."</h1>";
         echo "<div class='listingstatus ".$bookstatus."'>".$bookstatusText."</div>";
-        echo "<div class='listinginfotext'>";
-        echo "    <p><b>Seller: </b> <a href='profile.php?username=".$username."'>".$username."</a></p>";
-        echo "    <p><b>Edition: </b>".$bookedition."</p>";
-        echo "    <p><b>Author: </b>".$row['AUTHOR']->load()."</p>";
-        echo "    <p><b>ISBN: </b>".$row['ISBN']."</p>";
-        echo "    <p><b>Course Number: </b>".$row['COURSENUMBER']."</p>";
-        echo "    <p><b>Condition: </b>".$row['CONDITION']."</p>";
-        echo "    <p><b>Posted: </b>".$row['POSTDATE']."</p>";
-        echo "</div>";
+        echo "<div class='listinginfotext'><table>";
+        echo "    <tr><td style='width:30%'><b>Seller:</b></td><td><a href='profile.php?username=".$username."'>".$username."</a></td></tr>";
+        echo "    <tr><td style='width:30%'><b>Edition:</b></td><td>".$bookedition."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>Author:</b></td><td>".$row['AUTHOR']->load()."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>ISBN:</b></td><td>".$row['ISBN']."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>Course Number:</b></td><td>".$row['COURSENUMBER']."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>Condition:</b></td><td>".$row['CONDITION']."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>Posted:</b></td><td>".$row['POSTDATE']."</td></tr>";
+        echo "</table></div>";
 
         echo "<div class='listingdescription'>";
         echo $description;
