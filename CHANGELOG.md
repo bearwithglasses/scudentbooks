@@ -1,14 +1,28 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+<<<<<<< HEAD
 3/30/2017
 	Renee
 		- recreated BookPicture table and added dummy data to it
 		- updated homepage and listing page to show pictures from the BookPicture table
 		- updated showData.php to show the BookPicture data
 		- created bookimages folder and added pictures
+=======
+3/31/2017
+
+	Christina
+		- FrontEnd/demopages folder
+			- updated addbook.html to match createtables.sql tables.
+			- updated ProcessBook.php to take corresponding values from addbook.html and include BookPostSqlFnc.php
+			- added BookPostSqlFnc.php for add function.
+			- added main.css and booksusers.css in the folder to make pages look nicer
+		- Backend folder
+			- deleted old files from beginning of project to avoid confusion (still on my local drive though)
+>>>>>>> 422a36d20f45ebcb1595734e28a65eac5fe55b66
 
 3/10/2017
+
 	Renee
 		- FrontEnd folder
 			- updated showData.php to show BookDescription table
