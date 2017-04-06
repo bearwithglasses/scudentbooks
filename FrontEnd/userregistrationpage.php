@@ -340,7 +340,7 @@
                     <li>
                         <label for="major1">*Major:</label>
                         <select name="major1" id="major1">
-                            <option selected="selected" value="selectMajor1">Select a major</option>
+                            <option selected="selected" value="">Select a major</option>
                             <option value="Computer Engineering">Computer Engineering</option>
                             <option value="Electrical Engineering">Electrical Engineering</option>
                             <option value="Web Design and Engineering">Web Design and Engineering</option>
@@ -352,7 +352,7 @@
                     <li>
                         <label for="major2">Major:</label>
                         <select name="major2" id="major2">
-                            <option selected="selected" value="selectMajor2">Select a major</option>
+                            <option selected="selected" value="">Select a major</option>
                             <option value="Computer Engineering">Computer Engineering</option>
                             <option value="Electrical Engineering">Electrical Engineering</option>
                             <option value="Web Design and Engineering">Web Design and Engineering</option>
@@ -364,7 +364,7 @@
                     <li>
                         <label for="major3">Major:</label>
                         <select name="major3" id="major3">
-                            <option selected="selected" value="selectMajor3">Select a major</option>
+                            <option selected="selected" value="">Select a major</option>
                             <option value="Computer Engineering">Computer Engineering</option>
                             <option value="Electrical Engineering">Electrical Engineering</option>
                             <option value="Web Design and Engineering">Web Design and Engineering</option>
@@ -376,7 +376,7 @@
                     <li>
                         <label for="minor1">Minor:</label>
                         <select name="minor1" id="minor1">
-                            <option selected="selected" value="selectMinor1">Select a minor</option>
+                            <option selected="selected" value="">Select a minor</option>
                             <option value="Computer Engineering">Computer Engineering</option>
                             <option value="Electrical Engineering">Electrical Engineering</option>
                             <option value="Web Design and Engineering">Web Design and Engineering</option>
@@ -387,7 +387,7 @@
                     <li>
                         <label for="minor2">Minor:</label>
                         <select name="minor2" id="minor2">
-                            <option selected="selected" value="selectMinor2">Select a minor</option>
+                            <option selected="selected" value="">Select a minor</option>
                             <option value="Computer Engineering">Computer Engineering</option>
                             <option value="Electrical Engineering">Electrical Engineering</option>
                             <option value="Web Design and Engineering">Web Design and Engineering</option>
@@ -399,7 +399,7 @@
                     <li>
                         <label for="minor3">Minor:</label>
                         <select name="minor3" id="minor3">
-                            <option selected="selected" value="selectMinor3">Select a minor</option>
+                            <option selected="selected" value="">Select a minor</option>
                             <option value="Computer Engineering">Computer Engineering</option>
                             <option value="Electrical Engineering">Electrical Engineering</option>
                             <option value="Web Design and Engineering">Web Design and Engineering</option>
@@ -411,7 +411,7 @@
                     <li>
                         <label for="year">Year:</label>
                         <select name="year" id="year">
-                            <option selected="selected" value="selectYear">Select a year</option>
+                            <option selected="selected" value="">Select a year</option>
                             <option value="Freshman">Freshman</option>
                             <option value="Sophomore">Sophomore</option>
                             <option value="Junior">Junior</option>
@@ -422,7 +422,7 @@
                     <li>
                         <label for="location">Location:</label>
                         <select name="location" id="location">
-                            <option selected="selected" value="selectLocation">Select a location</option>
+                            <option selected="selected" value="">Select a location</option>
                             <option value="University Villas">University Villas</option>
                             <option value="Sobrato">Sobrato</option>
                             <option value="Casa Italiana">Casa Italiana</option>
