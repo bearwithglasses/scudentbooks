@@ -29,7 +29,7 @@ CREATE TABLE UserInfo(
 CREATE TABLE BookPost(
 	bookid varchar(5) NOT NULL,
 	userid varchar(5) NOT NULL,
-	title nvarchar(100) NOT NULL,
+	title nvarchar2(100) NOT NULL,
 	author clob NOT NULL,
 	edition int,
 	purpose varchar(4) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE BookPost(
 	courseNumber varchar(20),
 	professor clob,
 	postDate date DEFAULT NULL,
-	condition nvarchar(20),
+	condition nvarchar2(20),
 	status varchar(20) DEFAULT 'available' NOT NULL,
 	CHECK (purpose in ('sell','swap')),
 	CHECK (condition in ('new','used - good','used - acceptable')),
