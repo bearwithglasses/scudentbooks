@@ -16,7 +16,7 @@ function validation() {
     /* Error is fixed, error message dissappears */
     else
     {
-        document.getElementById("usernameError").innerHTML = "";
+        document.getElementById("usernameError").innerHTML = ""; //Error is fixed, error message dissappears
     }
 
     /********* Password **********/
@@ -47,7 +47,7 @@ function validation() {
     /* Error is fixed, error message dissappears */
     else 
     {
-        document.getElementById("passwordError").innerHTML = "";
+        document.getElementById("confirmPasswordError").innerHTML = "";
     }
 
     /********* First name **********/
@@ -71,9 +71,14 @@ function validation() {
 
     /********* Middle name **********/
     var middleName = document.getElementById("middleName").value; //Retrieves the value entered for middle name
-    /* Checks if middle name entered is valid. Regex doesn't support numbers
-    Referenced source for regex code: http://stackoverflow.com/questions/275160/regex-for-names */
-    if (middleName.match(/^[a-zA-Z]'?[- a-zA-Z]+$/) == null)
+    /* If middle name is empty, do nothing */
+    if (middleName == "")
+    {
+        document.getElementById("middleNameError").innerHTML = "";
+    }
+    /* Checks if middle name entered is valid. Regex doesn't support numbers 
+    Referenced source for regex code: http://stackoverflow.com/questions/14715133/regular-expression-for-no-white-space-at-start-or-end-but-allow-white-space-in */
+    else if (middleName.match(/^[-_a-zA-Z]+(\s+[-_a-zA-Z]+)*$/) == null)
     {
         return "middleNameError";
     }
@@ -123,9 +128,14 @@ function validation() {
 
     /********* Phone number **********/
     var phoneNumber = document.getElementById("phoneNumber").value; //Retrieves the value entered for phone number
-    /* Checks if phone number entered is valid. 
+    /* If phone number is empty, do nothing */
+    if (phoneNumber == "")
+    {
+        document.getElementById("phoneNumberError").innerHTML = "";   
+    }
+    /* Checks if phone number entered is valid.
     Referenced source for regex code: http://www.authorcode.com/how-to-validate-phone-number-in-javascript/ */
-    if (phoneNumber.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) == null)
+    else if (phoneNumber.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) == null)
     {
         return "phoneNumberError";
     }
@@ -245,6 +255,7 @@ function submission() {
     else if (valid == "confirmPasswordError2")
     {
         document.getElementById("confirmPasswordError").innerHTML = "Passwords do not match"; //Displays error message if passwords don't match
+        document.getElementById("confirmPassword").focus(); //Focuses on text field
     }
     else if (valid == "firstNameError1")
     {

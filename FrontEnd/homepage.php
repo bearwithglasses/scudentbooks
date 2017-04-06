@@ -9,10 +9,10 @@ $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
 
-if(!isset($_SESSION["user"])){
-    header('Location: loginpage.php');
-    die();
-}
+// if(!isset($_SESSION["user"])){
+//     header('Location: loginpage.php');
+//     die();
+// }
 
 $sql="SELECT * FROM BOOKPOST ORDER BY POSTDATE DESC";
 $stid = oci_parse($con, $sql);

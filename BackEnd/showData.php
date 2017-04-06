@@ -85,7 +85,6 @@ oci_execute($stid4);
 	}
 	echo "</table>";
 
-
 	echo "<h1>BOOKPOST table</h1><p><table border='1'>
 	<tr>
 	<th>BOOKID</th>

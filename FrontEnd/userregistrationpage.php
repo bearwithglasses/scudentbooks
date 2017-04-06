@@ -292,7 +292,7 @@
 <!-- Container that holds Main and Side divs -->
 <div id="container">
     <div class="registrationForm">
-        <form id="registration" method="post">
+        <form id="registration" action="userregistrationsubmitpage.php" method="post">
             <h1>Sign Up to Become a Member here</h1>
             <p>* Required Field</p>
             <div id="formRegister">
@@ -431,7 +431,7 @@
                         </select>
                     </li>
                 </ul>
-                <input type="button" id="submitButton" value="Submit" onclick="submission()">
+                <input type="submit" id="submitButton" value="Submit" onclick="submission()">
             </div>
         </form>
     </div>

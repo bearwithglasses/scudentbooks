@@ -5,14 +5,14 @@ DROP TABLE UserInfo;
 
 --User info
 CREATE TABLE UserInfo(
-	userid int NOT NULL,
+	userid varchar(5) NOT NULL,
 	username varchar(50) NOT NULL UNIQUE,
 	password varchar(50) NOT NULL,
 	firstName varchar(50) NOT NULL,
 	middleName varchar(50),
 	lastName varchar(50) NOT NULL,
 	emailAddress varchar(254) NOT NULL,
-	phoneNumber int,
+	phoneNumber varchar(50),
 	major1 varchar(50) NOT NULL,
 	major2 varchar(50),
 	major3 varchar(50),
@@ -21,14 +21,14 @@ CREATE TABLE UserInfo(
 	minor3 varchar(50),
 	year varchar(10),
 	location varchar(50),
-	CHECK (year in ('freshman','sophomore','junior','senior','graduate')),
+	CHECK (year in ('Freshman','Sophomore','Junior','Senior','Graduate')),
 	PRIMARY KEY(userid)
 ) TABLESPACE STUDENTBOOKS;
 
 --Book posts
 CREATE TABLE BookPost(
-	bookid int NOT NULL,
-	userid int NOT NULL,
+	bookid varchar(5) NOT NULL,
+	userid varchar(5) NOT NULL,
 	title varchar(100) NOT NULL,
 	author clob NOT NULL,
 	edition smallint,
@@ -50,16 +50,16 @@ CREATE TABLE BookPost(
 
 --Book post description
 CREATE TABLE BookDescription(
-	bookid int NOT NULL,
+	bookid varchar(5) NOT NULL,
 	description clob,
 	FOREIGN KEY(bookid) REFERENCES BookPost
 ) TABLESPACE STUDENTBOOKS;
 
 --Book post photos
 CREATE TABLE BookPicture(
-	bookid int NOT NULL,
-	pic1 blob NOT NULL,
-	pic2 blob,
-	pic3 blob,
+	bookid varchar(5) NOT NULL,
+	pic1 varchar(50) NOT NULL,
+	pic2 varchar(50),
+	pic3 varchar(50),
 	FOREIGN KEY(bookid) REFERENCES BookPost
 ) TABLESPACE STUDENTBOOKS;
