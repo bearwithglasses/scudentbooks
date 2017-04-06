@@ -18,8 +18,8 @@ else
 }
 
 $errorMessage = ""; //Initialize error message variable as empty value
-// $username = $_GET["username"]; //Retrieves username from database
-// $password = $_GET["password"]; //Retrieves password from database
+//$username = $_GET["username"]; //Retrieves username from database
+//$password = $_GET["password"]; //Retrieves password from database
 
 // if ($_SERVER['REQUEST_METHOD'] == 'POST')
 // {
@@ -44,6 +44,7 @@ $errorMessage = ""; //Initialize error message variable as empty value
 //     }
 // }
 
+/*
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (!empty($_POST["username"]) AND !empty($_POST["password"]))
@@ -57,6 +58,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $errorMessage = "Login failed";
         }
+    }
+    else
+    {
+        header('Location: loginpage.php');
+    }
+}
+*/
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    if (!empty($_POST['username']) && !empty($_POST['password']))
+    {
+	$username = $_POST['username']; //Retrieves username from database
+    	$password = $_POST['password']; //Retrieves password from database
+	$sql = "SELECT * FROM USERINFO WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+        //$sql_statement = oci_parse($conn, $sql);
+        //oci_execute($sql_statement);
+
+	if ($sql_statement = oci_parse($conn, $sql))
+	{
+	    oci_execute($sql_statement);
+	    if (oci_num_rows($sql_statement) == 1)
+            {
+                $_SESSION['user'] = true;
+                header('Location: homepage.php');
+            }
+            else
+            {
+                $errorMessage = "Login failed";
+            }
+        }
+	else
+	{
+	    $errorMessage = "Login incorrect";
+	}
     }
     else
     {
@@ -111,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <div id="container">
     <div class="loginForm">
         <h1>Welcome to SCUdent Books!</h1>
-        <form id="login" method="post">
+	<form id="login" method="post">
             <label for="inputUsername">Username</label>
             <input type="text" id="inputUsername" placeholder="Username" name="username" required autofocus>
             <label for="inputPassword">Password</label>
