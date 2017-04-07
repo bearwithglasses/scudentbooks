@@ -1,7 +1,23 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+4/7/2017
+	
+	Winston
+		- FrontEnd folder
+			- Modified login page
+				- Still doesn't work. Will update accordingly
+			- Modified user registration
+				- Client side validation works
+				- Disabled server side validation for now
+				- Still doesn't entirely work. Will update accordingly
+		- Database
+			- Adjusted several data types and certain constraint values in database tables
+			- Drafted an entity relationship diagram schema for the inbox messaging system. Will implement soon
+
+
 4/1/2017
+	
 	Renee
 		- edited homepage and listing for book listings with no pictures/less than 3 pictures
 		- updated showData.php to display 'NULL' if the data is NULL
@@ -9,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 
 3/30/2017
+	
 	Renee
 		- recreated BookPicture table and added dummy data to it
 		- updated homepage and listing page to show pictures from the BookPicture table
