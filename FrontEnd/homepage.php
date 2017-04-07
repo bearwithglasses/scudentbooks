@@ -9,10 +9,10 @@ $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
 
-// if(!isset($_SESSION["user"])){
-//     header('Location: loginpage.php');
-//     die();
-// }
+if(!isset($_SESSION["user"])){
+    header('Location: loginpage.php');
+    die();
+}
 
 $sql="SELECT * FROM BOOKPOST ORDER BY POSTDATE DESC";
 $stid = oci_parse($con, $sql);
@@ -82,7 +82,7 @@ oci_execute($stid);
             // Choose the correct display text/links for the book
             while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
 
-                if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){
+                if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
                     $bookstatus = "buy";
                     $bookstatusText = "$".$row['PRICE'];
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
@@ -125,7 +125,7 @@ oci_execute($stid);
                 //Save the picture text to a variable
                 while($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
                     if ($row3['PIC1'] != NULL){
-                        $pic1 = $row3['PIC1']->load();
+                        $pic1 = $row3['PIC1'];
                     }
                     else{
                         $pic1 = "nopic.jpg";

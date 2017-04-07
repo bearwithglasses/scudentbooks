@@ -125,15 +125,15 @@ oci_execute($stidPic);
     // Get and save all book pictures to variables
     while($row = oci_fetch_array($stidPic, OCI_ASSOC+OCI_RETURN_NULLS)){
         if ($row['PIC1'] != NULL){
-            $pic1 = $row['PIC1']->load();
+            $pic1 = $row['PIC1'];
         }
 
         if ($row['PIC2'] != NULL){
-            $pic2 = $row['PIC2']->load();
+            $pic2 = $row['PIC2'];
         }
 
         if ($row['PIC3'] != NULL){
-            $pic3 = $row['PIC3']->load();
+            $pic3 = $row['PIC3'];
         }
     }
 
@@ -180,7 +180,7 @@ oci_execute($stidPic);
             $bookedition = "N/A";
         };
 
-        if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){
+        if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
             $bookstatus = "buy";
             $bookstatusText = "$".$row['PRICE'];
             $disable = "";

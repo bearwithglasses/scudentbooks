@@ -6,7 +6,7 @@ $db_user = "wchang";
 $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
-// Check connection
+// Check connectio
 $sql="SELECT * FROM USERINFO ORDER BY USERID";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
@@ -85,6 +85,7 @@ oci_execute($stid4);
 	}
 	echo "</table>";
 
+
 	echo "<h1>BOOKPOST table</h1><p><table border='1'>
 	<tr>
 	<th>BOOKID</th>
@@ -159,21 +160,21 @@ oci_execute($stid4);
 	while($row = oci_fetch_array($stid4, OCI_ASSOC+OCI_RETURN_NULLS))
 	{
 		if ($row['PIC1'] != NULL){
-			$pic1 = $row['PIC1']->load();
+			$pic1 = $row['PIC1'];
 		}
 		else{
 			$pic1 = "<i>NULL</i>";
 		}
 
 		if ($row['PIC2'] != NULL){
-			$pic2 = $row['PIC2']->load();
+			$pic2 = $row['PIC2'];
 		}
 		else{
 			$pic2 = "<i>NULL</i>";
 		}
 
 		if ($row['PIC3'] != NULL){
-			$pic3 = $row['PIC3']->load();
+			$pic3 = $row['PIC3'];
 		}
 		else{
 			$pic3 = "<i>NULL</i>";

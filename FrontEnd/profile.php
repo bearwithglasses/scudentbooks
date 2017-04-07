@@ -131,7 +131,7 @@ oci_execute($stid);
     //Display the list of books of that User
     while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
 
-        if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){
+        if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
                     $bookstatus = "buy";
                     $bookstatusText = "$".$row['PRICE'];
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
@@ -143,7 +143,7 @@ oci_execute($stid);
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
                     $booklinkend = "</a>";
                 }
-                if($row['STATUS'] == "sale pending"){
+                if($row['STATUS'] == "sale-pending"){
                     $bookstatus = "pending";
                     $bookstatusText = "Sale Pending";
                     $booklink = "";
