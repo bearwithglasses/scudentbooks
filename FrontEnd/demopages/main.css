@@ -55,6 +55,13 @@ select{
     padding: 5px 20px;
 }
 
+#closemessage{
+    float: right;
+    margin-right: -100px;
+    margin-top: -80px;
+    cursor: pointer;
+}
+
 .searchbar .button, .advancedsearch{
     background-color: #BF3939;
     border: none;

@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books - Add Books</title>
+    <title>SCUdent Books Book Listing Demo</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
     <script src="sendmessage.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-
-	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-	<meta content="text/javascript" http-equiv="Content-Script-Type" />
-	<meta content="text/css" http-equiv="Content-Style-Type" />
-
-      <title>Add Books</title>
 </head>
 
 <body>
@@ -53,35 +48,11 @@
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
-<!--
-CREATE TABLE BookPost(
-			bookid int NOT NULL AUTO_INCREMENT,
-			userid int NOT NULL,
-			title varchar(100) NOT NULL,
-			author text NOT NULL,
-			edition smallint,
-			purpose varchar(4) NOT NULL,
-			price decimal(5,2),
-			isbn int,
-			major varchar(50),
-			courseNumber smallint,
-			professor varchar(50),
-			postDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-			conditions varchar(5),
-			status varchar(20) DEFAULT 'available' NOT NULL,
-			CHECK (purpose in ('buy','swap')),
-			CHECK (conditions in ('new','good','bad')),
-			CHECK (status in ('available','sale pending','unavailable')),
-			PRIMARY KEY(bookid),
-			FOREIGN KEY(userid) REFERENCES UserInfo(userid)
-		);";
--->
->>>>>>> origin/master
 <h1>Add a Book</h1>
 <div id="regBox">
 <fieldset>
 <legend>Book Form</legend>
-<p id="directions">Enter your book information in the fields marked with an asterisk (*) below.</br>
+<p id="directions">Enter your book and contact information in the fields marked with an asterisk (*) below.</br>
 <form id="edit_info" action="ProcessBook.php" method="post" onsubmit="return checkform(this);">
     <div class="form">    
         <h3>Book Information</h3>     
@@ -89,21 +60,14 @@ CREATE TABLE BookPost(
         <ul>
             <li><label>Title*: </label><input type="text" name="book_title"></li>
             <li><label>Author*: </label><input type="text" name="book_author"></li>
-            <li><label>Edition: </label><input type="text" name="book_edition"></li>
-            <li><label>Purpose*: </label>
- 				<div id="radio">
- 				<input type="radio" name="book_purpose" value="buy" checked>Buy<br>
- 				<input type="radio" name="book_purpose" value="swap">Swap<br>
- 				</div>
- 			</li>
- 			<li><label>Price*: </label><input type="text" name="book_price"></li>
-            <li><label>ISBN: </label><input type="text" name="book_isbn"></li>
-            <li><label>Department Name: </label>
-                <select id="deptNameIdx" name="book_major">
+            <li><label>Edition*: </label><input type="text" name="book_edition"></li>
+            <li><label>ISBN*: </label><input type="text" name="book_edition"></li>
+            <li><label>Department*: </label>
+                <select id="deptNameIdx" name="book_deptName">
                     <option value="ARTS" selected="selected">ARTS</option>
                     <option value="CHIN">CHIN</option>
                     <option value="COEN">COEN</option>
-                    <option value="CORN">MATH</option>
+                    <option value="CORN">CORN</option>
                     <option value="ENGL">ENGL</option>
                     <option value="HIST">HIST</option>
                     <option value="ITAL">ITAL</option>
@@ -112,109 +76,35 @@ CREATE TABLE BookPost(
                     <option value="Other">Other</option>
                 </select>
             </li>
-            <li><label>Course Number: </label><input type="text" name="book_courseNo"></li>
-            <li><label>Professor: </label><input type="text" name="book_prof"></li>
-            <li><label>Condition: </label>
-            	<div id="radio">
-  					<input type="radio" name="book_condition" value="new" checked>New<br>
-  					<input type="radio" name="book_condition" value="good">Good<br>
-  					<input type="radio" name="book_condition" value="bad">Bad<br>
-  				</div>
-  			</li>
-            <li><label>Description: </label><textarea id="messagebox" name="book_message" placeholder="Write additional notes about the book here."></textarea></li>
-        </ul>
-        <h4>Book Images</h4>
-        <ul>
-            <li><input type="file" name="fileToUpload" id="fileToUpload"></li>
-            <li><input type="file" name="fileToUpload" id="fileToUpload"></li>
-        	<li><input type="file" name="fileToUpload" id="fileToUpload"></li>
+            <li><label>Class Number*: </label><input type="text" name="book_classNo"></li>
+            <li><label>Professor: </label><input type="text" name="book_classNo"></li>
+            <li><label>Condition*: </label>
+                <select id="deptNameIdx" name="book_deptName">
+                    <option value="ARTS" selected="selected">Like New</option>
+                    <option value="CHIN">Gently Used</option>
+                    <option value="CHIN">Minor Damages</option>
+                </select>
+             <li><label>Purpose: </label>
+  <input type="radio" name="gender" value="male"> Sell
+  <input type="radio" name="gender" value="female"> Swap
+            <li><label>Price*: </label><input type="text" name="book_price"></li>
+            <li><label>Description: </label><textarea id="messagebox" name="message" placeholder="Write additional notes about the book here."></textarea></li>
         </ul>
         <br>
-        <div>
-        <button id="addButton" input type="submit" value="Add" />Add</button>
-        </div>
-
-		<div id="divError"></div>
-
-	</form>
+        <h3>Book Images</h3>
+        </br>
+        <ul>
+            <li><input type="file" name="fileToUpload" id="fileToUpload"></li>
+            <li><input type="file" name="fileToUpload" id="fileToUpload"></li></li>
+            <li><input type="file" name="fileToUpload" id="fileToUpload"></li></li>
+            </li>
+            <li><label></label><button id="addButton" input type="submit" value="Add" />Add</button></li>
+        </ul>
+    </div>
+</form>
 </fieldset>
+
 </div>
-</br>
-   </body>
-</html>
-
-<script language="javascript" type="text/javascript">
-function checkform(pform1){
-	//alert ("checkform is called 1");
-	var title = pform1.book_title.value;
-	var author = pform1.book_author.value;
-	var purpose = pform1.book_purpose.value;
-	var price = pform1.book_price.value;
-	var condition = pform1.book_condition.value;
-	//optional entries
-	var edition = pform1.book_edition.value;
-	var isbn = pform1.book_isbn.value;
-	var deptName = pform1.book_major.value;
-	var courseNo = pform1.book_courseNo.value;
-	var professor = pform1.book_prof.value;
-	var description = pform1.book_message.value;
-	
-	var err={}; 
-	var errorFlag=0;
-	//alert ("checkform is called 2 " + deptName);
-	//check required fields
-	//check department name
-	//var e = document.getElementById(deptNameIdx);
-	/*var e = pform1.book_deptName;
-	var deptName = e.options[e.selectedIndex].text;
-	if (deptName.length <= 0){
-		err.message="Please fill in a Department Name.\n"; 
-		err.field=pform1.book_deptName; 
-		errorFlag=1;
-	}*/
-	
-	//check title
-	if ((title.length<=0) && (errorFlag==0)){
-		//alert ("at title" + title);
-		err.message="Title not given.\n"
-		err.field=pform1.book_title;
-		errorFlag=1;
-	}
-	
-	//check author
-	if ((author.length<=0) && (errorFlag==0)){
-		err.message="Author not entered.\n"
-		err.field=pform1.book_author;
-		errorFlag=1;
-	}
-	
-	//check price
-	if ((price.length<=0) && (errorFlag==0)){
-		err.message="Asking Price not given.\n"
-		err.field=pform1.book_price;
-		errorFlag=1;
-	}
-	
-	//check edition
-	/*if ((edition.length<=0) && (errorFlag==0)){
-		err.message="Edition not entered.\n"
-		err.field=pform1.book_edition;
-		errorFlag=1;
-	}
-	*/
-
-	//alert ("alert3 " + errorFlag + " " + err.message);
-	if(err.message) 
-	{ 
-		//alert ("alert for error" + err.message);
-    	document.getElementById('divError').innerHTML = err.message;
-    	err.field.focus();
-    	return false;        
-	} 
-	//alert("no error value"); 
-	return true;
-}
-</script>
 
 
 <!-- Footer  -->
