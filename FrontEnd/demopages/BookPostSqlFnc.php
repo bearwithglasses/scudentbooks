@@ -17,18 +17,36 @@ function makeConnection(){
 //	echo "Connection made here.<br>";
 	return $con;
 }
-
-
+//
 function GetMaxBookid()
 {
 		$con = makeConnection();
 		//
 		// look for the highest existing bookid in BOOKPOST
 		//
-		//$sql2 = "SELECT MAX(BOOKID) FROM BOOKPOST";
+		$sql2 = "SELECT Max(bookid) As MAXNUM FROM BOOKPOST";
+		$stid = oci_parse($con,$sql2);
+		oci_execute($stid);
+		oci_fetch($stid);
+		$m_bookid = oci_result($stid, "MAXNUM");
+		oci_free_statement($stid);
+        oci_close($con);
+		return ($m_bookid);
+		//
+}	
+//
+
+function GetMaxBookidOld()
+{
+		$con = makeConnection();
+		//
+		// look for the highest existing bookid in BOOKPOST
+		//
+		//$sql2 = "SELECT MAX('bookid') FROM BOOKPOST";
 		$sql2 = "SELECT * FROM BOOKPOST";
 		$stid = oci_parse($con,$sql2);
 		oci_execute($stid);
+	
 	    $max_bookid = 0;
 		//
 		// LOOP around to find the highest bookid
@@ -47,6 +65,38 @@ function GetMaxBookid()
 		 //
 }	
 //
+/*				4-7-17  definition
+CREATE TABLE BookPost(
+	bookid varchar(5) NOT NULL,
+	userid varchar(5) NOT NULL,
+	title nvarchar2(100) NOT NULL,
+	author clob NOT NULL,
+	edition int,
+	purpose varchar(4) NOT NULL,
+	price decimal(5,2),
+	isbn int,
+	major varchar(50),
+	courseNumber varchar(20),
+	professor clob,
+	postDate date DEFAULT NULL,
+	condition nvarchar2(20),
+	status varchar(20) DEFAULT 'available' NOT NULL,
+	CHECK (purpose in ('sell','swap')),
+	CHECK (condition in ('new','used - good','used - acceptable')),
+	CHECK (status in ('available','sale pending','unavailable')),
+	PRIMARY KEY(bookid),
+	FOREIGN KEY(userid) REFERENCES UserInfo
+) TABLESPACE STUDENTBOOKS;
+
+--Book post description
+CREATE TABLE BookDescription(
+	bookid varchar(5) NOT NULL,
+	description clob,
+	FOREIGN KEY(bookid) REFERENCES BookPost
+) TABLESPACE STUDENTBOOKS;
+*/
+
+//
 function BookPost_insertValues($m_userid,$m_title,$m_author,$m_edition,$m_purpose,$m_price,$m_isbn,$m_major,$m_courseNumber,$m_professor,
                                $m_condition,$m_status,$m_description)
 	{
@@ -55,6 +105,8 @@ function BookPost_insertValues($m_userid,$m_title,$m_author,$m_edition,$m_purpos
 		$m_bookid = GetMaxBookid();		//GetMaxBookid will return the hightest existing bookid value in BookPost table
 		// inc $m_bookid by 1 .. this is the value to create the next book entry!!!
 		$m_bookid = $m_bookid + 1;
+	    settype($m_bookid, 'string');			//convert to string
+		settype($m_userid, 'string');			//convert to string
 		//
 		$con = makeConnection();
 		
@@ -76,32 +128,46 @@ function BookPost_insertValues($m_userid,$m_title,$m_author,$m_edition,$m_purpos
 					 :mystatus)");
 		//	RETURN bookid INTO :mybookid");
 		//	$m_bookid = 13;		 
-			oci_bind_by_name($sql,'mybookid',$m_bookid,-1, SQLT_INT);
-			oci_bind_by_name($sql,'myuserid',$m_userid,-1, SQLT_INT);
+			//oci_bind_by_name($sql,'mybookid',$m_bookid,-1, SQLT_INT);
+			//oci_bind_by_name($sql,'myuserid',$m_userid,-1, SQLT_INT);
+						
+			
+			//var_dump($m_bookid); 
+			//var_dump($m_userid); 
+			oci_bind_by_name($sql,'mybookid',$m_bookid,5, SQLT_CHR);
+			oci_bind_by_name($sql,'myuserid',$m_userid,5, SQLT_CHR);
+			
 			oci_bind_by_name($sql,'mytitle',$m_title,100,SQLT_CHR);
 			oci_bind_by_name($sql,'myauthor',$m_author,-1,SQLT_CHR);
+			
+			
 			oci_bind_by_name($sql,'myedition',$m_edition,-1, SQLT_INT);
 			oci_bind_by_name($sql,'mypurpose',$m_purpose,4,SQLT_CHR);
-		  //  echo ("purpose:" . $m_purpose . "<br>");
+		    echo ("purpose:" . $m_purpose . "<br>");
 			oci_bind_by_name($sql,'myprice',$m_price);
 			oci_bind_by_name($sql,'myisbn',$m_isbn,-1, SQLT_INT);
 			
 			oci_bind_by_name($sql,'mymajor',$m_major,50,SQLT_CHR);
-			oci_bind_by_name($sql,'mycourseNumber',$m_courseNumber,-1,SQLT_INT);
-			oci_bind_by_name($sql,'myprofessor',$m_professor,50,SQLT_CHR);
+			oci_bind_by_name($sql,'mycourseNumber',$m_courseNumber,20,SQLT_CHR);
+			
+			oci_bind_by_name($sql,'myprofessor',$m_professor,-1,SQLT_CHR);
 			$m_postDate = date("d-M-y");
 			oci_bind_by_name($sql,'mypostDate',$m_postDate,24);
-		//    echo ("date:" . $m_postDate . "<br>");
-			oci_bind_by_name($sql,'mycondition',$m_condition,5,SQLT_CHR);
-		 //	echo ("condition:" . $m_condition . "<br>");
+		//   echo ("date:" . $m_postDate . "<br>");
+			oci_bind_by_name($sql,'mycondition',$m_condition,20,SQLT_CHR);
+		 	echo ("condition:" . $m_condition ."<br>");
+		 
 			oci_bind_by_name($sql,'mystatus',$m_status,20,SQLT_CHR);
-		 //	echo ("status:" . $m_status . "<br>");
+		    echo ("status:" . $m_status . "<br>");
 			oci_execute($sql);
 		//	print $m_bookid;
 		   oci_close($con);
 		// 
 		//  NOW add the description to the BookDescription Table
-		//
+		//  if m_description is NOT AN EMPTY STRING
+		//s
+		if (!EMPTY($m_description))
+		{
 		$con = makeConnection();
 		
 		$sql = oci_parse($con, "INSERT INTO BookDescription (bookid,description) VALUES ( :mybookid,:mydescrption)");
@@ -109,6 +175,7 @@ function BookPost_insertValues($m_userid,$m_title,$m_author,$m_edition,$m_purpos
 		oci_bind_by_name($sql,'mydescrption',$m_description,-1,SQLT_CHR);
 		oci_execute($sql);
 		oci_close($con);
+		}
 	}	
 
 ?>

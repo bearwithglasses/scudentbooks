@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books - Add Books</title>
+    <title>SCUdent Books - Add Book</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
     <script src="sendmessage.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-
+=======
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 	<meta content="text/javascript" http-equiv="Content-Script-Type" />
 	<meta content="text/css" http-equiv="Content-Style-Type" />
 
       <title>Add Books</title>
+>>>>>>> origin/master
 </head>
 
 <body>
 
+<<<<<<< HEAD
 <!-- Navigation -->
     <div id="web_nav">
         <header id="logo">
@@ -53,34 +56,47 @@
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
+=======
 <!--
+
+NEW DEFINITION-- 4/6/17
+
 CREATE TABLE BookPost(
-			bookid int NOT NULL AUTO_INCREMENT,
-			userid int NOT NULL,
-			title varchar(100) NOT NULL,
-			author text NOT NULL,
-			edition smallint,
-			purpose varchar(4) NOT NULL,
-			price decimal(5,2),
-			isbn int,
-			major varchar(50),
-			courseNumber smallint,
-			professor varchar(50),
-			postDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-			conditions varchar(5),
-			status varchar(20) DEFAULT 'available' NOT NULL,
-			CHECK (purpose in ('buy','swap')),
-			CHECK (conditions in ('new','good','bad')),
-			CHECK (status in ('available','sale pending','unavailable')),
-			PRIMARY KEY(bookid),
-			FOREIGN KEY(userid) REFERENCES UserInfo(userid)
-		);";
+	bookid varchar(5) NOT NULL,
+	userid varchar(5) NOT NULL,
+	title nvarchar2(100) NOT NULL,
+	author clob NOT NULL,
+	edition int,
+	purpose varchar(4) NOT NULL,
+	price decimal(5,2),
+	isbn int,
+	major varchar(50),
+	courseNumber varchar(20),
+	professor clob,
+	postDate date DEFAULT NULL,
+	condition nvarchar2(20),
+	status varchar(20) DEFAULT 'available' NOT NULL,
+	CHECK (purpose in ('sell','swap')),
+	CHECK (condition in ('new','used - good','used - acceptable')),
+	CHECK (status in ('available','sale pending','unavailable')),
+	PRIMARY KEY(bookid),
+	FOREIGN KEY(userid) REFERENCES UserInfo
+) TABLESPACE STUDENTBOOKS;
+
+--Book post description
+CREATE TABLE BookDescription(
+	bookid varchar(5) NOT NULL,
+	description clob,
+	FOREIGN KEY(bookid) REFERENCES BookPost
+) TABLESPACE STUDENTBOOKS;
+
 -->
 >>>>>>> origin/master
 <h1>Add a Book</h1>
 <div id="regBox">
 <fieldset>
 <legend>Book Form</legend>
+<<<<<<< HEAD
 <p id="directions">Enter your book information in the fields marked with an asterisk (*) below.</br>
 <form id="edit_info" action="ProcessBook.php" method="post" onsubmit="return checkform(this);">
     <div class="form">    
@@ -92,8 +108,8 @@ CREATE TABLE BookPost(
             <li><label>Edition: </label><input type="text" name="book_edition"></li>
             <li><label>Purpose*: </label>
  				<div id="radio">
- 				<input type="radio" name="book_purpose" value="buy" checked>Buy<br>
- 				<input type="radio" name="book_purpose" value="swap">Swap<br>
+ 				<input type="radio" name="book_purpose" value="sell" checked>sell<br>
+ 				<input type="radio" name="book_purpose" value="swap">swap<br>
  				</div>
  			</li>
  			<li><label>Price*: </label><input type="text" name="book_price"></li>
@@ -116,9 +132,9 @@ CREATE TABLE BookPost(
             <li><label>Professor: </label><input type="text" name="book_prof"></li>
             <li><label>Condition: </label>
             	<div id="radio">
-  					<input type="radio" name="book_condition" value="new" checked>New<br>
-  					<input type="radio" name="book_condition" value="good">Good<br>
-  					<input type="radio" name="book_condition" value="bad">Bad<br>
+  					<input type="radio" name="book_condition" value="new" checked>new<br>
+  					<input type="radio" name="book_condition" value="used - good">used - good<br>
+  					<input type="radio" name="book_condition" value="used - acceptable">used - acceptable<br>
   				</div>
   			</li>
             <li><label>Description: </label><textarea id="messagebox" name="book_message" placeholder="Write additional notes about the book here."></textarea></li>
@@ -133,7 +149,7 @@ CREATE TABLE BookPost(
         <div>
         <button id="addButton" input type="submit" value="Add" />Add</button>
         </div>
-
+=======
 		<div id="divError"></div>
 
 	</form>
@@ -216,7 +232,7 @@ function checkform(pform1){
 }
 </script>
 
-
+<<<<<<< HEAD
 <!-- Footer  -->
     <footer>
         <a href="/" class="footer_info">Help</a>
@@ -227,3 +243,6 @@ function checkform(pform1){
     <script src="main.js"></script>
     <script src="popups-photos.js"></script>
 </html>
+=======
+
+>>>>>>> origin/master
