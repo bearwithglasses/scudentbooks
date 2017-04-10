@@ -265,33 +265,37 @@
 ?>
 
 <!-- Navigation -->
-    <div class="web_nav">
-        <header class="logo">
-            <div id="logo"><a href="homepage.html"><img alt="eCampus logo" src="images/eCampusLogo.png"></a></div>
+    <div id="web_nav">
+        <header id="logo">
+            <div id="logo"><a href="homepage.php"><img alt="eCampus logo" src="images/eCampusLogo.png"></a></div>
         </header>
 
-        <form class="searchbar">
-            <span class="searchicon"><i></i></span>
-            <input type="text" name="search" placeholder="Search...">
-            <input type="button" class="button" value="Search">
-            <a href="/" class="advancedsearch">Advanced</a>
-        </form>
+        <div id="links">
+            <form class="searchbar">
+                <span class="searchicon"><i></i></span>
+                <input type="text" name="search" placeholder="Search...">
+                <input type="button" class="button" value="Search">
+                <a href="/" class="advancedsearch">Advanced</a>
+            </form>
 
-        <nav>
-        <ul class="navlinks">
-            <li><a href="/" class="web_link">Home</a></li>
-            <li><a href="#" class="web_link">Sell</a></li>
-            <li><a href="#" class="web_link">Inbox</a></li>
-            <li><!--<div class="username_dropdown">
-                <button onclick="userNameMenu()" class="usernamebutton">You</button></div>-->
-            <a href="#" class="web_link">You</a>
-            </li>
-        </nav>
+            <nav>
+            <ul class="navlinks" id="mainNav">
+                <li><a href="#" class="web_link">Home</a></li>
+                <li><a href="#" class="web_link">Sell</a></li>
+                <li><a href="#" class="web_link">Inbox</a></li>
+                <li><a href="#" class="web_link">You</a></li>
+            </ul>
+            </nav>
+        </div>
+
+        <div class="icon">
+            <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+        </div>
     </div>
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
-    <div class="registrationForm">
+    <div class="registrationForm form">
         <form id="registration" action="userregistrationsubmitpage.php" method="post">
             <h1>Sign Up to Become a Member here</h1>
             <p>* Required Field</p>
