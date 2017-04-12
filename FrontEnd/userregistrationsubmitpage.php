@@ -9,11 +9,11 @@ $db_name = "STUDENTBOOKS";
 $conn = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 if ($conn)
 {
-    print "Connection successful<br>";
+    //print "Connection successful<br>";
 }
 else
 {
-    print "Connection failed<br>";
+    //print "Connection failed<br>";
     exit;
 }
 
@@ -26,28 +26,52 @@ for ($i = 0; $i < 5; $i++)
     $userid .= $available[mt_rand(0, $max)];
 }
 
-//Referenced code for inserting values into sql table and sanitizing them to prevent sql injections: http://stackoverflow.com/questions/2119145/inserting-data-in-oracle-database-using-php
-// $username = $_POST['username'];
-// $password = $_POST['password'];
-// $firstName = $_POST['firstName'];
-// $middleName = $_POST['middleName'];
-// $lastName = $_POST['lastName'];
-// $emailAddress = $_POST['emailAddress'];
-// $phoneNumber = $_POST['phoneNumber'];
-// $major1 = $_POST['major1'];
-// $major2 = $_POST['major2'];
-// $major3 = $_POST['major3'];
-// $minor1 = $_POST['minor1'];
-// $minor2 = $_POST['minor2'];
-// $minor3 = $_POST['minor3'];
-// $year = $_POST['year'];
-// $location = $_POST['location'];
+//Referenced code for inserting values into sql table and sanitizing them to prevent sql injections:
+//http://stackoverflow.com/questions/2119145/inserting-data-in-oracle-database-using-php
+$username = $_POST['username'];
+$password = $_POST['password'];
+$firstName = $_POST['firstName'];
+$middleName = $_POST['middleName'];
+$lastName = $_POST['lastName'];
+$emailAddress = $_POST['emailAddress'];
+$phoneNumber = $_POST['phoneNumber'];
+$major1 = $_POST['major1'];
+$major2 = $_POST['major2'];
+$major3 = $_POST['major3'];
+$minor1 = $_POST['minor1'];
+$minor2 = $_POST['minor2'];
+$minor3 = $_POST['minor3'];
+$year = $_POST['year'];
+$location = $_POST['location'];
 
-$sql = "INSERT INTO UserInfo VALUES($userid, '$_POST[username]', '$_POST[password]', '$_POST[firstName]', '$_POST[middleName]', '$_POST[lastName]', '$_POST[emailAddress]', $_POST[phoneNumber], '$_POST[major1]', '$_POST[major2]', '$_POST[major3]', '$_POST[minor1]', '$_POST[minor2]', '$_POST[minor3]', '$_POST[year]', '$_POST[location]')";
+//If the form submitted, run the SQL statement
+if(isset($_REQUEST["submitted"])) {
 
-//$sql = 'INSERT INTO UserInfo (userid, username, password, firstName, middleName, lastName, emailAddress, phoneNumber, major1, major2, major3, minor1, minor2, minor3, year, location) VALUES($userid, :username, :password, :firstName, :middleName, :lastName, :emailAddress, :phoneNumber, :major1, :major2, :major3, :minor1, :minor2, :minor3, :year, :location)';
+$sql = "INSERT INTO UserInfo (userid, username, password, firstName, middleName, lastName, emailAddress, phoneNumber, major1, major2, major3, minor1, minor2, minor3, year, location) VALUES('$userid', :username, :password, :firstName, :middleName, :lastName, :emailAddress, :phoneNumber, :major1, :major2, :major3, :minor1, :minor2, :minor3, :year, :location)";
 
 $sql_statement = oci_parse($conn, $sql);
+
+//Sanitizing them to prevent sql injections
+oci_bind_by_name($sql_statement, 'username', $username);
+oci_bind_by_name($sql_statement, 'password', $password);
+oci_bind_by_name($sql_statement, 'firstName', $firstName);
+oci_bind_by_name($sql_statement, 'middleName', $middleName);
+oci_bind_by_name($sql_statement, 'lastName', $lastName);
+oci_bind_by_name($sql_statement, 'emailAddress', $emailAddress);
+oci_bind_by_name($sql_statement, 'phoneNumber', $phoneNumber);
+oci_bind_by_name($sql_statement, 'major1', $major1);
+oci_bind_by_name($sql_statement, 'major2', $major2);
+oci_bind_by_name($sql_statement, 'major3', $major3);
+oci_bind_by_name($sql_statement, 'minor1', $minor1);
+oci_bind_by_name($sql_statement, 'minor2', $minor2);
+oci_bind_by_name($sql_statement, 'minor3', $minor3);
+oci_bind_by_name($sql_statement, 'year', $year);
+oci_bind_by_name($sql_statement, 'location', $location);
+
+oci_execute($sql_statement);
+oci_close($conn);
+
+}
 
 //Sanitizes user input values
 // oci_bind_by_name($sql_statement, ':username', $username);
@@ -66,7 +90,7 @@ $sql_statement = oci_parse($conn, $sql);
 // oci_bind_by_name($sql_statement, ':year', $year);
 // oci_bind_by_name($sql_statement, ':location', $location);
 
-oci_execute($sql_statement);
+
 ?>
 
 <!DOCTYPE html>

@@ -9,90 +9,48 @@ $db_name = "STUDENTBOOKS";
 $conn = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 if ($conn)
 {
-    print "Connection successful<br>";
+    //print "Connection successful<br>";
 }
 else
 {
-    print "Connection failed<br>";
+    //print "Connection failed<br>";
     exit;
 }
 
-$errorMessage = ""; //Initialize error message variable as empty value
-//$username = $_GET["username"]; //Retrieves username from database
-//$password = $_GET["password"]; //Retrieves password from database
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST')
-// {
-//     if (!empty($_POST['username']) && !empty($_POST['password']))
-//     {
-//         $sql = "SELECT * FROM USERINFO WHERE USERNAME = '$username' AND PASSWORD = '$password'";
-//         $sql_statement = oci_parse($conn, $sql);
-//         oci_execute($sql_statement);
-//         if (!empty($row['username'] && !empty($row['password'])))
-//         {
-//             $_SESSION['username'] = $row['PASSWORD'];
-//             header('Location: homepage.php');
-//         }
-//         else
-//         {
-//             $errorMessage = "Login failed";
-//         }
-//     }
-//     else
-//     {
-//         header('Location: loginpage.php');
-//     }
-// }
-
-/*
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    if (!empty($_POST["username"]) AND !empty($_POST["password"]))
-    {
-        if ($_POST["username"] == "john123" AND $_POST["password"] == "apple456")
-        {
-            $_SESSION["user"] = true;
-            header('Location: homepage.php');
-        }
-        else
-        {
-            $errorMessage = "Login failed";
-        }
-    }
-    else
-    {
-        header('Location: loginpage.php');
-    }
-}
-*/
+$errorMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    if (!empty($_POST['username']) && !empty($_POST['password']))
-    {
-	$username = $_POST['username']; //Retrieves username from database
-    	$password = $_POST['password']; //Retrieves password from database
-	$sql = "SELECT * FROM USERINFO WHERE USERNAME = '$username' AND PASSWORD = '$password'";
-        //$sql_statement = oci_parse($conn, $sql);
-        //oci_execute($sql_statement);
+    if (!empty($_POST['username']) && !empty($_POST['password'])){
 
-	if ($sql_statement = oci_parse($conn, $sql))
-	{
-	    oci_execute($sql_statement);
-	    if (oci_num_rows($sql_statement) == 1)
+        $username = $_POST['username']; //Retrieves username from form
+        $password = $_POST['password']; //Retrieves password from form
+
+        //Search for the USERID that matches username and password
+        $sql = "SELECT USERID FROM USERINFO WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+        $sql_statement = oci_parse($conn, $sql);
+        oci_execute($sql_statement);
+        $row = oci_fetch_array($sql_statement, OCI_ASSOC+OCI_RETURN_NULLS);
+
+        //Count the number of rows in the SQL statment
+        //If the password and username match, then there will be 1 row
+        //If they both don't match, then there will be 0 row
+        $count = oci_num_rows($sql_statement);
+        if ($count == 1)
             {
                 $_SESSION['user'] = true;
+                //$errorMessage = "Correct Login.";
                 header('Location: homepage.php');
+                //$errorMessage = "Login Success<br>Username ".$username."<br>Password: ".$password.$id;
+
             }
             else
             {
-                $errorMessage = "Login failed";
+                //$errorMessage = "Login Fail<br>Username ".$username."<br>Password: ".$password."<br>".$count;
+                $errorMessage = "Incorrect Login.";
             }
-        }
-	else
-	{
-	    $errorMessage = "Login incorrect";
-	}
+        
+    
     }
     else
     {
@@ -118,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 <body>
 
-<<!-- Navigation -->
+<!-- Navigation -->
     <div id="web_nav">
         <header id="logo">
             <div id="logo"><a href="homepage.php"><img alt="eCampus logo" src="images/eCampusLogo.png"></a></div>
@@ -149,21 +107,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
-    <div class="loginForm">
+    <div class="loginForm form">
         <h1>Welcome to SCUdent Books!</h1>
-	<form id="login" method="post">
-            <label for="inputUsername">Username</label>
-            <input type="text" id="inputUsername" placeholder="Username" name="username" required autofocus>
-            <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" placeholder="Password" name="password" required>
+    <form id="login" method="post">
+            <ul>
+            <li>
+                <label for="inputUsername">Username</label>
+                <input type="text" id="inputUsername" placeholder="Username" name="username" required autofocus>
+            </li>
+            <li>
+                <label for="inputPassword">Password</label>
+                <input type="password" id="inputPassword" placeholder="Password" name="password" required>
+            </li>
+            <li>
+                <p id="loginError">
+                    <?php 
+                        echo $errorMessage; //Prints error message if login incorrect
+                    ?>
+                </p>
+            </li>
+            </ul>
             <button type="submit" id="loginButton" name="submit">Login</button>
-            <p id="loginError">
-                <?php 
-                    echo $errorMessage; //Prints error message
-                ?>
-            </p>
         </form>
-        <a href="userregistrationpage.php">Don't have an account? Register here</a>
+        <p><a href="userregistrationpage.php">Don't have an account? Register here</a></p>
     </div>
 </div>
 
