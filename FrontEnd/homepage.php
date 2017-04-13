@@ -8,15 +8,21 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
-
 if(!isset($_SESSION["user"])){
-    header('Location: loginpage.php');
-    die();
+    //header('Location: login.php');
+    //die();
+    $_SESSION["user"] = false;
 }
 
+//SQL query to get all the books
 $sql="SELECT * FROM BOOKPOST ORDER BY POSTDATE DESC";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
+
+//SQL query to get majors later in the code
+$sql2="SELECT * FROM BOOKPOST ORDER BY POSTDATE DESC";
+$stid2 = oci_parse($con, $sql2);
+oci_execute($stid2);
 
 
 
@@ -60,7 +66,26 @@ oci_execute($stid);
                 <li><a href="#" class="web_link">Home</a></li>
                 <li><a href="#" class="web_link">Sell</a></li>
                 <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link">You</a></li>
+                <li>
+                <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
+                <?php
+                if($_SESSION["user"] == true){
+
+                    echo '<span id="usernav">';
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo '      <div id="userlinks" class="dropdownnav">';
+                    echo '        <a href="#">Your Profile</a>';
+                    echo '        <a href="#">Manage Books</a>';
+                    echo '        <a href="#">Settings</a>';
+                    echo '        <a href="logout.php">Log Out</a>';
+                    echo '</span>';
+                }
+                else{
+                    echo '<li><a href="join.php" class="web_link registerlink">Register</a></li>';
+                    echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
+                }
+                ?>
+                </li>
             </ul>
             </nav>
         </div>
@@ -73,14 +98,58 @@ oci_execute($stid);
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
+    <?php
+        if($_SESSION["user"] == false){
+    echo '<div class="welcome">';
+    echo '    <div class="welcometext">';
+    echo '        <h1> Welcome to SCUdent Books</h1>';
+    echo '        <p>Your place to buy, sell, and swap books with other SCU students right on campus!</p>';
+    echo '       <p></p><p><a href="join.php" class="advancedsearch">Join SCUdent Books</a></p>';
+    echo '   </div>';
+    echo '</div>';
+        }
+    ?>
+
+    <div class="bookcategories">
+    <h1>Browse Major</h1>
+    <?php
+            //This sections creates a 'browse by major' section for books based off of the categories the current books in the database.
+
+            $categories = array();
+
+            //Get each unique major and add it to an array
+            while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
+
+                if (!in_array($row['MAJOR'],$categories)){
+                    array_push($categories, $row['MAJOR']);
+                }
+            };
+            //print_r ($categories);
+
+            //Print each major link that links to its page
+            echo "<ul class='categories'>";
+            for($i = 0; $i < sizeof($categories); $i++){
+                echo "<li><a href='major.php?major=".$categories[$i]."'>".$categories[$i]."</a></li>";
+            }
+            echo "</ul>";
+
+            ?>
+    </div>
+
     <div class="booklist">
     <h1>Newest Books</h1>
         <ul>
+
             <?php
 
             
             // Choose the correct display text/links for the book
             while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
+                
+                //Print only the first 10 books
+                if ($count = oci_num_rows($stid) == 7){
+                    break;
+                };
 
                 if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
                     $bookstatus = "buy";
@@ -132,8 +201,6 @@ oci_execute($stid);
                     }
                 }
 
-
-
                 //Display the book listing with the location, user, date, author, and book status button
                 echo "<li>";        
                     echo "<div class='listusername'><a href='profile.php?username=".$username."'>".$username."</a></div>";
@@ -144,7 +211,9 @@ oci_execute($stid);
                     echo "</div>";
                     echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
                 echo "</li>";
+            
             }
+
 
             ?>
             

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 ini_set('display_errors','On');
 error_reporting(E_ALL);
@@ -9,31 +8,17 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
-
 if(!isset($_SESSION["user"])){
     //header('Location: login.php');
     //die();
     $_SESSION["user"] = false;
 }
 
-$username = $_GET["username"];
-
-//Select the User from the USERINFO table
-$sql="SELECT * FROM USERINFO WHERE USERNAME = '$username'";
+$sql="SELECT * FROM BOOKPOST ORDER BY POSTDATE DESC";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
 
-while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
-    $userid = $row['USERID']; //Set the User's USERID as userid to be used to find books
-};
 
-//Select all the books where the USERID is the same as the User's
-$sql2="SELECT * FROM BOOKPOST WHERE USERID = '$userid'";
-$stid2 = oci_parse($con, $sql2);
-oci_execute($stid2);
-
-$stid = oci_parse($con, $sql);
-oci_execute($stid);
 
 ?>
 
@@ -45,11 +30,11 @@ oci_execute($stid);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books User Profile Demo</title>
-    <script src="main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>SCUdent Books Home Demo</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
-    <link rel="stylesheet" type="text/css" href="booksusers.css" />
+    <script src="https://use.fontawesome.com/29dce5faae.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -104,61 +89,19 @@ oci_execute($stid);
         </div>
     </div>
 
-<!-- Popup Message Demo -->
-<div id="popupbox" class="popup">
-    <div class="popupmessage">
-    <form action="#" id="messageform" method="post" name="form">
-        <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
-        <h2>Send a Message to <b><?php echo $username ?></b></h2>
-        <label></label><input type="text" name="book_title" placeholder="Message Title">
-        <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
-        <input type="button" class="button" id="sendmessage" value="Send Message">
-    </form>
-    </div>
-</div>
-
-
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
-<div id="profile">
-    <div class="profileimage">
-        <div class="listpic pic"><img src="images/500px.png"></div>
-    </div>
-
-    <!--Display the User information-->
-    <div class="profileinfo">
-        <h1><?php echo $username ?></h1>
-        <div class="profileinfotext">
-
-        <?php
-        while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
-			echo "<p><b>Major:</b> " . $row['MAJOR1'] . "</p>";
-			echo "<p><b>Year:</b> " . $row['YEAR'] . "</p>";
-			echo "<p><b>Location:</b> " . $row['LOCATION'] . "</p>";
-			echo "</tr>";
-			}
-        ?>
-
-        </div>
-    </div>
-
-        <div class="sendmessage"><button id="messagebutton">Send Message</button></p></div>
-</div>
-
-
     <div class="booklist">
-    <h1>Book List</h1>
-    <ul>
+    <h1>Newest Books</h1>
+        <ul>
+            <?php
 
+            
+            // Choose the correct display text/links for the book
+            while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
 
-
-    <?php
-
-    //Display the list of books of that User
-    while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
-
-        if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
+                if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
                     $bookstatus = "buy";
                     $bookstatusText = "$".$row['PRICE'];
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
@@ -170,27 +113,61 @@ oci_execute($stid);
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
                     $booklinkend = "</a>";
                 }
-                if($row['STATUS'] == "sale-pending"){
+                if($row['STATUS'] == "sale pending"){
                     $bookstatus = "pending";
                     $bookstatusText = "Sale Pending";
                     $booklink = "";
                     $booklinkend = "";
                 }
 
+                // Get user info based off of the userid from the books
+                $userid = $row['USERID'];
+                $sql2="SELECT * FROM USERINFO WHERE USERID = '$userid'";
+                $stid2 = oci_parse($con, $sql2);
+                oci_execute($stid2);
 
-        echo "<li>";            
-            echo "<div class='listpic pic'><a href='listing.php?id=".$row['BOOKID']."'><img src='images/500px.png'></a></div>";
-            echo "<div class='listtitle'><a href='listing.php?id=".$row['BOOKID']."'>" . $row['TITLE'] . "</a></div>";
-            echo "<div class='bookinfo'>Author: ". $row['AUTHOR']->load()."<br>Posted 1/23/16";
-            echo "</div>";
-            echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
-        echo "</li>";
-    }
+                // Save user data to variables
+                while($row2 = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
+                    $username = $row2['USERNAME'];
+                    $location = $row2['LOCATION'];
+                    $date = $row['POSTDATE'];
+                    $bookid = $row['BOOKID'];
+                    $author = $row['AUTHOR']->load();
+                }
 
-    ?>
+                $pic1 = "nopic.jpg";
+                //Set up the sql statement to be used later in the code to get the book pictures
+                $sql3="SELECT * FROM BOOKPICTURE WHERE BOOKID = '$bookid'";
+                $stid3 = oci_parse($con, $sql3);
+                oci_execute($stid3);
+
+                //Save the picture text to a variable
+                while($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
+                    if ($row3['PIC1'] != NULL){
+                        $pic1 = $row3['PIC1'];
+                    }
+                    else{
+                        $pic1 = "nopic.jpg";
+                    }
+                }
+
+                //Display the book listing with the location, user, date, author, and book status button
+                echo "<li>";        
+                    echo "<div class='listusername'><a href='profile.php?username=".$username."'>".$username."</a></div>";
+                    echo "<div class='location'>".$location."</div>";    
+                    echo "<div class='listpic pic'><a href='listing.php?id=".$bookid."'><img src='bookimages/".$pic1."'></a></div>";
+                    echo "<div class='listtitle'><a href='listing.php?id=".$bookid."'>".$row['TITLE']."</a></div>";
+                    echo "<div class='bookinfo'>Author: ".$author."<br>".$date;
+                    echo "</div>";
+                    echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
+                echo "</li>";
+            
+            }
 
 
-    </ul>
+            ?>
+            
+        </ul>
     </div>
 </div>
 

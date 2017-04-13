@@ -17,6 +17,12 @@ else
     exit;
 }
 
+if(!isset($_SESSION["user"])){
+    //header('Location: login.php');
+    //die();
+    $_SESSION["user"] = false;
+}
+
 //Referenced code for generating random 5 digit alphanumeric string: http://stackoverflow.com/questions/48124/generating-pseudorandom-alpha-numeric-strings
 $available = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 $userid = '';
@@ -127,7 +133,26 @@ oci_close($conn);
                 <li><a href="#" class="web_link">Home</a></li>
                 <li><a href="#" class="web_link">Sell</a></li>
                 <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link">You</a></li>
+                <li>
+                <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
+                <?php
+                if($_SESSION["user"] == true){
+
+                    echo '<span id="usernav">';
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo '      <div id="userlinks" class="dropdownnav">';
+                    echo '        <a href="#">Your Profile</a>';
+                    echo '        <a href="#">Manage Books</a>';
+                    echo '        <a href="#">Settings</a>';
+                    echo '        <a href="logout.php">Log Out</a>';
+                    echo '</span>';
+                }
+                else{
+                    echo '<li><a href="join.php" class="web_link registerlink">Register</a></li>';
+                    echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
+                }
+                ?>
+                </li>
             </ul>
             </nav>
         </div>
@@ -141,9 +166,7 @@ oci_close($conn);
 <div id="container">
     <div class="returnHome">
         <h1>Thank you for registering!</h1>
-        <form>
-            <input type="button" id="returnHomeButton" onclick="window.location.href='homepage.php';" value="Back to Home Page">
-        </form>
+        <p><a href="login.php" class="advancedsearch">Login Now</a></p>
     </div>
 </div>
 

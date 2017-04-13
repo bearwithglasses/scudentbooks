@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if(!isset($_SESSION["user"])){
+    //header('Location: login.php');
+    //die();
+    $_SESSION["user"] = false;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +48,26 @@
                 <li><a href="#" class="web_link">Home</a></li>
                 <li><a href="#" class="web_link">Sell</a></li>
                 <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link">You</a></li>
+                <li>
+                <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
+                <?php
+                if($_SESSION["user"] == true){
+
+                    echo '<span id="usernav">';
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo '      <div id="userlinks" class="dropdownnav">';
+                    echo '        <a href="#">Your Profile</a>';
+                    echo '        <a href="#">Manage Books</a>';
+                    echo '        <a href="#">Settings</a>';
+                    echo '        <a href="logout.php">Log Out</a>';
+                    echo '</span>';
+                }
+                else{
+                    echo '<li><a href="join.php" class="web_link registerlink">Register</a></li>';
+                    echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
+                }
+                ?>
+                </li>
             </ul>
             </nav>
         </div>
@@ -51,7 +80,7 @@
 <!-- Container that holds Main and Side divs -->
 <div id="container">
     <div class="registrationForm form">
-        <form id="registration" action="userregistrationsubmitpage.php" method="post">
+        <form id="registration" action="joinsuccess.php" method="post">
             <h1>Sign Up to Become a Member here</h1>
             <p><img style='margin-left:5px;' src="images/asterisk.png" alt="*"> Required Field</p>
             <div id="formRegister">

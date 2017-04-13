@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 ini_set('display_errors','On');
 error_reporting(E_ALL);
 $db_host = "dbserver.engr.scu.edu/db11g";
@@ -7,6 +8,13 @@ $db_user = "wchang";
 $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
+
+
+if(!isset($_SESSION["user"])){
+    //header('Location: login.php');
+    //die();
+    $_SESSION["user"] = false;
+}
 
 $bookid = $_GET["id"]; //Get the bookid from the URL
 
@@ -83,7 +91,26 @@ oci_execute($stidPic);
                 <li><a href="#" class="web_link">Home</a></li>
                 <li><a href="#" class="web_link">Sell</a></li>
                 <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link">You</a></li>
+                <li>
+                <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
+                <?php
+                if($_SESSION["user"] == true){
+
+                    echo '<span id="usernav">';
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo '      <div id="userlinks" class="dropdownnav">';
+                    echo '        <a href="#">Your Profile</a>';
+                    echo '        <a href="#">Manage Books</a>';
+                    echo '        <a href="#">Settings</a>';
+                    echo '        <a href="logout.php">Log Out</a>';
+                    echo '</span>';
+                }
+                else{
+                    echo '<li><a href="join.php" class="web_link registerlink">Register</a></li>';
+                    echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
+                }
+                ?>
+                </li>
             </ul>
             </nav>
         </div>
