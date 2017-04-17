@@ -57,7 +57,8 @@ oci_execute($stidPic);
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
     <script src="popups-photos.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="messagewarning.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -96,11 +97,16 @@ oci_execute($stidPic);
 <!-- Popup Message Demo -->
 <div id="popupbox" class="popup">
     <div class="popupmessage">
-    <form action="#" id="messageform" method="post" name="form">
+    <form action="sendmessage.php" id="messageform" method="post" name="form">
         <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
         <h2>Send a Message to <b><?php echo $username ?></b> about <b><?php echo $booktitle ?></b></h2>
+        <input type="text" id="subject" name="book_title">
+        <script>
+            document.getElementById("subject").value = 'Message about <?php echo $booktitle ?>';
+        </script>
         <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
-        <input type="button" class="button" id="sendmessage" value="Send Message">
+        <input type="hidden" name="submitted" value="true"/>
+        <input type="submit" class="button" id="sendmessage" value="Send Message" onclick="sendMessage()">
     </form>
     </div>
 </div>

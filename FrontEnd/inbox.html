@@ -39,10 +39,10 @@ oci_execute($stid);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCUdent Books User Profile Demo</title>
     <script src="main.js"></script>
-    <script src="messagewarning.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
+    <link rel="stylesheet" type="text/css" href="inbox.css" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -81,13 +81,11 @@ oci_execute($stid);
 <!-- Popup Message Demo -->
 <div id="popupbox" class="popup">
     <div class="popupmessage">
-    <form action="sendmessage.php" id="messageform" method="post" name="form">
+    <form action="#" id="messageform" method="post" name="form">
         <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
         <h2>Send a Message to <b><?php echo $username ?></b></h2>
-        <input type="text" id="subject" name="book_title" placeholder="Subject">
         <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
-        <input type="hidden" name="submitted" value="true"/>
-        <input type="submit" class="button" id="sendmessage" value="Send Message" onclick="sendMessage()">
+        <input type="button" class="button" id="sendmessage" value="Send Message">
     </form>
     </div>
 </div>
@@ -96,77 +94,67 @@ oci_execute($stid);
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
+<div id="inboxsidebar">
+    <ul>
+       <li><a href="/" class="minorbutton inboxtypes">All</a></li>
+       <li><a href="/" class="minorbutton inboxtypes">Sent</a></li>
+       <li><a href="/" class="minorbutton inboxtypes">Recieved</a></li>
+    </ul>
+</div>
 <div id="profile">
-    <div class="profileimage">
-        <div class="listpic pic"><img src="images/500px.png"></div>
+    <h1>Inbox</h1>
+
+    <div class="backtoinbox">
+        <a href="/"><- Back to Inbox</a>
     </div>
+<div class="inboxfilters">
+            <label>Sort by Date</label>
+            <select id="condIdx" name="book_condition">
+                <option value="New" selected="selected">Newest to Oldest</option>
+                <option value="Used">Oldest to Newest</option>
+            </select>
+            <a href="/" class="minorbutton inboxfilterbutton">Group by User</a>
+            <a href="/" class="minorbutton inboxfilterbutton">Group by Book</a>
+ </div>
 
-    <!--Display the User information-->
-    <div class="profileinfo">
-        <h1><?php echo $username ?></h1>
-        <div class="profileinfotext">
-
-        <?php
-        while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
-			echo "<p><b>Major:</b> " . $row['MAJOR1'] . "</p>";
-			echo "<p><b>Year:</b> " . $row['YEAR'] . "</p>";
-			echo "<p><b>Location:</b> " . $row['LOCATION'] . "</p>";
-			echo "</tr>";
-			}
-        ?>
-
-        </div>
+    <div class="messagelisting">
+        <div class="datetab">1/23/22</div>
+        <div class="fromtab"><a href="">wchang</a></div>
+        <div class="messagetitle"><a href="">Message about The Tomato Book</a></div>
+        <div class="editmessage"><a href="/"><img src="images/trash.png"></a></div>
     </div>
-
-        <div class="sendmessage"><button id="messagebutton">Send Message</button></p></div>
+    <div class="messagelisting">
+        <div class="datetab">1/23/22</div>
+        <div class="fromtab"><a href="">wchang</a></div>
+        <div class="messagetitle"><a href="">Re: Message about The Tomato Book</a></div>
+        <div class="editmessage"><a href="/"><img src="images/trash.png"></a></div>
+    </div>
+    <div class="messagelisting">
+        <div class="datetab">1/11/22</div>
+        <div class="fromtab"><a href="">bwang</a></div>
+        <div class="messagetitle"><a href="">Re: Do you have the book for COEN 10?</a></div>
+        <div class="editmessage"><a href="/"><img src="images/trash.png"></a></div>
+    </div>
+    <div class="messagelisting">
+        <div class="datetab">1/11/22</div>
+        <div class="fromtab"><a href="">bwang</a></div>
+        <div class="messagetitle"><a href="">Do you have the book for COEN 10?</a></div>
+        <div class="editmessage"><a href="/"><img src="images/trash.png"></a></div>
+    </div>
+    <div class="messagelisting">
+        <div class="datetab">1/23/22</div>
+        <div class="fromtab"><a href="">rprescilla</a></div>
+        <div class="messagetitle"><a href="">Message about Caclculus 12: Alternate Reality Vectors</a></div>
+        <div class="editmessage"><a href="/"><img src="images/trash.png"></a></div>
+    </div>
+    <div class="messagelisting">
+        <div class="datetab">1/11/22</div>
+        <div class="fromtab"><a href="">bwang</a></div>
+        <div class="messagetitle"><a href="">Meeting at Kenna</a></div>
+        <div class="editmessage"><a href="/"><img src="images/trash.png"></a></div>
+    </div>
 </div>
 
-
-    <div class="booklist">
-    <h1>Book List</h1>
-    <ul>
-
-
-
-    <?php
-
-    //Display the list of books of that User
-    while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
-
-        if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
-                    $bookstatus = "buy";
-                    $bookstatusText = "$".$row['PRICE'];
-                    $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
-                    $booklinkend = "</a>";
-                }
-                if($row['STATUS'] == "available" && $row['PURPOSE'] == "swap"){
-                    $bookstatus = "swap";
-                    $bookstatusText = "For Swap";
-                    $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
-                    $booklinkend = "</a>";
-                }
-                if($row['STATUS'] == "sale-pending"){
-                    $bookstatus = "pending";
-                    $bookstatusText = "Sale Pending";
-                    $booklink = "";
-                    $booklinkend = "";
-                }
-
-
-        echo "<li>";            
-            echo "<div class='listpic pic'><a href='listing.php?id=".$row['BOOKID']."'><img src='images/500px.png'></a></div>";
-            echo "<div class='listtitle'><a href='listing.php?id=".$row['BOOKID']."'>" . $row['TITLE'] . "</a></div>";
-            echo "<div class='bookinfo'>Author: ". $row['AUTHOR']->load()."<br>Posted 1/23/16";
-            echo "</div>";
-            echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
-        echo "</li>";
-    }
-
-    ?>
-
-
-    </ul>
-    </div>
 </div>
 
 <!-- Footer  -->
