@@ -1,6 +1,23 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+4/18/2017
+
+	Christina
+		- FrontEnd folder
+			- Deleted demopages folder and moved all pages from there to FrontEnd
+			- Made changes to loginpage.php so that userid is required for adding books
+			- On homepage.php: rerouted Sell to addbook.html and Advanced to searchpageColumn.php
+				- need to do this for other pages as well except loginpage
+				- I also realized the nav bar is kind of inconsistent
+			- Photos can now be uploaded (but must be small in size... find the limit later)
+			- Created a confirmation page showing a preview of the listing after a book has been added
+			- Titles of books serve as links to the book listing pages
+			- Advanced Search function works perfectly for fields NOT involving text input
+				- Don't know how to run an accurate search function using just one search bar...
+			- Added pictures of books to bookimages folder for debugging (they're not pictures of books)
+				- I added a LOT of books while debugging and many listings have errors -- need to be deleted.
+
 4/7/2017
 	
 	Winston
