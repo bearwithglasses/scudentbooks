@@ -33,7 +33,7 @@ h1, h2, h3{
 }
 
 
-input[type=text],input[type=password],input[type=email]{
+input[type=text] {
     width: 50%;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
@@ -45,30 +45,14 @@ input[type=text],input[type=password],input[type=email]{
     transition: width 0.4s ease-in-out;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+input[type=text]:focus {
     border: 1px solid #A33C3C;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
 
-input:required, textarea:required{
-    background: #fff url(images/asterisk.png) no-repeat 98% center;
-}
-
-
 select{
     padding: 5px 20px;
-}
-
-#loginError{
-    color: #BF3939;
-}
-
-#closemessage{
-    float: right;
-    margin-right: -100px;
-    margin-top: -80px;
-    cursor: pointer;
 }
 
 .searchbar .button, .advancedsearch{
@@ -107,7 +91,7 @@ select{
     width: 0 10px;
 }
 
-button, input[type=submit]{
+button{
     background-color: #BF3939;
     border: none;
     color: white;
@@ -120,29 +104,9 @@ button, input[type=submit]{
     cursor: pointer;
 }
 
-.button:hover, .advancedsearch:hover, button:hover, input[type=submit]:hover{
+.button:hover, .advancedsearch:hover, button:hover{
     background-color: #6B2020;
     cursor: pointer;
-    text-decoration: none;
-}
-
-.minorbutton{
-    background-color: lightgray;
-    border: none;
-    color: black;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1em;
-    margin: 5px;
-    cursor: pointer;
-}
-
-.minorbutton:hover{
-    background-color: darkgrey;
-    cursor: pointer;
-    text-decoration: none;
 }
 
 /******************** Header and Navigation ********************************/
@@ -336,6 +300,10 @@ a.web_link:hover {
     padding: 10px;
     text-align: left;
 }
+#directions {
+	text-align: center;
+	font: 1.0em Verdana, sans-serif;
+}
 .form ul {
     width: 100%;
     list-style-type:none;
@@ -401,8 +369,6 @@ legend{
     border: 1px solid lightgray;
     width: 20%;
     float: left;
-    padding-top: 30px;
-    margin: 0px 20px 0px 20px;
 }
 
 #floatright{

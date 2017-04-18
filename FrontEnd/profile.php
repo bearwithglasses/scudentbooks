@@ -10,16 +10,14 @@ $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
 $username = $_GET["username"];
 
-//Select the User from the USERINFO table
 $sql="SELECT * FROM USERINFO WHERE USERNAME = '$username'";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
 
 while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
-    $userid = $row['USERID']; //Set the User's USERID as userid to be used to find books
+    $userid = $row['USERID'];
 };
 
-//Select all the books where the USERID is the same as the User's
 $sql2="SELECT * FROM BOOKPOST WHERE USERID = '$userid'";
 $stid2 = oci_parse($con, $sql2);
 oci_execute($stid2);
@@ -39,8 +37,7 @@ oci_execute($stid);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCUdent Books User Profile Demo</title>
     <script src="main.js"></script>
-    <script src="messagewarning.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -81,13 +78,11 @@ oci_execute($stid);
 <!-- Popup Message Demo -->
 <div id="popupbox" class="popup">
     <div class="popupmessage">
-    <form action="sendmessage.php" id="messageform" method="post" name="form">
-        <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
+    <form action="#" id="messageform" method="post" name="form">
         <h2>Send a Message to <b><?php echo $username ?></b></h2>
-        <input type="text" id="subject" name="book_title" placeholder="Subject">
         <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
-        <input type="hidden" name="submitted" value="true"/>
-        <input type="submit" class="button" id="sendmessage" value="Send Message" onclick="sendMessage()">
+        <input type="button" class="button" id="sendmessage" value="Send Message">
+        <input type="button" class="button" id="closemessage" value="Close Message">
     </form>
     </div>
 </div>
@@ -101,7 +96,6 @@ oci_execute($stid);
         <div class="listpic pic"><img src="images/500px.png"></div>
     </div>
 
-    <!--Display the User information-->
     <div class="profileinfo">
         <h1><?php echo $username ?></h1>
         <div class="profileinfotext">
@@ -130,10 +124,9 @@ oci_execute($stid);
 
     <?php
 
-    //Display the list of books of that User
     while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
 
-        if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
+        if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){
                     $bookstatus = "buy";
                     $bookstatusText = "$".$row['PRICE'];
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
@@ -145,7 +138,7 @@ oci_execute($stid);
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
                     $booklinkend = "</a>";
                 }
-                if($row['STATUS'] == "sale-pending"){
+                if($row['STATUS'] == "sale pending"){
                     $bookstatus = "pending";
                     $bookstatusText = "Sale Pending";
                     $booklink = "";

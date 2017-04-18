@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $sql_statement = oci_parse($conn, $sql);
         oci_execute($sql_statement);
         $row = oci_fetch_array($sql_statement, OCI_ASSOC+OCI_RETURN_NULLS);
-	
+
         //Count the number of rows in the SQL statment
         //If the password and username match, then there will be 1 row
         //If they both don't match, then there will be 0 row
@@ -39,10 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         if ($count == 1)
             {
                 $_SESSION['user'] = true;
-				$_SESSION['username'] = $username;				//Added by CC... important for ADD BOOK to get userid from userinfo
-				//$errorMessage = "Correct Login.";
-		         header('Location: homepage.php');
-				//$errorMessage = "Login Success<br>Username ".$username."<br>Password: ".$password.$id;
+                //$errorMessage = "Correct Login.";
+                header('Location: homepage.php');
+                //$errorMessage = "Login Success<br>Username ".$username."<br>Password: ".$password.$id;
 
             }
             else

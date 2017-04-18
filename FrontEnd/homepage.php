@@ -30,7 +30,7 @@ oci_execute($stid);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books Home Demo</title>
+    <title>SCUdent Books Home</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <script src="https://use.fontawesome.com/29dce5faae.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -52,13 +52,13 @@ oci_execute($stid);
                 <span class="searchicon"><i></i></span>
                 <input type="text" name="search" placeholder="Search...">
                 <input type="button" class="button" value="Search">
-                <a href="/" class="advancedsearch">Advanced</a>
+                <a href="searchpageColumn.php" class="advancedsearch">Advanced</a>
             </form>
 
             <nav>
             <ul class="navlinks" id="mainNav">
                 <li><a href="#" class="web_link">Home</a></li>
-                <li><a href="#" class="web_link">Sell</a></li>
+                <li><a href="addbook.html" class="web_link">Sell</a></li>
                 <li><a href="#" class="web_link">Inbox</a></li>
                 <li><a href="#" class="web_link">You</a></li>
             </ul>

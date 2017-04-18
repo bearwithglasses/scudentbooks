@@ -8,7 +8,8 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
-$bookid = $_GET["id"];
+//$bookid = $_GET["id"];
+$bookid = $_GET['selected'];
 
 $sql="SELECT * FROM BOOKPOST WHERE BOOKID = '$bookid'";
 $stid = oci_parse($con, $sql);
@@ -18,6 +19,36 @@ while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
     $userid = $row['USERID'];
     $booktitle = $row['TITLE'];
 };
+//
+//
+
+$sql4="SELECT * FROM BOOKPICTURE WHERE BOOKID = '$bookid'";
+$stid4= oci_parse($con, $sql4);
+oci_execute($stid4);
+$found = 0;
+while($row = oci_fetch_array($stid4, OCI_ASSOC+OCI_RETURN_NULLS)){
+    $bookimage1 = $row['PIC1'];
+	$bookimage2 = $row['PIC2'];
+	$bookimage3 = $row['PIC3'];
+	$found = 1;
+};
+
+if ($found == 1)
+{	
+	$bookimage1 = "src=\"bookimages/".$bookimage1."\"";
+	$bookimage2 = "src=\"bookimages/".$bookimage2."\"";
+	$bookimage3 = "src=\"bookimages/".$bookimage3."\"";
+}
+else
+{		
+	$bookimage1 = "src=\"bookimages/blank1.png\"";
+	$bookimage2 = "src=\"bookimages/blank2.png\"";
+	$bookimage3 = "src=\"bookimages/blank3.png\"";
+}
+//echo "bookimage: ".$bookimage1."<br>";
+//echo "bookimage: ".$bookimage2."<br>";
+//echo "bookimage: ".$bookimage3."<br>";
+
 
 $sql2="SELECT * FROM USERINFO WHERE USERID = '$userid'";
 $stid2 = oci_parse($con, $sql2);
@@ -32,9 +63,13 @@ $stid3 = oci_parse($con, $sql3);
 oci_execute($stid3);
 
 
+
+
 $sql="SELECT * FROM BOOKPOST WHERE BOOKID = '$bookid'";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
+
+
 
 ?>
 
@@ -109,20 +144,20 @@ oci_execute($stid);
 <div id="listing">
     <div class="listingimage">
     <div id="mainimage">
-        <div class="listpic pic bookpic" id="img1"><img src="images/500px.png" onclick="openImage(this)"></div>
-        <div class="listpic pic bookpic" id="img2"><img src="images/500-2.png" onclick="openImage(this)"></div>
-        <div class="listpic pic bookpic" id="img3"><img src="images/500-3.png" onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img1"><img <?php echo $bookimage1 ?> onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img2"><img <?php echo $bookimage2 ?> onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img3"><img <?php echo $bookimage3 ?> onclick="openImage(this)"></div>
     </div>
 
         <div class="bookphotonav">
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" src="images/500px.png" style="width:100%" onclick="currentDiv(1)">
+              <img class="opacity opacity-off" <?php echo $bookimage1 ?> style="width:100%" onclick="currentDiv(1)">
             </div>
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" src="images/500-2.png" style="width:100%" onclick="currentDiv(2)">
+              <img class="opacity opacity-off" <?php echo $bookimage2 ?> style="width:100%" onclick="currentDiv(2)">
             </div>
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" src="images/500-3.png" style="width:100%" onclick="currentDiv(3)">
+              <img class="opacity opacity-off" <?php echo $bookimage3 ?> style="width:100%" onclick="currentDiv(3)">
             </div>
           </div>
     </div>
@@ -131,9 +166,10 @@ oci_execute($stid);
     <div class="listinginfo">
 
     <?php
-
+        $description = " ";
         while($row = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
-            $description = $row['DESCRIPTION']->load();
+			 $description = $row['DESCRIPTION']->load();
+		     
          }
 
         while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
@@ -143,7 +179,7 @@ oci_execute($stid);
             $bookedition = "N/A";
         };
 
-        if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){
+        if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
             $bookstatus = "buy";
             $bookstatusText = "$".$row['PRICE'];
             $disable = "";
