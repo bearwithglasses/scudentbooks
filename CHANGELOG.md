@@ -1,12 +1,20 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-4/12/2017 ---> updated again 4/19/2017
+4/19/2017
 
-	Renee
-
+	Winston
+		- Database
+			- Created inbox database tables. Will add to database in the future.
 		- FrontEnd folder
+			- Currently working on sending messages to users. Will update accordingly.
 
+
+	Renee (previously updated on 4/12/2017)
+
+		- Pushed Christina's updates that was lost during a merge conflict; updated the "Sell" and "Advanced Search" navigation in other pages
+		
+		- FrontEnd folder
 			- Modified and renamed login page
 				- Login works successfully for all users in database with client-side validation
 			- Modified and renamed user registration pages
@@ -15,13 +23,10 @@ All notable changes to this project will be documented in this file.
 				- All users can see every page without needing to log in.
 				- The homepage and navigation change depending on whether the user is signed in or not.
 				- Homepage includes a 'welcome' section when user is not logged in; it disappears when the user logs in.
-
 			- Navigation update for all pages
 				- Added 'Register' and 'Login' links if a user is not logged in, and if a user logs in, the two links are removed and is replaced with a 'You' link with a dummy user navigation. User navigation includes a functional 'Log Out' link.
-
 			- Browse by Majors pages/functionality
 				- Book major categories are created dynamically on the home page. These link to their respective pages using 'categories.php' and the major parameter in the URL. Pages show a list of books that are labeled with that major.
-
 			- Miscellaneous styling edits to footer, login page
 
 4/18/2017

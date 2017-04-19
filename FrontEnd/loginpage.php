@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         if ($count == 1)
             {
                 $_SESSION['user'] = true;
+                $_SESSION['username'] = $username;              //Added by CC... important for ADD BOOK to get userid from userinfo
                 //$errorMessage = "Correct Login.";
                 header('Location: homepage.php');
                 //$errorMessage = "Login Success<br>Username ".$username."<br>Password: ".$password.$id;

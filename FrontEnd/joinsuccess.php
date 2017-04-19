@@ -125,13 +125,13 @@ oci_close($conn);
                 <span class="searchicon"><i></i></span>
                 <input type="text" name="search" placeholder="Search...">
                 <input type="button" class="button" value="Search">
-                <a href="/" class="advancedsearch">Advanced</a>
+                <a href="searchpageColumn.php" class="advancedsearch">Advanced</a>
             </form>
 
             <nav>
             <ul class="navlinks" id="mainNav">
                 <li><a href="#" class="web_link">Home</a></li>
-                <li><a href="#" class="web_link">Sell</a></li>
+                <li><a href="addbook.html" class="web_link">Sell</a></li>
                 <li><a href="#" class="web_link">Inbox</a></li>
                 <li>
                 <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
