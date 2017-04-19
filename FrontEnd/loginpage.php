@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $sql_statement = oci_parse($conn, $sql);
         oci_execute($sql_statement);
         $row = oci_fetch_array($sql_statement, OCI_ASSOC+OCI_RETURN_NULLS);
-	
+
         //Count the number of rows in the SQL statment
         //If the password and username match, then there will be 1 row
         //If they both don't match, then there will be 0 row
@@ -39,10 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         if ($count == 1)
             {
                 $_SESSION['user'] = true;
-				$_SESSION['username'] = $username;				//Added by CC... important for ADD BOOK to get userid from userinfo
-				//$errorMessage = "Correct Login.";
-		         header('Location: homepage.php');
-				//$errorMessage = "Login Success<br>Username ".$username."<br>Password: ".$password.$id;
+                //$errorMessage = "Correct Login.";
+                header('Location: homepage.php');
+                //$errorMessage = "Login Success<br>Username ".$username."<br>Password: ".$password.$id;
 
             }
             else
@@ -78,38 +77,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <body>
 
 <!-- Navigation -->
-    <div id="web_nav">
-        <header id="logo">
-            <div id="logo"><a href="homepage.php"><img alt="eCampus logo" src="images/eCampusLogo.png"></a></div>
+    <div id="login_nav">
+        <header>
+            <div id="login_logo"><a href="homepage.php"><img alt="eCampus logo" src="images/eCampusLogo.png"></a></div>
         </header>
-
-        <div id="links">
-            <form class="searchbar">
-                <span class="searchicon"><i></i></span>
-                <input type="text" name="search" placeholder="Search...">
-                <input type="button" class="button" value="Search">
-                <a href="/" class="advancedsearch">Advanced</a>
-            </form>
-
-            <nav>
-            <ul class="navlinks" id="mainNav">
-                <li><a href="#" class="web_link">Home</a></li>
-                <li><a href="#" class="web_link">Sell</a></li>
-                <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link">You</a></li>
-            </ul>
-            </nav>
-        </div>
-
-        <div class="icon">
-            <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
-        </div>
     </div>
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
-    <div class="loginForm form">
-        <h1>Welcome to SCUdent Books!</h1>
+    <div class="form loginForm">
+        <h1>Welcome back!</h1>
     <form id="login" method="post">
             <ul>
             <li>
@@ -130,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             </ul>
             <button type="submit" id="loginButton" name="submit">Login</button>
         </form>
-        <p><a href="userregistrationpage.php">Don't have an account? Register here</a></p>
+        <p><a href="userregistrationpage.php">Don't have an account? Register here!</a></p>
     </div>
 </div>
 
