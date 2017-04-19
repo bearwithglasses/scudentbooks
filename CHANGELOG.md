@@ -1,29 +1,22 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-4/12/2017
+4/18/2017
 
-	Renee
-
+	Christina
 		- FrontEnd folder
-
-			- Modified and renamed login page
-				- Login works successfully for all users in database with client-side validation
-			- Modified and renamed user registration pages
-				- User registration works successfully with client-side validation and adds user to database
-			- Editted login accesibility
-				- All users can see every page without needing to log in.
-				- The homepage and navigation change depending on whether the user is signed in or not.
-				- Homepage includes a 'welcome' section when user is not logged in; it disappears when the user logs in.
-
-			- Navigation update for all pages
-				- Added 'Register' and 'Login' links if a user is not logged in, and if a user logs in, the two links are removed and is replaced with a 'You' link with a dummy user navigation. User navigation includes a functional 'Log Out' link.
-
-			- Browse by Majors pages/functionality
-				- Book major categories are created dynamically on the home page. These link to their respective pages using 'categories.php' and the major parameter in the URL. Pages show a list of books that are labeled with that major.
-
-			- Miscellaneous styling edits to footer, login page
-
+			- Deleted demopages folder and moved all pages from there to FrontEnd
+			- Made changes to loginpage.php so that userid is required for adding books
+			- On homepage.php: rerouted Sell to addbook.html and Advanced to searchpageColumn.php
+				- need to do this for other pages as well except loginpage
+				- I also realized the nav bar is kind of inconsistent
+			- Photos can now be uploaded (but must be small in size... find the limit later)
+			- Created a confirmation page showing a preview of the listing after a book has been added
+			- Titles of books serve as links to the book listing pages
+			- Advanced Search function works perfectly for fields NOT involving text input
+				- Don't know how to run an accurate search function using just one search bar...
+			- Added pictures of books to bookimages folder for debugging (they're not pictures of books)
+				- I added a LOT of books while debugging and many listings have errors -- need to be deleted.
 
 4/7/2017
 	
