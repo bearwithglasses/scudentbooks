@@ -1,6 +1,9 @@
+/******************** Basic Styling ********************************/
+
+
 body {
     font: 1.1em Calibri;
-    background-color: white;
+    background-color: #F7F7F5;
     margin: 0 auto;
     width: 85%;
 }
@@ -32,8 +35,10 @@ h1, h2, h3{
     margin-top: -10px;
 }
 
+/******************** Basic Input Styling ********************************/
 
-input[type=text] {
+
+input[type=text],input[type=password],input[type=email]{
     width: 50%;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
@@ -45,14 +50,33 @@ input[type=text] {
     transition: width 0.4s ease-in-out;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
     border: 1px solid #A33C3C;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
 
+input:required, textarea:required{
+    background: #fff url(images/asterisk.png) no-repeat 98% center;
+}
+
+
 select{
     padding: 5px 20px;
+}
+
+#loginError{
+    color: #BF3939;
+}
+
+/******************** Navigation Searchbar Styling ********************************/
+
+
+#closemessage{
+    float: right;
+    margin-right: -100px;
+    margin-top: -80px;
+    cursor: pointer;
 }
 
 .searchbar .button, .advancedsearch{
@@ -72,7 +96,7 @@ select{
     position: relative;
     display: inline-block;
     left: -18px;
-    color:#fafafa;
+    color: #fafafa;
 }
 
 .advancedsearch{
@@ -91,7 +115,7 @@ select{
     width: 0 10px;
 }
 
-button{
+button, input[type=submit]{
     background-color: #BF3939;
     border: none;
     color: white;
@@ -104,12 +128,32 @@ button{
     cursor: pointer;
 }
 
-.button:hover, .advancedsearch:hover, button:hover{
+.button:hover, .advancedsearch:hover, button:hover, input[type=submit]:hover{
     background-color: #6B2020;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.minorbutton{
+    background-color: lightgray;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 5px;
     cursor: pointer;
 }
 
-/******************** Header and Navigation ********************************/
+.minorbutton:hover{
+    background-color: darkgrey;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/******************** Logo and Navigation ********************************/
 
 #logo{
     display: inline-block;
@@ -151,8 +195,29 @@ button{
     text-decoration: none;
 }
 
+#userlinks{
+    overflow: hidden;
+}
+
+.dropdownnav{
+    display: none;
+    position: absolute;
+    z-index: 10;
+    background-color: #ccc;
+}
+
 a.web_link:hover {
-    background-color: #450101;
+    color: #2EA3C9;
+    border-bottom: 1px solid #2EA3C9;
+    }
+
+.registerlink, .loginlink{
+    border: 1px solid #2EA3C9;
+}
+
+.registerlink:hover, .loginlink:hover, a.registerlink:hover, a.loginlink:hover{
+    background-color: #2EA3C9;
+    color: white;
 }
 
 #container{
@@ -160,9 +225,89 @@ a.web_link:hover {
     overflow: hidden;
     padding: 30px;
     width: 100%;
+    background: white;
 }
 
-/******************** Photo Grid ********************************/
+/******************** Homepage Section Styling ********************************/
+
+.welcome{
+    padding: 50px 10px;
+    background-color: #EDEBE4;
+    height: 200px;
+    margin: 0 -30px 20px -30px;
+}
+
+.welcometext{
+    width: 80%;
+    margin: auto;
+}
+
+.welcometext h1{
+    border: none;
+}
+
+.welcometext p{
+    font-size: 1.3em;
+}
+
+/******************** Book Category Styling ********************************/
+
+.bookcategories ul{
+    list-style: none;
+    margin: 0 auto;
+    overflow: auto;
+    text-align: center;
+}
+
+.bookcategories ul a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.bookcategories ul a:hover{
+    text-decoration: none;
+}
+
+
+.categories li{
+    display: inline-block;
+    width: 30%;
+    margin: 10px 20px 10px 0;
+}
+
+.categories li a{
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    color: white;
+    font-size: 1.3em;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+
+.categories li:nth-child(1n){
+    background-color: #BF3939;
+}
+
+.categories li:nth-child(2n){
+    background-color: #96CED9;
+}
+
+.categories li:nth-child(4n){
+    background-color: #E8D066;
+}
+
+.categories li a:hover{
+    background-color: #383736;
+}
+
+
+/******************** Book Listing Grid Layout Styling ********************************/
 
 
 .booklist ul{
@@ -300,10 +445,6 @@ a.web_link:hover {
     padding: 10px;
     text-align: left;
 }
-#directions {
-	text-align: center;
-	font: 1.0em Verdana, sans-serif;
-}
 .form ul {
     width: 100%;
     list-style-type:none;
@@ -328,6 +469,30 @@ a.web_link:hover {
 legend{
     display: none;
 }
+
+/******************** Login Page ********************************/
+
+.loginForm{
+    width: 30%;
+    margin: auto;
+}
+
+#login_logo, header{
+    margin: 10px auto;
+    text-align: center;
+}
+
+#login_nav {
+    background-color: white;
+    padding: 30px;
+    width: 100%;
+}
+
+#loginButton{
+    width: 100%;
+    margin-top: -10px;
+}
+
 
 /******************** Search Page Styling ********************************/
 /*
@@ -369,6 +534,8 @@ legend{
     border: 1px solid lightgray;
     width: 20%;
     float: left;
+    padding-top: 30px;
+    margin: 0px 20px 0px 20px;
 }
 
 #floatright{
@@ -419,7 +586,7 @@ legend{
 /******************** Footer ********************************/
 
 footer {
-    background-color: #f2f2f2;
+    border-top: 1px solid #F7F7F5;
     text-align: center;
     padding: 20px;
     margin: 20px 0;

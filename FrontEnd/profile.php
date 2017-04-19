@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 ini_set('display_errors','On');
 error_reporting(E_ALL);
 $db_host = "dbserver.engr.scu.edu/db11g";
@@ -8,16 +9,25 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
+
+if(!isset($_SESSION["user"])){
+    //header('Location: login.php');
+    //die();
+    $_SESSION["user"] = false;
+}
+
 $username = $_GET["username"];
 
+//Select the User from the USERINFO table
 $sql="SELECT * FROM USERINFO WHERE USERNAME = '$username'";
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
 
 while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
-    $userid = $row['USERID'];
+    $userid = $row['USERID']; //Set the User's USERID as userid to be used to find books
 };
 
+//Select all the books where the USERID is the same as the User's
 $sql2="SELECT * FROM BOOKPOST WHERE USERID = '$userid'";
 $stid2 = oci_parse($con, $sql2);
 oci_execute($stid2);
@@ -65,7 +75,26 @@ oci_execute($stid);
                 <li><a href="#" class="web_link">Home</a></li>
                 <li><a href="#" class="web_link">Sell</a></li>
                 <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link"><?php echo $username ?></a></li>
+                <li>
+                <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
+                <?php
+                if($_SESSION["user"] == true){
+
+                    echo '<span id="usernav">';
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo '      <div id="userlinks" class="dropdownnav">';
+                    echo '        <a href="#">Your Profile</a>';
+                    echo '        <a href="#">Manage Books</a>';
+                    echo '        <a href="#">Settings</a>';
+                    echo '        <a href="logout.php">Log Out</a>';
+                    echo '</span>';
+                }
+                else{
+                    echo '<li><a href="join.php" class="web_link registerlink">Register</a></li>';
+                    echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
+                }
+                ?>
+                </li>
             </ul>
             </nav>
         </div>
@@ -79,10 +108,11 @@ oci_execute($stid);
 <div id="popupbox" class="popup">
     <div class="popupmessage">
     <form action="#" id="messageform" method="post" name="form">
+        <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
         <h2>Send a Message to <b><?php echo $username ?></b></h2>
+        <label></label><input type="text" name="book_title" placeholder="Message Title">
         <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
         <input type="button" class="button" id="sendmessage" value="Send Message">
-        <input type="button" class="button" id="closemessage" value="Close Message">
     </form>
     </div>
 </div>
@@ -96,6 +126,7 @@ oci_execute($stid);
         <div class="listpic pic"><img src="images/500px.png"></div>
     </div>
 
+    <!--Display the User information-->
     <div class="profileinfo">
         <h1><?php echo $username ?></h1>
         <div class="profileinfotext">
@@ -124,9 +155,10 @@ oci_execute($stid);
 
     <?php
 
+    //Display the list of books of that User
     while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
 
-        if($row['STATUS'] == "available" && $row['PURPOSE'] == "buy"){
+        if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
                     $bookstatus = "buy";
                     $bookstatusText = "$".$row['PRICE'];
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
@@ -138,7 +170,7 @@ oci_execute($stid);
                     $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
                     $booklinkend = "</a>";
                 }
-                if($row['STATUS'] == "sale pending"){
+                if($row['STATUS'] == "sale-pending"){
                     $bookstatus = "pending";
                     $bookstatusText = "Sale Pending";
                     $booklink = "";
