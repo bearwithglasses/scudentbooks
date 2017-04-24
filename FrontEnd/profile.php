@@ -72,19 +72,18 @@ oci_execute($stid);
 
             <nav>
             <ul class="navlinks" id="mainNav">
-                <li><a href="#" class="web_link">Home</a></li>
-                <li><a href="addbook.html" class="web_link">Sell</a></li>
-                <li><a href="#" class="web_link">Inbox</a></li>
-                <li>
                 <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
                 <?php
                 if($_SESSION["user"] == true){
-
+                echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
+                echo '<li><a href="addbook.html" class="web_link">Sell</a></li>';
+                echo '<li><a href="#" class="web_link">Inbox</a></li>';
+                echo '<li>';
                     echo '<span id="usernav">';
                     echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
                     echo '      <div id="userlinks" class="dropdownnav">';
-                    echo '        <a href="#">Your Profile</a>';
-                    echo '        <a href="#">Manage Books</a>';
+                    echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
+                    echo '        <a href="yourbooks.php">Manage Books</a>';
                     echo '        <a href="#">Settings</a>';
                     echo '        <a href="logout.php">Log Out</a>';
                     echo '</span>';
@@ -94,7 +93,6 @@ oci_execute($stid);
                     echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
                 }
                 ?>
-                </li>
             </ul>
             </nav>
         </div>
@@ -177,11 +175,31 @@ oci_execute($stid);
                     $booklinkend = "";
                 }
 
+        $date = $row['POSTDATE'];
+        $bookid = $row['BOOKID'];
+        $author = $row['AUTHOR']->load();
 
-        echo "<li>";            
-            echo "<div class='listpic pic'><a href='listing.php?id=".$row['BOOKID']."'><img src='images/500px.png'></a></div>";
-            echo "<div class='listtitle'><a href='listing.php?id=".$row['BOOKID']."'>" . $row['TITLE'] . "</a></div>";
-            echo "<div class='bookinfo'>Author: ". $row['AUTHOR']->load()."<br>Posted 1/23/16";
+        $pic1 = "nopic.jpg";
+        //Set up the sql statement to be used later in the code to get the book pictures
+        $sql3="SELECT * FROM BOOKPICTURE WHERE BOOKID = '$bookid'";
+        $stid3 = oci_parse($con, $sql3);
+        oci_execute($stid3);
+
+        //Save the picture text to a variable
+        while($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
+            if ($row3['PIC1'] != NULL){
+                $pic1 = $row3['PIC1'];
+            }
+            else{
+                $pic1 = "nopic.jpg";
+            }
+        }
+
+        //Display the book listing with the date, author, and book status button
+        echo "<li>";        
+            echo "<div class='listpic pic'><a href='listing.php?id=".$bookid."'><img src='bookimages/".$pic1."'></a></div>";
+            echo "<div class='listtitle'><a href='listing.php?id=".$bookid."'>".$row['TITLE']."</a></div>";
+            echo "<div class='bookinfo'>Author: ".$author."<br>".$date;
             echo "</div>";
             echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
         echo "</li>";

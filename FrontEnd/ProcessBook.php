@@ -4,67 +4,59 @@ session_start();			//need this otherwise you cannot access $_SESSION array..
 ini_set('display_errors','On');
 include ("BookPostSqlFnc.php");
 
-function UploadImageFile1()
+function UploadImageFile($fileToUpload,$bookid)
 {
  $target_dir = "bookimages/";
- $target_file = $target_dir . basename($_FILES["fileToUpload1"]["name"]);
+ $target_file = $target_dir . basename($_FILES[$fileToUpload]["name"]);
  $uploadOk = 1;
  $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-    if (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file)) 
-	 {
-		    $uploadOk = 1;
-//          echo "The file ".$target_file."has been uploaded"."<br>";
-      }else {
-//			echo "Sorry, an error uploading your file"."<br>";
-			$uploadOk = 0;
-	 }
-
-     return ($uploadOk);
+ 
+ // Check file size
+if ($_FILES[$fileToUpload]["size"] > 500000) {
+	echo "Sorry, your file is too large.";
+	$uploadOk = 0;
 }
-//
-function UploadImageFile2()
-{
- $target_dir = "bookimages/";
- $target_file = $target_dir . basename($_FILES["fileToUpload2"]["name"]);
- $uploadOk = 1;
- $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-//echo "target_dir:  ".$target_dir."<br>";
-//echo "target_file: ".$target_file."<br>";
-//echo "imageFileType:  ".$imageFileType."<br>";
-//echo "source_file: ".$_FILES["fileToUpload2"]["tmp_name"]."<br>";
-    if (move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file)) 
-	 {
-		    $uploadOk = 1;
-//          echo "The file ".$target_file."has been uploaded"."<br>";
-      }else {
-//			echo "Sorry, an error uploading your file"."<br>";
-			$uploadOk = 0;
-	 }
 
-     return ($uploadOk);
+// Allow certain file formats
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+&& $imageFileType != "gif" ) {
+	//echo "Sorry, only JPEG, PNG, JPG, GIF files are allowed"."<br>";
+	$uploadOk = 0;
 }
-//
-function UploadImageFile3()
-{
- $target_dir = "bookimages/";
- $target_file = $target_dir . basename($_FILES["fileToUpload3"]["name"]);
- $uploadOk = 1;
- $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-//echo "target_dir:  ".$target_dir."<br>";
-//echo "target_file: ".$target_file."<br>";
-//echo "imageFileType:  ".$imageFileType."<br>";
-//echo "source_file: ".$_FILES["fileToUpload3"]["tmp_name"]."<br>";
-    if (move_uploaded_file($_FILES["fileToUpload3"]["tmp_name"], $target_file)) 
-	 {
-		    $uploadOk = 1;
-//          echo "The file ".$target_file."has been uploaded"."<br>";
-      }else {
-//			echo "Sorry, an error uploading your file"."<br>";
-			$uploadOk = 0;
-	 }
 
-     return ($uploadOk);
+// Check if $uploadOk is set to 0 by an errorup
+if ($uploadOk = 1) {
+
+//
+//
+//$path = "/home/httpd/html/index.php";
+//$file = basename($path);         // $file is set to "index.php"
+//$file = basename($path, ".php"); // $file is set to "index"//	
+	// 
+	// what we want to do here is to append bookid to the image name so we always have a unique image name
+	// change  /temp/wallet.jpg to /temp/wallet100.jpg
+	//
+	 $imageFileType = ".".$imageFileType;					//append a . infront of image type like (.jpg, .png etc)
+	 $file = basename ($target_file,$imageFileType);			//this will return wallet
+	// echo "file name is ".$file."<br>";
+	 $target_file = $target_dir.$file.$bookid.$imageFileType;			//append bookid to the image name
+	// echo "final target_file name is ...".$target_file."<br>";
+	 
+	 if (move_uploaded_file($_FILES[$fileToUpload]["tmp_name"], $target_file)) 
+	 {
+	   $file = basename($target_file);		//remove the folder name
+	   return ($file);
+      }else {
+	    $file='';		//empty string
+	   return ($file);	//upload file not successful....
+	 } 
+}
+else
+{
+	$file = '';
+	return ($file);
+}
+
 }
 //
 //
@@ -133,50 +125,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo ("status: " . $input_status . "<br>");
 	$input_desc = $_POST['book_message'];
 	//
+	//   BookPost_insert will return the unique bookid
+	//
+	$bookid = BookPost_insertValues($input_userid,$input_title,$input_author,$input_edition,
+	$input_purpose,$input_price,$input_isbn,$input_major,$input_courseNo,$input_professor,
+	$input_condition,$input_status,$input_desc);
+	
+	//
 	$ImageName1 = basename($_FILES["fileToUpload1"]["name"]);
 	
 	//echo "image name is: ".$ImageName1."<br>";
-	$uploadFlag= 0;
+	
     if (!empty($ImageName1))
 	{	
-     $uploadFlag = UploadImageFile1();
+     $ImageName1 = UploadImageFile("fileToUpload1",$bookid);
+	// echo "ImageName1 is ...".$ImageName1."<br>";
 	}
-	if ($uploadFlag == 0)
+	if (empty($ImageName1))
 	  $ImageName1 = "blank1.png";  
 	//
 	$ImageName2 = basename($_FILES["fileToUpload2"]["name"]);
-	
-	//echo "image name is: ".$ImageName2."<br>";
-	$uploadFlag = 0;
-    if (!empty($ImageName2))
+	//
+	if (!empty($ImageName2))
 	{	
-     $uploadFlag = UploadImageFile2();
+     $ImageName2 = UploadImageFile("fileToUpload2",$bookid);
+	// echo "ImageName2 is ...".$ImageName2."<br>";
 	}
-	if ($uploadFlag == 0)
-	  $ImageName2 = "blank2.png";
-  
+	if (empty($ImageName2))
+	  $ImageName2 = "blank2.png";  
+	//
+	  
 	$ImageName3 = basename($_FILES["fileToUpload3"]["name"]);
 	
-	//echo "image name is: ".$ImageName3."<br>";
-	$uploadFlag3 = 0;
-    if (!empty($ImageName2))
+	if (!empty($ImageName3))
 	{	
-     $uploadFlag3 = UploadImageFile3();
+     $ImageName3 = UploadImageFile("fileToUpload3",$bookid);
+	// echo "ImageName3 is ...".$ImageName3."<br>";
 	}
-	if ($uploadFlag == 0)
+	if (empty($ImageName3))
 	  $ImageName3 = "blank3.png";
-	//
-	BookPost_insertValues($input_userid,$input_title,$input_author,$input_edition,
-	$input_purpose,$input_price,$input_isbn,$input_major,$input_courseNo,$input_professor,
-	$input_condition,$input_status,$input_desc,
-	$ImageName1,$ImageName2,$ImageName3);
-	//
 	
-	
+    BookPost_insertPictureNames($bookid,$ImageName1,$ImageName2,$ImageName3);
     $bookimage1 = "src=\"bookimages/".$ImageName1."\"";
 	$bookimage2 = "src=\"bookimages/".$ImageName2."\"";
 	$bookimage3 = "src=\"bookimages/".$ImageName3."\"";	
-	
+
    }
 	//header('Location: thanks.php');
 }
