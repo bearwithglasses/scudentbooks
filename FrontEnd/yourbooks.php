@@ -112,8 +112,10 @@ oci_execute($stid);
 
     <div class="booklist">
     <h1>Your Books</h1>
-
-    <p>Manage your books here.</p>
+    <div class="managebooksnav">
+            <a href="addbook.html" class="youraddbook post">Post a New Book</a>
+            <a href="/" class="youraddbook">Delete Books</a>
+    </div>
     <ul>
     <?php
 
@@ -166,9 +168,11 @@ oci_execute($stid);
             echo "<div class='listtitle'><a href='listing.php?id=".$bookid."'>".$row['TITLE']."</a></div>";
             echo "<div class='bookinfo'>Author: ".$author."<br>".$date;
             echo "</div>";
-            echo "<div class='usertools'><a href='/'><img src='images/note.png'></a>";
-            echo "<a href='/'><img src='images/trash.png'></a></div>";
             echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
+            echo "<div class='usertools'>";
+            echo "<a href='/'><img src='images/note.png' alt='Edit ".$row['TITLE']."'></a>";
+            echo "<a href='deletebook.php?id=".$bookid."' class='deletebook'><img src='images/trash.png' alt='Delete ".$row['TITLE']."'></a>";
+            echo "</div>";
         echo "</li>";
     }
 

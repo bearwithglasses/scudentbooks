@@ -1,8 +1,66 @@
 .usertools{
-    margin: 10px 0;
+    margin: 10px -20px -20px -20px;
+    padding: 10px;
+    display: block;
+    background-color: #f2f2f2;
+    text-align: center;
 }
 
 .usertools img{
     margin: 0 10px;
+    padding: 10px;
 }
 
+.usertools img:hover{
+	background-color: #DBDBDB;
+}
+
+.usertools a:hover{
+	border: none;
+	text-decoration: none;
+}
+
+.booklist li{
+    display: inline-block;
+    text-align: left;
+    padding: 20px;
+    width: 20%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 10px 20px 10px 0;
+}
+
+
+.managebooksnav{
+	width: 50%;
+	margin: 20px auto;
+    text-align: center;
+}
+
+.youraddbook{
+    background-color: #9C9C9C;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.youraddbook:hover, .youraddbook a:hover{
+    background-color: #6B2020;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    color: white;
+}
+
+.post{
+    background-color: #2EA3C9;
+}

@@ -20,3 +20,8 @@ $("#userlinks").on("click", function (event) {
 $("#userdropdown").on("click", function (event) {
     event.stopPropagation();
 });
+
+//Confirmation popup to confirm deleting a book
+$('.deletebook').click(function(){
+    return confirm("Are you sure you want to delete this book?");
+})
