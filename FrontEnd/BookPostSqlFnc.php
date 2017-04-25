@@ -239,4 +239,134 @@ function BookPost_insertValues($m_userid,$m_title,$m_author,$m_edition,$m_purpos
 		
 	}
 
+
+
+	//Function used for editting books in editbook.php
+	function BookPost_replaceValues($m_userid,$m_title,$m_author,$m_edition,$m_purpose,$m_price,$m_isbn,$m_major,$m_courseNumber,$m_professor,
+                               $m_condition,$m_status,$m_description,$m_bookid)
+	{
+		
+
+		$con = makeConnection();
+		
+		// REMEMBER .. 14 fields for BOOKPOST
+		$sql = oci_parse($con, "UPDATE BOOKPOST
+			SET bookid = :mybookid,
+				userid = :myuserid,
+				title = :mytitle,
+				author = :myauthor,
+				edition = :myedition,
+				purpose = :mypurpose,
+				price = :myprice,
+				isbn = :myisbn,
+				major = :mymajor,
+				courseNumber = :mycourseNumber,
+				professor = :myprofessor,
+				postDate = :mypostDate,
+				condition = :mycondition,
+				status = :mystatus
+		WHERE BOOKID = :mybookid
+		");
+		//	RETURN bookid INTO :mybookid");
+		//	$m_bookid = 13;		 
+			//oci_bind_by_name($sql,'mybookid',$m_bookid,-1, SQLT_INT);
+			//oci_bind_by_name($sql,'myuserid',$m_userid,-1, SQLT_INT);
+						
+			
+			//var_dump($m_bookid); 
+			//var_dump($m_userid); 
+			oci_bind_by_name($sql,'mybookid',$m_bookid,5, SQLT_CHR);
+			oci_bind_by_name($sql,'myuserid',$m_userid,5, SQLT_CHR);
+			
+			oci_bind_by_name($sql,'mytitle',$m_title,100,SQLT_CHR);
+			//echo ("mytitle:" . $m_title . "<br>");
+			
+			oci_bind_by_name($sql,'myauthor',$m_author,100,SQLT_CHR);
+			//echo ("myauthor:" . $m_author . "<br>");
+									
+			oci_bind_by_name($sql,'myedition',$m_edition,-1, SQLT_INT);
+			//echo ("myedition:" . $m_edition . "<br>");
+			
+			oci_bind_by_name($sql,'mypurpose',$m_purpose,4,SQLT_CHR);
+			//echo ("mypurpose:" . $m_purpose . "<br>");
+			
+			oci_bind_by_name($sql,'myprice',$m_price);
+			//echo ("myprice:" . $m_price . "<br>");
+					
+			oci_bind_by_name($sql,'myisbn',$m_isbn,-1, SQLT_INT);
+			//echo ("myisbn:" . $m_isbn . "<br>");
+			
+			oci_bind_by_name($sql,'mymajor',$m_major,50,SQLT_CHR);
+			//echo ("mymajor:" . $m_major . "<br>");
+			
+			oci_bind_by_name($sql,'mycourseNumber',$m_courseNumber,20,SQLT_CHR);
+			//echo ("mycourseNumber:" . $m_courseNumber . "<br>");
+			
+			oci_bind_by_name($sql,'myprofessor',$m_professor,50,SQLT_CHR);
+			//echo ("myprofessor:" . $m_professor . "<br>");
+			
+			$m_postDate = date("d-M-y");
+			oci_bind_by_name($sql,'mypostDate',$m_postDate,24);
+		    //echo ("date:" . $m_postDate . "<br>");
+			
+			oci_bind_by_name($sql,'mycondition',$m_condition,20,SQLT_CHR);
+		 	//echo ("condition:" . $m_condition ."<br>");
+		 
+			oci_bind_by_name($sql,'mystatus',$m_status,20,SQLT_CHR);
+		    //echo ("status:" . $m_status . "<br>");
+			
+			oci_execute($sql);
+			
+		    oci_close($con);
+		// 
+		//  NOW add the description to the BookDescription Table
+		//  if m_description is NOT AN EMPTY STRING
+		//s
+		if (!EMPTY($m_description)){
+
+			//Get the book description
+			$con = makeConnection();
+		    $sql3="SELECT * FROM BOOKDESCRIPTION WHERE BOOKID = '$m_bookid'";
+
+		    //If no current book description exists, then insert new description into BOOKDESCRIPTION
+		    if(oci_parse($con, $sql3) == NULL){
+				$sql = oci_parse($con, "INSERT INTO BookDescription (bookid,description) VALUES ( :mybookid,:mydescrption)");
+				oci_bind_by_name($sql,'mybookid',$m_bookid,5, SQLT_CHR);     //same bookid from INSERT
+				oci_bind_by_name($sql,'mydescrption',$m_description,-1,SQLT_CHR);
+				oci_execute($sql);
+				oci_close($con);
+		    }
+		    //If a current book description exists, then update the current one
+		    else{
+				$sql = oci_parse($con, "UPDATE BookDescription SET description = :mydescrption
+				WHERE BOOKID = :mybookid");
+				oci_bind_by_name($sql,'mybookid',$m_bookid,5, SQLT_CHR);     //same bookid from INSERT
+				oci_bind_by_name($sql,'mydescrption',$m_description,-1,SQLT_CHR);
+				oci_execute($sql);
+				oci_close($con);
+			}
+		}
+		 
+	}	
+
+	//Function to replace book images when editing books in editbook.php
+	function BookPost_replacePictureNames($m_bookid,$m_ImageFileName1,$m_ImageFileName2,$m_ImageFileName3)
+	{
+		
+		 $con = makeConnection();
+		 $sql = oci_parse($con, "UPDATE BookPicture SET 
+		 	pic1 = :mypic1,
+		 	pic2 = :mypic2,
+		 	pic3 = :mypic3
+		 	WHERE BOOKID = :mybookid");
+		 oci_bind_by_name($sql,'mybookid',$m_bookid,5, SQLT_CHR);     //same bookid from INSERT
+		 oci_bind_by_name($sql,'mypic1',$m_ImageFileName1,-1,SQLT_CHR);
+		 oci_bind_by_name($sql,'mypic2',$m_ImageFileName2,-1,SQLT_CHR);
+		 oci_bind_by_name($sql,'mypic3',$m_ImageFileName3,-1,SQLT_CHR);
+		 oci_execute($sql);
+		 oci_close($con);
+		
+		
+	}
+
 ?>

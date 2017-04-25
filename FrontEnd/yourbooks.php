@@ -170,7 +170,7 @@ oci_execute($stid);
             echo "</div>";
             echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
             echo "<div class='usertools'>";
-            echo "<a href='/'><img src='images/note.png' alt='Edit ".$row['TITLE']."'></a>";
+            echo "<a href='editbook.php?id=".$bookid."' class='editbook'><img src='images/note.png' alt='Edit ".$row['TITLE']."'></a>";
             echo "<a href='deletebook.php?id=".$bookid."' class='deletebook'><img src='images/trash.png' alt='Delete ".$row['TITLE']."'></a>";
             echo "</div>";
         echo "</li>";
