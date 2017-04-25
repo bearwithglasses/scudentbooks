@@ -1,6 +1,22 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+
+4/23-24/2017
+
+Renee
+		- FrontEnd folder
+			- Updated Navigation bar with the user login/registration/usermenu for most major pages(homepage, allbooks, listing, login, major, profile, ProcessBook, yourbooks, searchpageColumn) except addbook.html
+			- Created 'yourbooks.php', where users can see all their current books and have the ability to edit or delete books. This page is only accesible to users who are logged in.
+			- Created 'deletebook.php' to delete books through te 'yourbooks.php'
+				- Deleting a book will prompt a confirmation before book is deleted
+				- After confirming, book will be deleted and user will be brought back to the updated 'yourbooks.php' page
+			- Created 'editbooks.php' and 'EditBookProcess.php' + Modified 'BookPostSqlFunc.php' to enable editing current books
+				- Copied code from 'BookProcess.php' to make 'EditBookProcess.php' which uses newly created functions located 'BookPostSqlFunc.php'
+				- Added functions "BookPost_replaceValues" and "BookPost_replacePictureNames"
+				- NOTE: Editing books will replace images with default images, so previously uploaded images will be replaced. Will fix this later!
+			- Minor style changes in main.css
+
 4/19/2017
 
 	Winston
