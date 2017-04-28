@@ -53,10 +53,9 @@ oci_execute($stidPic);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books Book Listing Demo</title>
+    <title>SCUdent Books Book Edit Success</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
-    <script src="popups-photos.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -113,6 +112,7 @@ oci_execute($stidPic);
 <!-- Popup Image Demo -->
 
 <div id="popupimage" class="popup">
+    <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
   <img class="popupmessage" id="mainimagepopup">
 </div>
 
@@ -273,13 +273,17 @@ oci_execute($stidPic);
 
             echo '<input type="hidden" name="bookid" value="'.$bookid.'"/>';
 
+            echo '<input type="hidden" name="originalpic1" value="'.$pic1.'"/>';
+            echo '<input type="hidden" name="originalpic2" value="'.$pic2.'"/>';
+            echo '<input type="hidden" name="originalpic3" value="'.$pic3.'"/>';
+
             ?>
         </ul>
         <h4>Book Images</h4>
         <ul>
-            <li><input type="file" name="fileToUpload1" id="fileToUpload"></li>
-            <li><input type="file" name="fileToUpload2" id="fileToUpload"></li>
-            <li><input type="file" name="fileToUpload3" id="fileToUpload"></li>
+            <li><img src="bookimages/<?php echo $pic1 ?>" width="200px" height="200px"><p><input type="file" name="fileToUpload1" id="fileToUpload"></li>
+            <li><img src="bookimages/<?php echo $pic2 ?>" width="200px" height="200px"><p><input type="file" name="fileToUpload2" id="fileToUpload"></li>
+            <li><img src="bookimages/<?php echo $pic3 ?>" width="200px" height="200px"><p><input type="file" name="fileToUpload3" id="fileToUpload"></li>
         </ul>
         <br>
         <div>

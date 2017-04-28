@@ -168,9 +168,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	  $ImageName3 = "blank3.png";
 	
     BookPost_replacePictureNames($bookid,$ImageName1,$ImageName2,$ImageName3);
-    $bookimage1 = "src=\"bookimages/".$ImageName1."\"";
-	$bookimage2 = "src=\"bookimages/".$ImageName2."\"";
-	$bookimage3 = "src=\"bookimages/".$ImageName3."\"";	
+
+    if ($ImageName1 == "blank1.png"){
+    	$ImageName1 = $_POST['originalpic1'];
+    }if ($ImageName2 == "blank2.png"){
+    	$ImageName2 = $_POST['originalpic2'];
+    }if ($ImageName3 == "blank3.png"){
+    	$ImageName3 = $_POST['originalpic3'];
+    }
+
+    $pic1 = $ImageName1;
+	$pic2 = $ImageName2;
+	$pic3 = $ImageName3;	
 
    }
 	//header('Location: thanks.php');
@@ -187,8 +196,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>SCUdent Books Book Listing Demo</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
-    <script src="popups-photos.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="popups-photos.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -241,27 +250,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
+<div id="popupimage" class="popup">
+   <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
+  <img class="popupmessage" id="mainimagepopup">
+</div>
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
+<div class="success">Successfully edited <b><?php echo $_POST['book_title']; ?></b>!<p>
+<a href="addbook.html" class="gobackyourbooks">Go back to Your Books</a></div>
+
 <div id="listing">
     <div class="listingimage">
     <div id="mainimage">
-        <div class="listpic pic bookpic" id="img1"><img <?php echo $bookimage1 ?> onclick="openImage(this)"></div>
-        <div class="listpic pic bookpic" id="img2"><img <?php echo $bookimage2 ?> onclick="openImage(this)"></div>
-        <div class="listpic pic bookpic" id="img3"><img <?php echo $bookimage3 ?> onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img1"><img src="bookimages/<?php echo $pic1 ?>" onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img2"><img src="bookimages/<?php echo $pic2 ?>" onclick="openImage(this)"></div>
+        <div class="listpic pic bookpic" id="img3"><img src="bookimages/<?php echo $pic3 ?>" onclick="openImage(this)"></div>
     </div>
 
         <div class="bookphotonav">
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" <?php echo $bookimage1 ?> style="width:100%" onclick="currentDiv(1)">
+              <img class="opacity opacity-off" src="bookimages/<?php echo $pic1 ?>" style="width:100%" onclick="currentDiv(1)">
             </div>
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" <?php echo $bookimage2 ?> style="width:100%" onclick="currentDiv(2)">
+              <img class="opacity opacity-off" src="bookimages/<?php echo $pic2 ?>" style="width:100%" onclick="currentDiv(2)">
             </div>
             <div class="bookthumbnail">
-              <img class="opacity opacity-off" <?php echo $bookimage3 ?> style="width:100%" onclick="currentDiv(3)">
+              <img class="opacity opacity-off" src="bookimages/<?php echo $pic3 ?>" style="width:100%" onclick="currentDiv(3)">
             </div>
           </div>
     </div>
@@ -292,16 +308,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         echo "<h1>".$_POST['book_title']."</h1>";
         echo "<div class='listingstatus ".$bookstatus."'>".$bookstatusText."</div>";
-        echo "<div class='listinginfotext'>";
-        echo "    <p><b>Seller: </b> <a href='profile.php?username=".$username."'>".$username."</a></p>";
-        echo "    <p><b>Edition: </b>".$bookedition."</p>";
-		echo "    <p><b>Author: </b>".$_POST['book_author']."</p>";
-        echo "    <p><b>ISBN: </b>".$_POST['book_isbn']."</p>";
-        echo "    <p><b>Course Number: </b>".$_POST['book_courseNo']."</p>";
-        echo "    <p><b>Condition: </b>".$_POST['book_condition']."</p>";
+        echo "<div class='listinginfotext'><table>";
+        echo "    <tr><td style='width:30%'><b>Seller: </b> <a href='profile.php?username=".$username."'>".$username."</a></td></tr>";
+        echo "    <tr><td style='width:30%'><b>Edition: </b>".$bookedition."</td></tr>";
+		echo "    <tr><td style='width:30%'><b>Author: </b>".$_POST['book_author']."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>ISBN: </b>".$_POST['book_isbn']."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>Course Number: </b>".$_POST['book_courseNo']."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>Condition: </b>".$_POST['book_condition']."</td></tr>";
 		$postDate = date("d-M-y");
-        echo "    <p><b>Posted: </b>".$postDate."</p>";
-        echo "</div>";
+        echo "    <tr><td style='width:30%'><b>Posted: </b>".$postDate."</td></tr>";
+        echo "</table></div>";
 
         echo "<div class='listingdescription'>";
         echo $description;

@@ -1,10 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+4/28/2017
+	Renee
+		- FrontEnd folder
+			- Updated editing book pages so that previously uploaded images will not be deleted when editing books.
+			- Still need to be able to delete books and fix book previews on the ProcessBook.php files
 
 4/23-24/2017
 
-Renee
+	Renee
 		- FrontEnd folder
 			- Updated Navigation bar with the user login/registration/usermenu for most major pages(homepage, allbooks, listing, login, major, profile, ProcessBook, yourbooks, searchpageColumn) except addbook.html
 			- Created 'yourbooks.php', where users can see all their current books and have the ability to edit or delete books. This page is only accesible to users who are logged in.

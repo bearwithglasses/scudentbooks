@@ -64,8 +64,8 @@ oci_execute($stidPic);
     <title>SCUdent Books Book Listing Demo</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
-    <script src="popups-photos.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="popups-photos.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -133,6 +133,7 @@ oci_execute($stidPic);
 <!-- Popup Image Demo -->
 
 <div id="popupimage" class="popup">
+   <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
   <img class="popupmessage" id="mainimagepopup">
 </div>
 

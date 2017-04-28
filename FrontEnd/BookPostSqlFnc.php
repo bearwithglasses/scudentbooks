@@ -353,8 +353,49 @@ function BookPost_insertValues($m_userid,$m_title,$m_author,$m_edition,$m_purpos
 	function BookPost_replacePictureNames($m_bookid,$m_ImageFileName1,$m_ImageFileName2,$m_ImageFileName3)
 	{
 		
-		 $con = makeConnection();
-		 $sql = oci_parse($con, "UPDATE BookPicture SET 
+		$con = makeConnection();
+
+		$sql3="SELECT * FROM BOOKPICTURE WHERE BOOKID = '$m_bookid'";
+        $stid3 = oci_parse($con, $sql3);
+        oci_execute($stid3);
+
+
+		//Save the picture text to a variable
+        while($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)){
+              $pic1 = $row3['PIC1'];
+              $pic2 = $row3['PIC2'];
+              $pic3 = $row3['PIC3'];
+            }
+        
+
+        if ($m_ImageFileName1 != "blank1.png"){
+			$sql = oci_parse($con, "UPDATE BookPicture SET 
+		 			pic1 = :mypic1
+		 			WHERE BOOKID = :mybookid");
+			oci_bind_by_name($sql,'mybookid',$m_bookid,5, SQLT_CHR); //same bookid from INSERT
+		    oci_bind_by_name($sql,'mypic1',$m_ImageFileName1,-1,SQLT_CHR);
+        oci_execute($sql);
+        }
+        if ($m_ImageFileName2 != "blank2.png"){
+			$sql = oci_parse($con, "UPDATE BookPicture SET 
+		 			pic2 = :mypic2
+		 			WHERE BOOKID = :mybookid");
+			oci_bind_by_name($sql,'mybookid',$m_bookid,5, SQLT_CHR); //same bookid from INSERT
+		    oci_bind_by_name($sql,'mypic2',$m_ImageFileName2,-1,SQLT_CHR);
+        oci_execute($sql);
+        }
+        if ($m_ImageFileName3 != "blank3.png"){
+			$sql = oci_parse($con, "UPDATE BookPicture SET 
+		 			pic3 = :mypic3
+		 			WHERE BOOKID = :mybookid");
+			oci_bind_by_name($sql,'mybookid',$m_bookid,5, SQLT_CHR); //same bookid from INSERT
+		    oci_bind_by_name($sql,'mypic3',$m_ImageFileName3,-1,SQLT_CHR);
+        oci_execute($sql);
+        }
+		oci_close($con);
+
+
+		 /*$sql = oci_parse($con, "UPDATE BookPicture SET 
 		 	pic1 = :mypic1,
 		 	pic2 = :mypic2,
 		 	pic3 = :mypic3
@@ -364,7 +405,7 @@ function BookPost_insertValues($m_userid,$m_title,$m_author,$m_edition,$m_purpos
 		 oci_bind_by_name($sql,'mypic2',$m_ImageFileName2,-1,SQLT_CHR);
 		 oci_bind_by_name($sql,'mypic3',$m_ImageFileName3,-1,SQLT_CHR);
 		 oci_execute($sql);
-		 oci_close($con);
+		 oci_close($con);*/
 		
 		
 	}
