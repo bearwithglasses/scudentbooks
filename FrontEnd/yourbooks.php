@@ -79,7 +79,7 @@ oci_execute($stid);
                 <?php
                 if($_SESSION["user"] == true){
                 echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
-                echo '<li><a href="addbook.html" class="web_link">Sell</a></li>';
+                echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
                 echo '<li><a href="#" class="web_link">Inbox</a></li>';
                 echo '<li>';
                     echo '<span id="usernav">';
@@ -87,7 +87,6 @@ oci_execute($stid);
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
-                    echo '        <a href="#">Settings</a>';
                     echo '        <a href="logout.php">Log Out</a>';
                     echo '</span>';
                 }
@@ -113,8 +112,7 @@ oci_execute($stid);
     <div class="booklist">
     <h1>Your Books</h1>
     <div class="managebooksnav">
-            <a href="addbook.html" class="youraddbook post">Post a New Book</a>
-            <a href="/" class="youraddbook">Delete Books</a>
+            <a href="addbook.php" class="youraddbook post">Post a New Book</a>
     </div>
     <ul>
     <?php

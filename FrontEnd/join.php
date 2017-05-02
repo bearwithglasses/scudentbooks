@@ -45,20 +45,18 @@ if(!isset($_SESSION["user"])){
 
             <nav>
             <ul class="navlinks" id="mainNav">
-                <li><a href="#" class="web_link">Home</a></li>
-                <li><a href="addbook.html" class="web_link">Sell</a></li>
-                <li><a href="#" class="web_link">Inbox</a></li>
-                <li>
                 <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
                 <?php
                 if($_SESSION["user"] == true){
-
+                echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
+                echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
+                echo '<li><a href="#" class="web_link">Inbox</a></li>';
+                echo '<li>';
                     echo '<span id="usernav">';
                     echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
                     echo '      <div id="userlinks" class="dropdownnav">';
-                    echo '        <a href="#">Your Profile</a>';
-                    echo '        <a href="#">Manage Books</a>';
-                    echo '        <a href="#">Settings</a>';
+                    echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
+                    echo '        <a href="yourbooks.php">Manage Books</a>';
                     echo '        <a href="logout.php">Log Out</a>';
                     echo '</span>';
                 }
@@ -67,7 +65,6 @@ if(!isset($_SESSION["user"])){
                     echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
                 }
                 ?>
-                </li>
             </ul>
             </nav>
         </div>

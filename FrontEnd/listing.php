@@ -92,7 +92,7 @@ oci_execute($stidPic);
                 <?php
                 if($_SESSION["user"] == true){
                 echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
-                echo '<li><a href="addbook.html" class="web_link">Sell</a></li>';
+                echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
                 echo '<li><a href="#" class="web_link">Inbox</a></li>';
                 echo '<li>';
                     echo '<span id="usernav">';

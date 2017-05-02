@@ -83,7 +83,7 @@ oci_execute($stidPic);
                 <?php
                 if($_SESSION["user"] == true){
                 echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
-                echo '<li><a href="addbook.html" class="web_link">Sell</a></li>';
+                echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
                 echo '<li><a href="#" class="web_link">Inbox</a></li>';
                 echo '<li>';
                     echo '<span id="usernav">';
@@ -91,7 +91,6 @@ oci_execute($stidPic);
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
-                    echo '        <a href="#">Settings</a>';
                     echo '        <a href="logout.php">Log Out</a>';
                     echo '</span>';
                 }
