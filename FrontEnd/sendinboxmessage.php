@@ -1,4 +1,5 @@
 <?php
+//include 'header.php';
 session_start();
 ini_set('display_errors','On');
 error_reporting(E_ALL);
@@ -17,43 +18,41 @@ else
     exit;
 }
 
+if(!isset($_SESSION["user"])){
+    //header('Location: login.php');
+    //die();
+    $_SESSION["user"] = false;
+}
+
 //Referenced code for generating random 5 digit alphanumeric string: http://stackoverflow.com/questions/48124/generating-pseudorandom-alpha-numeric-strings
 $available = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-$subjectid = '';
 $messageid = '';
 $max = strlen($available) - 1;
 for ($i = 0; $i < 5; $i++)
 {
-    $subjectid .= $available[mt_rand(0, $max)];
     $messageid .= $available[mt_rand(0, $max)];
 }
 
 //Referenced code for inserting values into sql table and sanitizing them to prevent sql injections:
 //http://stackoverflow.com/questions/2119145/inserting-data-in-oracle-database-using-php
-$book_title = $_POST['book_title'];
 $message = $_POST['message'];
-$userid1 = $_POST['userid1'];
-$userid2 = $_POST['userid2'];
+$subjectid = $_POST['subjectid'];
+$useridCreator = $_POST['useridCreator'];
 $username = $_POST['username'];
 
 //If the form submitted, run the SQL statement
 if (isset($_REQUEST["submitted"]))
 {           
-    $sql1 = "INSERT INTO Subject (subjectid, subject, subjectDate, userid1, userid2) VALUES ('$subjectid', :book_title, SYSDATE, :userid1, :userid2)";
-    $sql2 = "INSERT INTO Message (messageid, subjectid, userid, messageDate, body) VALUES ('$messageid', '$subjectid', :userid1, SYSDATE, :message)";
+    $sql1 = "INSERT INTO Message (messageid, subjectid, userid, messageDate, body) VALUES ('$messageid', :subjectid, :useridCreator, SYSDATE, :message)";
     
     $sql_statement1 = oci_parse($conn, $sql1);
-    $sql_statement2 = oci_parse($conn, $sql2);
 
     //Sanitizing them to prevent sql injections
-    oci_bind_by_name($sql_statement1, 'book_title', $book_title);
-    oci_bind_by_name($sql_statement1, 'userid1', $userid1);
-    oci_bind_by_name($sql_statement1, 'userid2', $userid2);
-    oci_bind_by_name($sql_statement2, 'userid1', $userid1);
-    oci_bind_by_name($sql_statement2, 'message', $message);
+    oci_bind_by_name($sql_statement1, 'subjectid', $subjectid);
+    oci_bind_by_name($sql_statement1, 'useridCreator', $useridCreator);
+    oci_bind_by_name($sql_statement1, 'message', $message);
 
     oci_execute($sql_statement1);
-    oci_execute($sql_statement2);
     oci_close($conn);
 }
 ?>
@@ -107,7 +106,7 @@ if (isset($_REQUEST["submitted"]))
     <div class="returnHome">
         <h1>Message Sent to <b><?php echo $username ?></b>!</h1>
         <form>
-            <input type="button" id="returnProfileButton" onclick="window.location.href='profile.php?username=<?php echo $username ?>';" value="Back to Profile">
+           <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>" class="web_link">Back to Inbox</a>
         </form>
     </div>
 </div>

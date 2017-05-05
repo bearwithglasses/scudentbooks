@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $count = oci_num_rows($sql_statement);
         if ($count == 1)
             {
-                $_SESSION['user'] = true;
+                $_SESSION['user'] = true; //Sets user login session as true
                 $_SESSION['username'] = $username;   //Added by CC... important for ADD BOOK to get userid from userinfo
                 //$errorMessage = "Correct Login.";
                 header('Location: homepage.php');

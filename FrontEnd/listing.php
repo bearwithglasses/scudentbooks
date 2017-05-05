@@ -9,11 +9,15 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
-
-if(!isset($_SESSION["user"])){
-    //header('Location: login.php');
-    //die();
-    $_SESSION["user"] = false;
+if ($_SESSION["user"])
+{
+    $usernameCreator = $_SESSION['username'];
+}
+else
+{
+    header('Location: login.php');
+    die();
+    //$_SESSION["user"] = false;
 }
 
 $bookid = $_GET["id"]; //Get the bookid from the URL
@@ -52,6 +56,16 @@ oci_execute($stid);
 $sqlPic="SELECT * FROM BOOKPICTURE WHERE BOOKID = '$bookid'";
 $stidPic = oci_parse($con, $sqlPic);
 oci_execute($stidPic);
+
+//Get user id of logged in user
+$sql4 = "SELECT * FROM UserInfo WHERE username = '$usernameCreator'";
+$stid4 = oci_parse($con, $sql4);
+oci_execute($stid4);
+
+while ($row4 = oci_fetch_array($stid4, OCI_ASSOC+OCI_RETURN_NULLS))
+{
+    $useridCreator = $row4['USERID'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,11 +75,12 @@ oci_execute($stidPic);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books Book Listing Demo</title>
+    <title>SCUdent Books Book Listing</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="popups-photos.js"></script>
+    <script src="messagewarning.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -121,11 +136,16 @@ oci_execute($stidPic);
 <!-- Popup Message Demo -->
 <div id="popupbox" class="popup">
     <div class="popupmessage">
-    <form action="#" id="messageform" method="post" name="form">
+    <form action="sendmessage.php" id="messageform" method="post" name="form">
         <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
         <h2>Send a Message to <b><?php echo $username ?></b> about <b><?php echo $booktitle ?></b></h2>
+        <input type="text" id="subject" name="book_title" value="Message about <?php echo $booktitle ?>">
         <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
-        <input type="button" class="button" id="sendmessage" value="Send Message">
+        <input type="hidden" name="submitted" value="true"/>
+        <input type="hidden" id="userid1" name="userid1" value="<?php echo $useridCreator ?>">
+        <input type="hidden" id="userid2" name="userid2" value="<?php echo $userid ?>">
+        <input type="hidden" id="username" name="username" value="<?php echo $username ?>">
+        <input type="submit" class="button" id="sendmessage" value="Send Message" onclick="return sendMessage();">
     </form>
     </div>
 </div>
