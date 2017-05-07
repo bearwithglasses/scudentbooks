@@ -83,15 +83,31 @@ if (isset($_REQUEST["submitted"]))
                 <span class="searchicon"><i></i></span>
                 <input type="text" name="search" placeholder="Search...">
                 <input type="button" class="button" value="Search">
-                <a href="/" class="advancedsearch">Advanced</a>
+                <a href="searchpageColumn.php" class="advancedsearch">Advanced</a>
             </form>
 
             <nav>
             <ul class="navlinks" id="mainNav">
-                <li><a href="#" class="web_link">Home</a></li>
-                <li><a href="#" class="web_link">Sell</a></li>
-                <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link">You</a></li>
+                <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
+                <?php
+                if($_SESSION["user"] == true){
+                echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
+                echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
+                echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
+                echo '<li>';
+                    echo '<span id="usernav">';
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo '      <div id="userlinks" class="dropdownnav">';
+                    echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
+                    echo '        <a href="yourbooks.php">Manage Books</a>';
+                    echo '        <a href="logout.php">Log Out</a>';
+                    echo '</span>';
+                }
+                else{
+                    echo '<li><a href="join.php" class="web_link registerlink">Register</a></li>';
+                    echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
+                }
+                ?>
             </ul>
             </nav>
         </div>

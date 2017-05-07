@@ -102,15 +102,31 @@ while ($rowUser2 = oci_fetch_array($stidUser2, OCI_ASSOC+OCI_RETURN_NULLS))
                 <span class="searchicon"><i></i></span>
                 <input type="text" name="search" placeholder="Search...">
                 <input type="button" class="button" value="Search">
-                <a href="/" class="advancedsearch">Advanced</a>
+                <a href="searchpageColumn.php" class="advancedsearch">Advanced</a>
             </form>
 
             <nav>
             <ul class="navlinks" id="mainNav">
-                <li><a href="#" class="web_link">Home</a></li>
-                <li><a href="#" class="web_link">Sell</a></li>
-                <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link"><?php echo $username ?></a></li>
+                <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
+                <?php
+                if($_SESSION["user"] == true){
+                echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
+                echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
+                echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
+                echo '<li>';
+                    echo '<span id="usernav">';
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo '      <div id="userlinks" class="dropdownnav">';
+                    echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
+                    echo '        <a href="yourbooks.php">Manage Books</a>';
+                    echo '        <a href="logout.php">Log Out</a>';
+                    echo '</span>';
+                }
+                else{
+                    echo '<li><a href="join.php" class="web_link registerlink">Register</a></li>';
+                    echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
+                }
+                ?>
             </ul>
             </nav>
         </div>
@@ -122,17 +138,7 @@ while ($rowUser2 = oci_fetch_array($stidUser2, OCI_ASSOC+OCI_RETURN_NULLS))
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
-
     <h1>Inbox</h1>
-
-<div id="inboxsidebar">
-    <ul>
-       <li><a href="/" class="minorbutton inboxtypes">All</a></li>
-       <li><a href="/" class="minorbutton inboxtypes">Sent</a></li>
-       <li><a href="/" class="minorbutton inboxtypes">Recieved</a></li>
-    </ul>
-</div>
-
 <div id="profile">
     <div class="backtoinbox">
         <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>"><- Back to Inbox</a>
@@ -181,7 +187,9 @@ while ($rowUser2 = oci_fetch_array($stidUser2, OCI_ASSOC+OCI_RETURN_NULLS))
                 echo "<div class='messageuser'>".$user."</div>";
                 if (!EMPTY($row['BODY'])) //Avoid crashing on empty body
                 {
+                    echo "<div class='messagebody'>";
                     echo "<pre>".$body."</pre>";
+                    echo "</div>";
                 }
             echo "</div>";
         }

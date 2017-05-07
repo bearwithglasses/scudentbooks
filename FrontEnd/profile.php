@@ -92,7 +92,7 @@ while ($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
                 if($_SESSION["user"] == true){
                 echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
                 echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
-                echo '<li><a href="#" class="web_link">Inbox</a></li>';
+                echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
                     echo '    <button onclick="myFunction()" id="userdropdown">You</button>';

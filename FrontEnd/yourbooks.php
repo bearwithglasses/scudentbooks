@@ -47,7 +47,7 @@ oci_execute($stid);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books User Profile Demo</title>
+    <title>SCUdent Books User Profile</title>
     <script src="main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css" />
@@ -80,7 +80,7 @@ oci_execute($stid);
                 if($_SESSION["user"] == true){
                 echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
                 echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
-                echo '<li><a href="#" class="web_link">Inbox</a></li>';
+                echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
                     echo '    <button onclick="myFunction()" id="userdropdown">You</button>';

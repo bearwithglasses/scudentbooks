@@ -83,15 +83,31 @@ oci_execute($stid2);
                 <span class="searchicon"><i></i></span>
                 <input type="text" name="search" placeholder="Search...">
                 <input type="button" class="button" value="Search">
-                <a href="/" class="advancedsearch">Advanced</a>
+                <a href="searchpageColumn.php" class="advancedsearch">Advanced</a>
             </form>
 
             <nav>
             <ul class="navlinks" id="mainNav">
-                <li><a href="#" class="web_link">Home</a></li>
-                <li><a href="#" class="web_link">Sell</a></li>
-                <li><a href="#" class="web_link">Inbox</a></li>
-                <li><a href="#" class="web_link"><?php echo $username ?></a></li>
+                <!-- Shows user navigation if logged in. Otherwise, shows a 'log in' button -->
+                <?php
+                if($_SESSION["user"] == true){
+                echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
+                echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
+                echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
+                echo '<li>';
+                    echo '<span id="usernav">';
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo '      <div id="userlinks" class="dropdownnav">';
+                    echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
+                    echo '        <a href="yourbooks.php">Manage Books</a>';
+                    echo '        <a href="logout.php">Log Out</a>';
+                    echo '</span>';
+                }
+                else{
+                    echo '<li><a href="join.php" class="web_link registerlink">Register</a></li>';
+                    echo '<li><a href="login.php" class="web_link loginlink">Log In</a></li>';
+                }
+                ?>
             </ul>
             </nav>
         </div>
@@ -101,27 +117,13 @@ oci_execute($stid2);
         </div>
     </div>
 
-<!-- Popup Message Demo -->
-<div id="popupbox" class="popup">
-    <div class="popupmessage">
-    <form action="#" id="messageform" method="post" name="form">
-        <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
-        <h2>Send a Message to <b><?php echo $username ?></b></h2>
-        <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
-        <input type="button" class="button" id="sendmessage" value="Send Message">
-    </form>
-    </div>
-</div>
-
-
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
 <div id="profile">
     <h1>Inbox</h1>
-
     <div class="backtoinbox">
-        <a href="/"><- Back to Inbox</a>
+        <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>"><- Back to Inbox</a>
     </div>
 <div class="inboxfilters">
     <form action="inbox-search.php?username=<?php echo $_SESSION['username'] ?>" class="searchbar" method="post" name="form">
@@ -135,7 +137,7 @@ oci_execute($stid2);
         <option value="Used">Oldest to Newest</option>
     </select> -->
     <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>" class="minorbutton inboxfilterbutton">Newest to Oldest</a>
-    <a href="inbox-old-to-new.php?username=<?php echo $_SESSION['username'] ?>" class="minorbutton inboxfilterbutton">Oldest to Newest</a>
+    <a href="inbox-old-to-new.php?username=<?php echo $_SESSION['username'] ?>" id="activated" class="minorbutton inboxfilterbutton">Oldest to Newest</a>
     <a href="inbox-user.php?username=<?php echo $_SESSION['username'] ?>" class="minorbutton inboxfilterbutton">Group by User</a>
  </div>
     <?php

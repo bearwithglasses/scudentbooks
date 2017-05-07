@@ -135,7 +135,7 @@ button, input[type=submit]{
 }
 
 .minorbutton{
-    background-color: lightgray;
+    background-color: #e6e6e6;
     border: none;
     color: black;
     padding: 10px 20px;
@@ -151,6 +151,14 @@ button, input[type=submit]{
     background-color: darkgrey;
     cursor: pointer;
     text-decoration: none;
+}
+
+#activated {
+    background-color: #bfbfbf;
+}
+
+#activated:hover {
+    background-color: darkgray;
 }
 
 /******************** Logo and Navigation ********************************/

@@ -36,7 +36,7 @@ oci_execute($stid2);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books Home Demo</title>
+    <title>SCUdent Books Home</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <script src="https://use.fontawesome.com/29dce5faae.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
