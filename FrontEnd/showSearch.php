@@ -8,8 +8,8 @@ function showSearchResults()
 	oci_execute($stid);
 	
 		//got rid of <th>BOOKID</th>
-    	echo "<h1>BOOKPOST table</h1><p><table border='1'>
-			<tr>
+    	//echo "<h1>BOOKPOST table</h1><p><table border='1'>
+		echo "<p><table border='1'><tr>
 			<th>TITLE</th>
 			<th>AUTHOR</th>
 			<th>EDITION</th>
@@ -85,7 +85,7 @@ function showSearchResults()
 			}
 			}
 			if ($bfound) {
-				$hrefMessage = "href=\"contactSearch.php?selected=" . $row['BOOKID'] . "\">" . $row['TITLE'];
+				$hrefMessage = "href=\"listing.php?id=" . $row['BOOKID'] . "\">" . $row['TITLE'];
 				echo "<tr>";
 				//echo "<td>" . $row['BOOKID'] . "</td>";
 				echo "<td><a " . $hrefMessage . "</a></td>";
