@@ -8,8 +8,9 @@ function showSearchResults()
 	oci_execute($stid);
 	
 		//got rid of <th>BOOKID</th>
-    	//echo "<h1>BOOKPOST table</h1><p><table border='1'>
-		echo "<p><table border='1'><tr>
+    	/*
+    	echo "<h1>BOOKPOST table</h1><p><table border='1'>
+			<tr>
 			<th>TITLE</th>
 			<th>AUTHOR</th>
 			<th>EDITION</th>
@@ -19,6 +20,7 @@ function showSearchResults()
 			<th>COURSENUMBER</th>
 			<th>CONDITION</th>
 			</tr>";
+		*/
 
 		while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS))
 		{
@@ -85,7 +87,68 @@ function showSearchResults()
 			}
 			}
 			if ($bfound) {
-				$hrefMessage = "href=\"listing.php?id=" . $row['BOOKID'] . "\">" . $row['TITLE'];
+			
+				if($row['STATUS'] == "available" && $row['PURPOSE'] == "sell"){
+                    $bookstatus = "buy";
+                    $bookstatusText = "$".$row['PRICE'];
+                    $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
+                    $booklinkend = "</a>";
+                }
+                if($row['STATUS'] == "available" && $row['PURPOSE'] == "swap"){
+                    $bookstatus = "swap";
+                    $bookstatusText = "For Swap";
+                    $booklink = "<a href='listing.php?id=".$row['BOOKID']."'>";
+                    $booklinkend = "</a>";
+                }
+                if($row['STATUS'] == "sale pending"){
+                    $bookstatus = "pending";
+                    $bookstatusText = "Sale Pending";
+                    $booklink = "";
+                    $booklinkend = "";
+                }
+			
+				// Get user info based on the userid from the books
+                $userid = $row['USERID'];
+                $sql2 = "SELECT * FROM USERINFO WHERE USERID = '$userid'";
+                $stid2 = oci_parse($con, $sql2);
+                oci_execute($stid2);
+
+                // Save user data to variables
+                while($row2 = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)){
+                    $username = $row2['USERNAME'];
+                    $location = $row2['LOCATION'];
+                    $date = $row['POSTDATE'];
+                    $bookid = $row['BOOKID'];
+                    $author = $row['AUTHOR']->load();
+                }
+
+				//$bookid = $row['BOOKID'];
+				$pic1 = "blank1.png";
+                //Set up the sql statement to be used later in the code to get the book pictures
+                $sql3 = "SELECT * FROM BOOKPICTURE WHERE BOOKID = '$bookid'";
+                $stid3 = oci_parse($con, $sql3);
+                oci_execute($stid3);
+
+                //Save the picture text to a variable
+                while($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS)) {
+                    if ($row3['PIC1'] != NULL){
+                        $pic1 = $row3['PIC1'];
+                    }
+                    else{
+                        $pic1 = "blank1.png";
+                    }
+                }
+			 	echo "<li>";        
+                    echo "<div class='listusername'><a href='profile.php?username=".$username."'>".$username."</a></div>";
+                    echo "<div class='location'>".$location."</div>";    
+                    echo "<div class='listpic pic'><a href='listing.php?id=".$bookid."'><img src='bookimages/".$pic1."'></a></div>";
+                    echo "<div class='listtitle'><a href='listing.php?id=".$bookid."'>".$row['TITLE']."</a></div>";
+                    echo "<div class='bookinfo'>Author: ". $author ."<br>".$date;
+                    echo "</div>";
+                    echo "<div class='buybutton ".$bookstatus."'>".$booklink.$bookstatusText.$booklinkend."</div>";
+                echo "</li>";
+                
+				/*$hrefMessage = "href=\"contactSearch.php?selected=" . $row['BOOKID'] . "\">" . $row['TITLE'];
 				echo "<tr>";
 				//echo "<td>" . $row['BOOKID'] . "</td>";
 				echo "<td><a " . $hrefMessage . "</a></td>";
@@ -98,6 +161,7 @@ function showSearchResults()
 				echo "<td>" . $row['COURSENUMBER'] . "</td>";
 				echo "<td>" . $row['CONDITION'] . "</td>";
 				echo "</tr>";
+				*/
 			}
 		}	
 		echo "</table>";
