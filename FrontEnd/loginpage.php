@@ -79,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 <!-- Navigation -->
     <div id="login_nav">
-        <header>
-            <div id="login_logo"><a href="homepage.php"><img alt="eCampus logo" src="images/eCampusLogo.png"></a></div>
+         <header id="logo">
+            <div id="logo"><a href="homepage.php"><img alt="SCUdentBooks logo" src="images/logo.png"></a></div>
         </header>
     </div>
 

@@ -266,16 +266,14 @@
 
 <!-- Navigation -->
     <div class="web_nav">
-        <header class="logo">
-            <div id="logo"><a href="homepage.html"><img alt="eCampus logo" src="images/eCampusLogo.png"></a></div>
+        <header id="logo">
+            <div id="logo"><a href="homepage.php"><img alt="SCUdentBooks logo" src="images/logo.png"></a></div>
         </header>
 
-        <form class="searchbar">
-            <span class="searchicon"><i></i></span>
-            <input type="text" name="search" placeholder="Search...">
-            <input type="button" class="button" value="Search">
-            <a href="/" class="advancedsearch">Advanced</a>
-        </form>
+        <div id="links">
+            <form class="searchbar">
+                <a href="searchpageColumn.php" class="advancedsearch">Search for Books</a>
+            </form>
 
         <nav>
         <ul class="navlinks">
