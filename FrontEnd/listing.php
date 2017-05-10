@@ -150,8 +150,8 @@ while ($row4 = oci_fetch_array($stid4, OCI_ASSOC+OCI_RETURN_NULLS))
 <!-- Popup Image Demo -->
 
 <div id="popupimage" class="popup">
-   <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
-  <img class="popupmessage" id="mainimagepopup">
+    <div id="closemessage2" value="Close Message"><img src="images/close.png"></div>
+    <img class="popupmessage" id="mainimagepopup">
 </div>
 
 <!-- Container that holds Main and Side divs -->
@@ -250,7 +250,7 @@ while ($row4 = oci_fetch_array($stid4, OCI_ASSOC+OCI_RETURN_NULLS))
         echo "    <tr><td style='width:30%'><b>Edition:</b></td><td>".$bookedition."</td></tr>";
         echo "    <tr><td style='width:30%'><b>Author:</b></td><td>".$row['AUTHOR']->load()."</td></tr>";
         echo "    <tr><td style='width:30%'><b>ISBN:</b></td><td>".$row['ISBN']."</td></tr>";
-        echo "    <tr><td style='width:30%'><b>Course Number:</b></td><td>".$row['COURSENUMBER']."</td></tr>";
+        echo "    <tr><td style='width:30%'><b>Course:</b></td><td>".$row['MAJOR']." ".$row['COURSENUMBER']."</td></tr>";
         echo "    <tr><td style='width:30%'><b>Condition:</b></td><td>".$row['CONDITION']."</td></tr>";
         echo "    <tr><td style='width:30%'><b>Posted:</b></td><td>".$row['POSTDATE']."</td></tr>";
         echo "</table></div>";

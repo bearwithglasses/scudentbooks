@@ -9,15 +9,11 @@ $db_pass = "winstonchang";
 $db_name = "STUDENTBOOKS";
 $con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
 
-if ($_SESSION["user"])
-{
-    $usernameCreator = $_SESSION['username'];
-}
-else
-{
-    header('Location: login.php');
-    die();
-    //$_SESSION["user"] = false;
+
+if(!isset($_SESSION["user"])){
+    //header('Location: login.php');
+    //die();
+    $_SESSION["user"] = false;
 }
 
 $username = $_GET["username"];
@@ -39,16 +35,6 @@ oci_execute($stid2);
 $stid = oci_parse($con, $sql);
 oci_execute($stid);
 
-//Get user id of logged in user
-$sql3 = "SELECT * FROM UserInfo WHERE username = '$usernameCreator'";
-$stid3 = oci_parse($con, $sql3);
-oci_execute($stid3);
-
-while ($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
-{
-    $useridCreator = $row3['USERID'];
-}
-
 ?>
 
 
@@ -59,10 +45,9 @@ while ($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books User Profile</title>
+    <title>SCUdent Books User Profile Demo</title>
     <script src="main.js"></script>
-    <script src="messagewarning.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -74,7 +59,7 @@ while ($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
 <!-- Navigation -->
     <div id="web_nav">
         <header id="logo">
-            <div id="logo"><a href="homepage.php"><img alt="SCUdentBooks logo" src="images/logo.png"></a></div>
+            <div id="logo"><a href="homepage.php"><img alt="eCampus logo" src="images/logo.png"></a></div>
         </header>
 
         <div id="links">
@@ -89,10 +74,10 @@ while ($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
                 if($_SESSION["user"] == true){
                 echo '<li><a href="homepage.php" class="web_link">Home</a></li>';
                 echo '<li><a href="addbook.php" class="web_link">Sell</a></li>';
-                echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
+                echo '<li><a href="#" class="web_link">Inbox</a></li>';
                 echo '<li>';
                     echo '<span id="usernav">';
-                    echo "    <button onclick='myFunction()' id='userdropdown'>".$_SESSION['username']."</button>";
+                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
@@ -116,26 +101,23 @@ while ($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
 <!-- Popup Message Demo -->
 <div id="popupbox" class="popup">
     <div class="popupmessage">
-    <form action="sendmessage.php" id="messageform" method="post" name="form">
+    <form action="#" id="messageform" method="post" name="form">
         <div id="closemessage" value="Close Message"><img src="images/close.png"></div>
         <h2>Send a Message to <b><?php echo $username ?></b></h2>
-        <input type="text" id="subject" name="book_title" placeholder="Subject">
+        <label></label><input type="text" name="book_title" placeholder="Message Title">
         <textarea id="messagebox" name="message" placeholder="Write your message here"></textarea>
-        <input type="hidden" name="submitted" value="true"/>
-        <input type="hidden" id="userid1" name="userid1" value="<?php echo $useridCreator ?>">
-        <input type="hidden" id="userid2" name="userid2" value="<?php echo $userid ?>">
-        <input type="hidden" id="username" name="username" value="<?php echo $username ?>">
-        <input type="submit" class="button" id="sendmessage" value="Send Message" onclick="return sendMessage();">
+        <input type="button" class="button" id="sendmessage" value="Send Message">
     </form>
     </div>
 </div>
+
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
 
 <div id="profile">
     <div class="profileimage">
-        <div class="listpic pic"><img src="images/500px.png"></div>
+            <img src="images/usericon1.png">
     </div>
 
     <!--Display the User information-->
@@ -145,11 +127,13 @@ while ($row3 = oci_fetch_array($stid3, OCI_ASSOC+OCI_RETURN_NULLS))
 
         <?php
         while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)){
-			echo "<p><b>Major:</b> " . $row['MAJOR1'] . "</p>";
-			echo "<p><b>Year:</b> " . $row['YEAR'] . "</p>";
-			echo "<p><b>Location:</b> " . $row['LOCATION'] . "</p>";
-			echo "</tr>";
-			}
+            //Display user information
+            echo "<div class='listinginfotext'><table>";
+            echo "    <tr><td style='width:20%'><b>Major:</b></td><td>".$row['MAJOR1']."</td></tr>";
+            echo "    <tr><td style='width:20%'><b>Year:</b></td><td>".$row['YEAR']."</td></tr>";
+            echo "    <tr><td style='width:20%'><b>Location:</b></td><td>".$row['LOCATION']."</td></tr>";
+            echo "</table></div>";
+            }
         ?>
 
         </div>

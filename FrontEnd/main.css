@@ -30,9 +30,42 @@ header {
 h1, h2, h3{
     color: #BF3939;
     font-family: 'Montserrat', Calibri;
-    border-bottom: 2px solid #BF3939;
-    padding: 10px 0;
+    border-bottom: 3px solid #BF3939;
+    padding: 5px 0;
     margin-top: -10px;
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /******************** Basic Input Styling ********************************/
@@ -73,6 +106,13 @@ select{
 
 
 #closemessage{
+    float: right;
+    margin-right: -100px;
+    margin-top: -80px;
+    cursor: pointer;
+}
+
+#closemessage2{
     float: right;
     margin-right: -100px;
     margin-top: -80px;
@@ -135,7 +175,7 @@ button, input[type=submit]{
 }
 
 .minorbutton{
-    background-color: #e6e6e6;
+    background-color: lightgray;
     border: none;
     color: black;
     padding: 10px 20px;
@@ -153,25 +193,17 @@ button, input[type=submit]{
     text-decoration: none;
 }
 
-#activated {
-    background-color: #bfbfbf;
-}
-
-#activated:hover {
-    background-color: darkgray;
-}
-
 /******************** Logo and Navigation ********************************/
 
 #logo{
     display: inline-block;
-    margin: 0 10px 0 0;
+    margin: -10px 20px 0 10px;
     float:left;
 }
 
 #web_nav {
     background-color: white;
-    padding: 30px;
+    padding: 50px 30px 30px 30px;
     width: 100%;
     border-bottom: 1px solid #C4C4C4;
 }
@@ -247,6 +279,10 @@ a.web_link:hover {
     background-color: #EDEBE4;
     height: 200px;
     margin: 0 -30px 20px -30px;
+    animation: fadein 1;
+    -moz-animation: fadein 1s; /* Firefox */
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    -o-animation: fadein 1s; /* Opera */
 }
 
 .welcometext{
@@ -262,11 +298,12 @@ a.web_link:hover {
     font-size: 1.3em;
 }
 
+
 /******************** Book Category Styling ********************************/
 
 .bookcategories ul{
     list-style: none;
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
     overflow: auto;
     text-align: center;
 }
@@ -284,7 +321,7 @@ a.web_link:hover {
 
 .categories li{
     display: inline-block;
-    width: 20%;
+    width: 10%;
     margin: 10px 20px 10px 0;
 }
 
@@ -304,14 +341,28 @@ a.web_link:hover {
 
 .categories li:nth-child(1n){
     background-color: #BF3939;
+    animation: fadein 3 linear;
+    -moz-animation: fadein 3s; /* Firefox */
+    -webkit-animation: fadein 3s; /* Safari and Chrome */
+    -o-animation: fadein 3s; /* Opera */
 }
 
 .categories li:nth-child(2n){
     background-color: #96CED9;
+    animation-delay: 1s;
+    animation: fadein 1 linear;
+    -moz-animation: fadein 1s; /* Firefox */
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    -o-animation: fadein 1s; /* Opera */
 }
 
 .categories li:nth-child(3n){
+    animation-delay: 2s;
     background-color: #E8D066;
+    animation: fadein 1 linear;
+    -moz-animation: fadein 1s; /* Firefox */
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    -o-animation: fadein 1s; /* Opera */
 }
 
 .categories li a:hover{
@@ -327,6 +378,10 @@ a.web_link:hover {
     margin: 0 auto;
     overflow: auto;
     text-align: center;
+    animation: fadein 1;
+    -moz-animation: fadein 1s; /* Firefox */
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    -o-animation: fadein 1s; /* Opera */
 }
 
 .booklist ul a{
@@ -345,6 +400,7 @@ a.web_link:hover {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     margin: 10px 20px 10px 0;
+    min-height: 300px;
 }
 
 
@@ -403,10 +459,11 @@ a.web_link:hover {
 
 
 .listtitle{
-    font-family: 'Montserrat', Calibri;
+    font-family: 'Open Sans', Calibri;
     letter-spacing: -1px;
     font-size: 1.7em;
     margin: 10px 0;
+    font-weight: bold;
 }
 
 .bookinfo{
@@ -429,7 +486,7 @@ a.web_link:hover {
   max-height: 400px;
   max-width: 400px;
   overflow: hidden;
-  margin: 20px 0;
+  margin: 20px auto;
 }
 
 .listpic img{
@@ -471,6 +528,10 @@ a.web_link:hover {
     display: inline-block;
     float: left;
 }
+
+.radio{
+    margin-left: 210px;
+}
 #divError {
     color: red;
     font-weight: bold;
@@ -485,16 +546,31 @@ legend{
 .loginForm{
     width: 30%;
     margin: auto;
+    animation: fadein 1;
+    -moz-animation: fadein 1s; /* Firefox */
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    -o-animation: fadein 1s; /* Opera */
+    
+}
+
+.loginForm input{
+    width: 100%;
 }
 
 #login_logo, header{
-    margin: 10px auto;
+    margin: 30px auto;
     text-align: center;
+}
+
+#login_nav #logo{
+    margin: 20px auto;
+    clear: both;
+    float: none;
 }
 
 #login_nav {
     background-color: white;
-    padding: 30px;
+    text-align: center;
     width: 100%;
 }
 
@@ -502,6 +578,13 @@ legend{
     width: 100%;
     margin-top: -10px;
 }
+
+#joinButton{
+    width: 100%;
+    padding: 10px 0;
+}
+
+
 
 
 /******************** Search Page Styling ********************************/

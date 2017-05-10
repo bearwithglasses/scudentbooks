@@ -75,7 +75,7 @@ if(!isset($_SESSION["user"])){
 <div id="container">
     <div class="registrationForm form">
         <form id="registration" action="joinsuccess.php" method="post">
-            <h1>Sign Up to Become a Member here</h1>
+            <h1>Become a SCUdent Member!</h1>
             <p><img style='margin-left:5px;' src="images/asterisk.png" alt="*"> Required Field</p>
             <div id="formRegister">
                 <ul>
@@ -370,7 +370,6 @@ if(!isset($_SESSION["user"])){
                         <label for="minor2">Minor:</label>
                         <select name="minor2" id="minor2" size="11">
                             <option selected="selected" value="">Select a minor</option>
-                            <option selected="selected" value="">Select a minor</option>
                             <option value="Aerospace Engineering"></option>
                             <option value="Ancient Studies">Ancient Studies</option>
                             <option value="Anthropology">Anthropology</option>
@@ -429,7 +428,6 @@ if(!isset($_SESSION["user"])){
                     <li>
                         <label for="minor3">Minor:</label>
                         <select name="minor3" id="minor3" size="11">
-                            <option selected="selected" value="">Select a minor</option>
                             <option selected="selected" value="">Select a minor</option>
                             <option value="Aerospace Engineering"></option>
                             <option value="Ancient Studies">Ancient Studies</option>
@@ -510,7 +508,7 @@ if(!isset($_SESSION["user"])){
                     </li>
                 </ul>
                 <input type="hidden" name="submitted" value="true"/>
-                <input type="submit" id="submitButton" value="Submit" onclick="submission()">
+                <input type="submit" id="joinButton" value="Create Account" onclick="submission()">
             </div>
         </form>
     </div>

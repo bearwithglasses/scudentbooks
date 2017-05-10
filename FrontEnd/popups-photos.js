@@ -5,6 +5,7 @@ var modal = document.getElementById("popupbox"); //Get the popup box for sending
 var modalimage = document.getElementById("popupimage"); //Get the popup box for book images
 var open = document.getElementById("messagebutton"); //Get the button that opens the popup ("Send Message")
 var close = document.getElementById("closemessage"); //Get the button that closes the popup ("Close Message")
+var close2 = document.getElementById("closemessage2"); //Get the button that closes the popup ("Close Message")
 
 // Photos
 // When clicking on the main image in the book listing, have the full view pop up
@@ -18,18 +19,24 @@ function openImage(element) {
 open.onclick = function() {
     modal.style.display = "block";
 }
-// When a user clicks on the close button, open the modal
+// When a user clicks on the close button, close the modal
 close.onclick = function() {
-    modal.style.display = "none";
+    $(modal).fadeToggle("2000");
+}
+
+close2.onclick = function() {
+    $(modalimage).fadeToggle("2000");
 }
 
 // When the user clicks anywhere outside of the popup box, close it
 window.onclick = function(event) {
     if (event.target == modal) {
-        modal.style.display = "none";
+        //modal.style.display = "none";
+        $(modal).fadeToggle("2000");
     }
     if (event.target == modalimage) {
-        modalimage.style.display = "none";
+        //modalimage.style.display = "none";
+        $(modalimage).fadeToggle("2000");
     }
 }
 

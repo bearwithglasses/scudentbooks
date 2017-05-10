@@ -78,14 +78,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <body>
 
 <!-- Navigation -->
+
+<!-- Container that holds Main and Side divs -->
+<div id="container">
+
+
     <div id="login_nav">
          <header id="logo">
             <div id="logo"><a href="homepage.php"><img alt="SCUdentBooks logo" src="images/logo.png"></a></div>
         </header>
     </div>
-
-<!-- Container that holds Main and Side divs -->
-<div id="container">
+    
     <div class="form loginForm">
         <h1>Welcome back!</h1>
     <form id="login" method="post">

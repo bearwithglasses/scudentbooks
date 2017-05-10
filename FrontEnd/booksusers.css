@@ -13,14 +13,19 @@ h2 b{
 	float: left;
 }
 
-.profileimage .pic, .listingimage .pic{ 
+.profileimage img{
+    margin: 0 0 0 150px;
+}
+
+
+.listingimage .pic{ 
   max-height: 400px;
   max-width: 400px;
   overflow: hidden;
   margin: 20px 0;
 }
 
-.profileimage .listpic, .listingimage .listpic{
+.listingimage .listpic{
 	margin: 0 auto;
 }
 
@@ -75,6 +80,7 @@ h2 b{
 	padding: 20px;
 	font-size: 1.1em;
 }
+
 
 .profileinfotext, .listinginfotext{
 	line-height: 5px;
@@ -144,6 +150,10 @@ tr:nth-child(even){background-color: #f2f2f2}
     font-size: 1.1em;
     margin: 5px 10px;
     float: right;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 #messagebutton:hover{
@@ -163,6 +173,10 @@ tr:nth-child(even){background-color: #f2f2f2}
     margin: 5px 10px;
     cursor: default;
     float: right;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 #messagebutton:hover{
@@ -177,6 +191,10 @@ tr:nth-child(even){background-color: #f2f2f2}
     padding: 10px 30px;
     display: inline-block;
     font-size: 1.1em;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 .buy {
@@ -213,6 +231,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 #popupimage{
 	text-align: center;
+    padding: 20px;
 }
 
 .popupmessage{
@@ -221,6 +240,13 @@ tr:nth-child(even){background-color: #f2f2f2}
     padding: 80px;
     width: 50%;
     margin: 100px auto;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.3s
+}
+
+.transitionout{
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;

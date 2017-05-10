@@ -1,10 +1,33 @@
+<?php
+
+session_start();
+ini_set('display_errors','On');
+error_reporting(E_ALL);
+$db_host = "dbserver.engr.scu.edu/db11g";
+$db_user = "wchang";
+$db_pass = "winstonchang";
+$db_name = "STUDENTBOOKS";
+$con = oci_connect($db_user, $db_pass, '//dbserver.engr.scu.edu/db11g');
+
+
+if($_SESSION["user"]){
+    $username = $_SESSION['username'];
+}else{
+    header('Location: login.php');
+    die();
+}
+$username = $_SESSION['username'];
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCUdent Books - Add Books</title>
+    <title>SCUdent Books - Add Book</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
     <script src="sendmessage.js"></script>
@@ -101,22 +124,23 @@ CREATE TABLE BookDescription(
 <div id="regBox">
 <fieldset>
 <legend>Book Form</legend>
-<p id="directions">Enter your book information in the fields marked with an asterisk (*) below.</br>
+<p id="directions">Enter your book information here. Don't worry, if you need to make changes later, you'll be able to come back and edit it.</p>
+<p><img style='margin-left:5px;' src="images/asterisk.png" alt="*"> Required Field</p>
 <form id="edit_info" action="ProcessBook.php" method="post" enctype="multipart/form-data" onsubmit="return checkform(this);">
     <div class="form">    
         <h3>Book Information</h3>     
         <br>
         <ul>
-            <li><label>Title*: </label><input type="text" name="book_title"></li>
-            <li><label>Author*: </label><input type="text" name="book_author"></li>
-            <li><label>Edition: </label><input type="text" name="book_edition"></li>
-            <li><label>Purpose*: </label>
- 				<div id="radio">
- 				<input type="radio" name="book_purpose" value="sell" checked>sell<br>
- 				<input type="radio" name="book_purpose" value="swap">swap<br>
+            <li><label>Title: </label><input type="text" name="book_title" required></li>
+            <li><label>Author: </label><input type="text" name="book_author" required></li>
+            <li><label>Edition: </label><input type="text" name="book_edition" required></li>
+            <li><label>Purpose: </label>
+ 				<div class="radio">
+ 				<input type="radio" name="book_purpose" value="sell" checked>sell <img style='margin-left:5px;' alt="*" src="images/asterisk.png"><br>
+ 				<input type="radio" name="book_purpose" value="swap">swap <img style='margin-left:5px;' alt="*" src="images/asterisk.png"><br>
  				</div>
  			</li>
- 			<li><label>Price*: </label><input type="text" name="book_price"></li>
+ 			<li><label>Price: </label><input type="text" name="book_price" placeholder="If swapping, just enter '0'" required></li>
             <li><label>ISBN: </label><input type="text" name="book_isbn"></li>
             <li><label>Department Name: </label>
                 <select id="deptNameIdx" name="book_major" size="11">
@@ -197,7 +221,7 @@ CREATE TABLE BookDescription(
             <li><label>Course Number: </label><input type="text" name="book_courseNo"></li>
             <li><label>Professor: </label><input type="text" name="book_prof"></li>
             <li><label>Condition: </label>
-            	<div id="radio">
+            	<div class="radio">
   					<input type="radio" name="book_condition" value="new" checked>new<br>
   					<input type="radio" name="book_condition" value="used - good">used - good<br>
   					<input type="radio" name="book_condition" value="used - acceptable">used - acceptable<br>
