@@ -135,7 +135,7 @@ oci_close($conn);
                 echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
-                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo "    <button onclick='myFunction()' id='userdropdown'>".$_SESSION['username']."</button>";
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
@@ -158,9 +158,9 @@ oci_close($conn);
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
-    <div class="returnHome">
-        <h1>Thank you for registering!</h1>
-        <p><a href="login.php" class="advancedsearch">Login Now</a></p>
+    <div class="success">
+        <p>Thank you for registering!</p>
+        <a href="login.php" class="advancedsearch">Login Now</a>
     </div>
 </div>
 

@@ -45,7 +45,7 @@ include ("showSearch.php");
                 echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
-                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo "    <button onclick='myFunction()' id='userdropdown'>".$_SESSION['username']."</button>";
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
@@ -86,17 +86,79 @@ include ("showSearch.php");
         </li>
         <li>
             <label>Department: </label>
-            <select id="deptNameIdx" name="book_major">
+            <select id="deptNameIdx" name="book_major" size="11">
             	<option value="any" selected="selected">Any</option>
-                <option value="ARTS">ARTS</option>
-                <option value="CHIN">CHIN</option>
-                <option value="COEN">COEN</option>
-                <option value="CORN">CORN</option>
-                <option value="ENGL">ENGL</option>
-                <option value="HIST">HIST</option>
-                <option value="ITAL">ITAL</option>
-                <option value="JAPN">JAPN</option>
-                <option value="PKMN">PKMN</option>
+                <option value="ACTG" class="sc-BUS">Accounting (ACTG)</option>
+                <option value="AERO" class="sc-UNV">Aerospace Studies (AERO)</option>
+                <option value="AMTH" class="sc-EGR">Applied Mathematics (AMTH)</option>
+                <option value="ANTH" class="sc-AS">Anthropology (ANTH)</option>
+                <option value="ARAB" class="sc-AS">Arabic (ARAB)</option>
+                <option value="ARTH" class="sc-AS">Art History (ARTH)</option>
+                <option value="ARTS" class="sc-AS">Studio Art (ARTS)</option>
+                <option value="ASCI" class="sc-AS">Arts &amp; Sciences (ASCI)</option>
+                <option value="BIOE" class="sc-EGR">Bioengineering (BIOE)</option>
+                <option value="BIOL" class="sc-AS">Biology (BIOL)</option>
+                <option value="BUSN" class="sc-BUS">Business (BUSN)</option>
+                <option value="CATE" class="sc-AS">Catechetics (CATE)</option>
+                <option value="CENG" class="sc-EGR">Civil Engineering (CENG)</option>
+                <option value="CHEM" class="sc-AS">Chemistry (CHEM)</option>
+                <option value="CHIN" class="sc-AS">Chinese (CHIN)</option>
+                <option value="CHST" class="sc-AS">Child Studies (CHST)</option>
+                <option value="CLAS" class="sc-AS">Classics (CLAS)</option>
+                <option value="COEN" class="sc-EGR">Computer Engineering (COEN)</option>
+                <option value="COMM" class="sc-AS sc-UNV">Communication (COMM)</option>
+                <option value="CPSY" class="sc-CPE">Counseling Psychology (CPSY)</option>
+                <option value="CSCI" class="sc-AS">Computer Science (CSCI)</option>
+                <option value="DANC" class="sc-AS">Dance (DANC)</option>
+                <option value="ECON" class="sc-AS sc-BUS">Economics (ECON)</option>
+                <option value="EDUC" class="sc-CPE">Education (EDUC)</option>
+                <option value="ELEN" class="sc-EGR">Electrical Engineering (ELEN)</option>
+                <option value="ELSJ" class="sc-UNV">Exp Lrn Social Justice (ELSJ)</option>
+                <option value="EMBA" class="sc-BUS">Executive MBA (EMBA)</option>
+                <option value="EMGT" class="sc-EGR">Engineering Management (EMGT)</option>
+                <option value="ENGL" class="sc-AS">English (ENGL)</option>
+                <option value="ENGR" class="sc-AS sc-EGR">Engineering (ENGR)</option>
+                <option value="ENVS" class="sc-AS">Environ Studies &amp; Sciences (ENVS)</option>
+                <option value="ETHN" class="sc-AS sc-UNV">Ethnic Studies (ETHN)</option>
+                <option value="FNCE" class="sc-BUS">Finance (FNCE)</option>
+                <option value="FREN" class="sc-AS">French &amp; Francophone Studies (FREN)</option>
+                <option value="GERM" class="sc-AS">German Studies (GERM)</option>
+                <option value="HIST" class="sc-AS">History (HIST)</option>
+                <option value="HNRS" class="sc-UNV">Honors Program (HNRS)</option>
+                <option value="IDIS" class="sc-BUS">Interdisciplinary (IDIS)</option>
+                <option value="INTL" class="sc-UNV">International Programs (INTL)</option>
+                <option value="ITAL" class="sc-AS">Italian Studies (ITAL)</option>
+                <option value="JAPN" class="sc-AS">Japanese Studies (JAPN)</option>
+                <option value="LANG" class="sc-AS">Language (LANG)</option>
+                <option value="LAW" class="sc-LAW">Law (LAW)</option>
+                <option value="LBST" class="sc-AS">Liberal Studies (LBST)</option>
+                <option value="LEAD" class="sc-UNV">Lead Scholars Program (LEAD)</option>
+                <option value="MATH" class="sc-AS">Mathematics (MATH)</option>
+                <option value="MECH" class="sc-EGR">Mechanical Engineering (MECH)</option>
+                <option value="MGMT" class="sc-BUS">Management (MGMT)</option>
+                <option value="MILS" class="sc-UNV">Military Science (MILS)</option>
+                <option value="MKTG" class="sc-AS sc-BUS sc-UNV">Marketing (MKTG)</option>
+                <option value="MSIS" class="sc-BUS">MS Information Systems (MSIS)</option>
+                <option value="MUSC" class="sc-AS">Music (MUSC)</option>
+                <option value="NEUR" class="sc-AS">Neuroscience (NEUR)</option>
+                <option value="OMIS" class="sc-BUS">Operations Mgmt &amp; Info Sys (OMIS)</option>
+                <option value="PHIL" class="sc-AS">Philosophy (PHIL)</option>
+                <option value="PHSC" class="sc-AS">Public Health Science (PHSC)</option>
+                <option value="PHYS" class="sc-AS">Physics (PHYS)</option>
+                <option value="PLIT" class="sc-AS">Pastoral Liturgy (PLIT)</option>
+                <option value="PMIN" class="sc-AS">Pastoral Ministries (PMIN)</option>
+                <option value="POLI" class="sc-AS">Political Science (POLI)</option>
+                <option value="PSYC" class="sc-AS">Psychology (PSYC)</option>
+                <option value="RELS" class="sc-AS">Religious Studies (RELS)</option>
+                <option value="RSOC" class="sc-AS">Religion &amp; Society (RSOC)</option>
+                <option value="SCTR" class="sc-AS">Scripture &amp; Tradition (SCTR)</option>
+                <option value="SOCI" class="sc-AS">Sociology (SOCI)</option>
+                <option value="SPAN" class="sc-AS">Spanish Studies (SPAN)</option>
+                <option value="SPIR" class="sc-AS">Spirituality (SPIR)</option>
+                <option value="TESP" class="sc-AS">Theology Ethics &amp; Spirituality (TESP)</option>
+                <option value="THTR" class="sc-AS">Theatre (THTR)</option>
+                <option value="UNIV" class="sc-UNV">University Programs (UNIV)</option>
+                <option value="WGST" class="sc-AS">Women's and Gender Studies (WGST)</option>
                 <option value="Other">Other</option>
             </select>
         </li>

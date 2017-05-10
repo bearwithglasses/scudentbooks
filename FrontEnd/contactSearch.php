@@ -112,7 +112,7 @@ oci_execute($stid);
                 echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
-                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo "    <button onclick='myFunction()' id='userdropdown'>".$_SESSION['username']."</button>";
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';

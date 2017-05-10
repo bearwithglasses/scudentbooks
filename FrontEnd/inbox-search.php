@@ -1,6 +1,5 @@
 <?php
 session_start();
-ini_set('display_errors','On');
 error_reporting(E_ALL);
 $db_host = "dbserver.engr.scu.edu/db11g";
 $db_user = "wchang";
@@ -121,7 +120,7 @@ if (isset($_REQUEST["submitted"]))
                 echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
-                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo "    <button onclick='myFunction()' id='userdropdown'>".$_SESSION['username']."</button>";
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
@@ -147,10 +146,8 @@ if (isset($_REQUEST["submitted"]))
 
 <div id="profile">
     <h1>Inbox</h1>
-    <div class="backtoinbox">
-        <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>"><- Back to Inbox</a>
-    </div>
 <div class="inboxfilters">
+    <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>">Back to Inbox</a>
     <form action="inbox-search.php?username=<?php echo $_SESSION['username'] ?>" class="searchbar" method="post" name="form">
         <span class="searchicon"><i></i></span>
         <input type="text" id="search" name="search" placeholder="Search..." value="<?php echo $search ?>">

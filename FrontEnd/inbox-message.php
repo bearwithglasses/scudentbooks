@@ -1,6 +1,5 @@
 <?php
 session_start();
-ini_set('display_errors','On');
 error_reporting(E_ALL);
 $db_host = "dbserver.engr.scu.edu/db11g";
 $db_user = "wchang";
@@ -112,7 +111,7 @@ while ($rowUser2 = oci_fetch_array($stidUser2, OCI_ASSOC+OCI_RETURN_NULLS))
                 echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
-                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo "    <button onclick='myFunction()' id='userdropdown'>".$_SESSION['username']."</button>";
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
@@ -137,9 +136,7 @@ while ($rowUser2 = oci_fetch_array($stidUser2, OCI_ASSOC+OCI_RETURN_NULLS))
 <div id="container">
     <h1>Inbox</h1>
 <div id="profile">
-    <div class="backtoinbox">
-        <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>"><- Back to Inbox</a>
-    </div>
+    <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>">Back to Inbox</a>
 
     <?php
         if ($usernameCreator == $user1)

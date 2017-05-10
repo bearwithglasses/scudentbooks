@@ -94,7 +94,7 @@ if (isset($_REQUEST["submitted"]))
                 echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
-                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo "    <button onclick='myFunction()' id='userdropdown'>".$_SESSION['username']."</button>";
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
@@ -117,8 +117,8 @@ if (isset($_REQUEST["submitted"]))
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
-    <div class="returnHome">
-        <h1>Message Sent to <b><?php echo $username ?></b>!</h1>
+    <div class="success">
+        <p>Message Sent to <b><?php echo $username ?></b>!</p>
         <form>
             <input type="button" id="returnProfileButton" onclick="window.location.href='profile.php?username=<?php echo $username ?>';" value="Back to Profile">
         </form>

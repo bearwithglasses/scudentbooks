@@ -84,7 +84,7 @@ oci_execute($stidPic);
                 echo "<li><a href='inbox.php?username=".$_SESSION['username']."' class='web_link'>Inbox</a></li>";
                 echo '<li>';
                     echo '<span id="usernav">';
-                    echo '    <button onclick="myFunction()" id="userdropdown">You</button>';
+                    echo "    <button onclick='myFunction()' id='userdropdown'>".$_SESSION['username']."</button>";
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
@@ -239,7 +239,7 @@ oci_execute($stidPic);
             echo '<li><label>ISBN: </label><input type="text" name="book_isbn" value="'.$current_isbn.'"></li>';
 
             // Go through list of MAJORS and print the dropdown menu
-            $majorlist = ['ARTS','CHIN','COEN','CORN','ENGL','HIST','ITAL','JAPN','PKMN','Other'];
+            $majorlist = ['ACTG','AERO','AMTH','ANTH','ARAB','ARTH','ARTS','ASCI','BIOE','BIOL','BUSN','CATE','CENG','CHEM','CHIN','CHST','CLAS','COEN','COMM','CPSY','CSCI','DANC','ECON','EDUC','ELEN','ELSJ','EMBA','EMGT','ENGL','ENGR','ENVS','ETHN','FNCE','FREN','GERM','HIST','HNRS','IDIS','INTL','ITAL','JAPN','LANG','LAW','LBST','LEAD','MATH','MECH','MGMT','MILS','MKTG','MSIS','MUSC','NEUR','OMIS','PHIL','PHSC','PHYS','PLIT','PMIN','POLI','PSYC','RELS','RSOC','SCTR','SOCI','SPAN','SPIR','TESP','THTR','UNIV','WGST','Other'];
 
             echo '<li><label>Department Name: </label>
                 <select id="deptNameIdx" name="book_major">';
