@@ -68,6 +68,7 @@ if (isset($_REQUEST["submitted"]))
     <title>SCUdent Books Message Sent</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
+    <link rel="stylesheet" type="text/css" href="inbox.css" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -122,6 +123,15 @@ if (isset($_REQUEST["submitted"]))
         <form>
             <input type="button" id="returnProfileButton" onclick="window.location.href='profile.php?username=<?php echo $username ?>';" value="Back to Profile">
         </form>
+    </div>
+    <div class="messageheader">
+        <h1><?php echo $book_title ?></h1>
+        <div class="messagedate"><?php echo SYSDATE ?></div>
+    </div>
+    <div class="messagecontent">
+        <div class="messagebody">
+            <pre><?php echo $message ?></pre>
+        </div>
     </div>
 </div>
 

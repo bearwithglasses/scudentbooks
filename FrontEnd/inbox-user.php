@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(E_ALL);
+error_reporting(0);
 $db_host = "dbserver.engr.scu.edu/db11g";
 $db_user = "wchang";
 $db_pass = "winstonchang";

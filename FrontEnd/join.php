@@ -312,7 +312,7 @@ if(!isset($_SESSION["user"])){
                         <label for="minor1">Minor:</label>
                         <select name="minor1" id="minor1" size="11">
                             <option selected="selected" value="">Select a minor</option>
-                            <option value="Aerospace Engineering"></option>
+                            <option value="Aerospace Engineering">Aerospace Engineering</option>
                             <option value="Ancient Studies">Ancient Studies</option>
                             <option value="Anthropology">Anthropology</option>
                             <option value="Arabic, Islamic, and Middle Eastern Studies">Arabic, Islamic, and Middle Eastern Studies</option>
@@ -370,7 +370,7 @@ if(!isset($_SESSION["user"])){
                         <label for="minor2">Minor:</label>
                         <select name="minor2" id="minor2" size="11">
                             <option selected="selected" value="">Select a minor</option>
-                            <option value="Aerospace Engineering"></option>
+                            <option value="Aerospace Engineering">Aerospace Engineering</option>
                             <option value="Ancient Studies">Ancient Studies</option>
                             <option value="Anthropology">Anthropology</option>
                             <option value="Arabic, Islamic, and Middle Eastern Studies">Arabic, Islamic, and Middle Eastern Studies</option>
@@ -429,7 +429,7 @@ if(!isset($_SESSION["user"])){
                         <label for="minor3">Minor:</label>
                         <select name="minor3" id="minor3" size="11">
                             <option selected="selected" value="">Select a minor</option>
-                            <option value="Aerospace Engineering"></option>
+                            <option value="Aerospace Engineering">Aerospace Engineering</option>
                             <option value="Ancient Studies">Ancient Studies</option>
                             <option value="Anthropology">Anthropology</option>
                             <option value="Arabic, Islamic, and Middle Eastern Studies">Arabic, Islamic, and Middle Eastern Studies</option>
@@ -499,11 +499,18 @@ if(!isset($_SESSION["user"])){
                         <label for="location">Location:</label>
                         <select name="location" id="location">
                             <option selected="selected" value="">Select a location</option>
-                            <option value="University Villas">University Villas</option>
-                            <option value="Sobrato">Sobrato</option>
+                            <option value="Graham Hall">Graham Hall</option>
+                            <option value="Campisi Hall">Campisi Hall</option>
+                            <option value="Swig Hall">Swig Hall</option>
                             <option value="Casa Italiana">Casa Italiana</option>
-                            <option value="Swig">Swig</option>
-                            <option value="Graham">Graham</option>
+                            <option value="Dunne Hall">Dunne Hall</option>
+                            <option value="Sobrato Hall">Sobrato Hall</option>
+                            <option value="Sanfilippo Hall">Sanfilippo Hall</option>
+                            <option value="McLaughlin-Walsh Hall">MchLaughlin-Walsh Hall</option>
+                            <option value="Nobili Hall">Nobili Hall</option>
+                            <option value="University Villas">University Villas</option>
+                            <option value="Neighborhood Units">Neighborhood Units</option>
+                            <option value="Off Campus">Off Campus</option>
                         </select>
                     </li>
                 </ul>

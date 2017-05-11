@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(E_ALL);
+error_reporting(0);
 $db_host = "dbserver.engr.scu.edu/db11g";
 $db_user = "wchang";
 $db_pass = "winstonchang";
@@ -196,6 +196,8 @@ while ($rowUser2 = oci_fetch_array($stidUser2, OCI_ASSOC+OCI_RETURN_NULLS))
             <input type="hidden" id="subjectid" name="subjectid" value="<?php echo $subjectid ?>">
             <input type="hidden" id="useridCreator" name="useridCreator" value="<?php echo $useridCreator ?>">
             <input type="hidden" id="username" name="username" value="<?php echo $messageUser ?>">
+            <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>">
+            <input type="hidden" id="subjectDate" name="subjectDate" value="<?php echo $subjectDate ?>">
             <input type="submit" class="button" id="messagebutton" value="Send Message" onclick="return sendInboxMessage();">
         </form>
     </div>

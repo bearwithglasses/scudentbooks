@@ -39,6 +39,8 @@ $message = $_POST['message'];
 $subjectid = $_POST['subjectid'];
 $useridCreator = $_POST['useridCreator'];
 $username = $_POST['username'];
+$subject = $_POST['subject'];
+$subjectDate = $_POST['subjectDate'];
 
 //If the form submitted, run the SQL statement
 if (isset($_REQUEST["submitted"]))
@@ -121,6 +123,16 @@ if (isset($_REQUEST["submitted"]))
         <form>
            <a href="inbox.php?username=<?php echo $_SESSION['username'] ?>" class="web_link">Back to Inbox</a>
         </form>
+    </div>
+    <div class="messageheader">
+        <h1><?php echo $subject ?></h1>
+        <div class="messagedate"><?php echo $subjectDate ?></div>
+    </div>
+    <div class="messagecontent">
+        <div class="messagedate"><?php echo SYSDATE ?></div>
+        <div class="messagebody">
+            <pre><?php echo $message ?></pre>
+        </div>
     </div>
 </div>
 
