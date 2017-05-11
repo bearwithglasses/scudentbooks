@@ -112,7 +112,6 @@ while ($row4 = oci_fetch_array($stid4, OCI_ASSOC+OCI_RETURN_NULLS))
                     echo '      <div id="userlinks" class="dropdownnav">';
                     echo "        <a href='profile.php?username=".$_SESSION['username']."'>Your Profile</a>";
                     echo '        <a href="yourbooks.php">Manage Books</a>';
-                    echo '        <a href="#">Settings</a>';
                     echo '        <a href="logout.php">Log Out</a>';
                     echo '</span>';
                 }
