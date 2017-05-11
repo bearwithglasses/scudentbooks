@@ -13,7 +13,7 @@ function UploadImageFile($fileToUpload,$bookid)
  
  // Check file size
 if ($_FILES[$fileToUpload]["size"] > 500000) {
-	echo "Sorry, your file is too large.";
+	//echo "Sorry, your file is too large.";
 	$uploadOk = 0;
 }
 
@@ -238,6 +238,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
+
+<div class="success">Successfully added <b><?php echo $_POST['book_title']; ?></b>!<p>
+<a href="http://students.engr.scu.edu/~wchang/scudentbooks/FrontEnd/yourbooks.php" class="gobackyourbooks">Go back to Your Books</a></div>
 
 <div id="listing">
     <div class="listingimage">

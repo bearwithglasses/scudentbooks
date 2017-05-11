@@ -13,7 +13,7 @@ function UploadImageFile($fileToUpload,$bookid)
  
  // Check file size
 if ($_FILES[$fileToUpload]["size"] > 500000) {
-	echo "Sorry, your file is too large.";
+	//echo "Sorry, your file is too large.";
 	$uploadOk = 0;
 }
 
@@ -196,8 +196,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>SCUdent Books Book Listing</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="popups-photos.js"></script>
+    <script src="messagewarning.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
@@ -255,7 +256,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div id="container">
 
 <div class="success">Successfully edited <b><?php echo $_POST['book_title']; ?></b>!<p>
-<a href="addbook.php" class="gobackyourbooks">Go back to Your Books</a></div>
+<a href="http://students.engr.scu.edu/~wchang/scudentbooks/FrontEnd/yourbooks.php" class="gobackyourbooks">Go back to Your Books</a></div>
 
 <div id="listing">
     <div class="listingimage">
