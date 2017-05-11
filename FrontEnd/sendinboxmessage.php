@@ -68,6 +68,7 @@ if (isset($_REQUEST["submitted"]))
     <title>SCUdent Books Message Sent</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link rel="stylesheet" type="text/css" href="booksusers.css" />
+    <link rel="stylesheet" type="text/css" href="inbox.css" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
