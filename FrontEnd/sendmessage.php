@@ -118,6 +118,17 @@ if (isset($_REQUEST["submitted"]))
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
+    <?php
+        //Get subject date
+        $sqlSubjectDate = "SELECT * FROM Subject WHERE subjectid = '$subjectid'";
+        $stidSubjectDate = oci_parse($con, $sqlSubjectDate);
+        oci_execute($stidSubjectDate);
+
+        while ($rowSubjectDate = oci_fetch_array($stidSubjectDate, OCI_ASSOC+OCI_RETURN_NULLS))
+        {
+            $subjectDate = $rowSubjectDate['SUBJECTDATE'];
+        }
+    ?>
     <div class="success">
         <p>Message Sent to <b><?php echo $username ?></b>!</p>
         <form>
@@ -126,7 +137,7 @@ if (isset($_REQUEST["submitted"]))
     </div>
     <div class="messageheader">
         <h1><?php echo $book_title ?></h1>
-        <div class="messagedate"><?php echo SYSDATE ?></div>
+        <div class="messagedate"><?php echo $subjectDate ?></div>
     </div>
     <div class="messagecontent">
         <div class="messagebody">

@@ -506,7 +506,7 @@ if(!isset($_SESSION["user"])){
                             <option value="Dunne Hall">Dunne Hall</option>
                             <option value="Sobrato Hall">Sobrato Hall</option>
                             <option value="Sanfilippo Hall">Sanfilippo Hall</option>
-                            <option value="McLaughlin-Walsh Hall">MchLaughlin-Walsh Hall</option>
+                            <option value="McLaughlin-Walsh Hall">McLaughlin-Walsh Hall</option>
                             <option value="Nobili Hall">Nobili Hall</option>
                             <option value="University Villas">University Villas</option>
                             <option value="Neighborhood Units">Neighborhood Units</option>

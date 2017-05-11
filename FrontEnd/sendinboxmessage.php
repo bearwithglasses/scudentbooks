@@ -55,7 +55,6 @@ if (isset($_REQUEST["submitted"]))
     oci_bind_by_name($sql_statement1, 'message', $message);
 
     oci_execute($sql_statement1);
-    oci_close($conn);
 }
 ?>
 
@@ -118,6 +117,17 @@ if (isset($_REQUEST["submitted"]))
 
 <!-- Container that holds Main and Side divs -->
 <div id="container">
+    <?php
+        //Get message date
+        $sqlMessageDate = "SELECT * FROM Message WHERE messageid = '$messageid'";
+        $stidMessageDate = oci_parse($con, $sqlMessageDate);
+        oci_execute($stidMessageDate);
+
+        while ($rowMessageDate = oci_fetch_array($stidMessageDate, OCI_ASSOC+OCI_RETURN_NULLS))
+        {
+            $messageDate = $rowMessageDate['MESSAGEDATE'];
+        }
+    ?>
     <div class="success">
         <p>Message Sent to <b><?php echo $username ?></b>!</p>
         <form>
@@ -129,7 +139,7 @@ if (isset($_REQUEST["submitted"]))
         <div class="messagedate"><?php echo $subjectDate ?></div>
     </div>
     <div class="messagecontent">
-        <div class="messagedate"><?php echo SYSDATE ?></div>
+        <div class="messagedate"><?php echo $messageDate ?></div>
         <div class="messagebody">
             <pre><?php echo $message ?></pre>
         </div>
