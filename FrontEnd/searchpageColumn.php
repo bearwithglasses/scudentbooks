@@ -190,9 +190,10 @@ include ("showSearch.php");
     -->
         <li>
         <label>Purpose: </label>
-                <input type="radio" name="book_purpose" value="any" checked>Any</input>
-                <input type="radio" name="book_purpose" value="sell">Sell</input>
-                <input type="radio" name="book_purpose" value="swap">Swap</input>
+                <div class="radiosearch">
+                <input type="radio" name="book_purpose" value="any" checked>Any</input><br>
+                <input type="radio" name="book_purpose" value="sell">Sell</input><br>
+                <input type="radio" name="book_purpose" value="swap">Swap</input><br>
         </li>
         <li>
             <label>Price: </label>

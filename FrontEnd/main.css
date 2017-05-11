@@ -532,6 +532,12 @@ a.web_link:hover {
 .radio{
     margin-left: 210px;
 }
+
+.radiosearch{
+    margin-left: 220px;
+    position: relative;
+    float: left;
+}
 #divError {
     color: red;
     font-weight: bold;
