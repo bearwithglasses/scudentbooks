@@ -54,7 +54,6 @@ if (isset($_REQUEST["submitted"]))
 
     oci_execute($sql_statement1);
     oci_execute($sql_statement2);
-    oci_close($conn);
 }
 ?>
 
@@ -121,7 +120,7 @@ if (isset($_REQUEST["submitted"]))
     <?php
         //Get subject date
         $sqlSubjectDate = "SELECT * FROM Subject WHERE subjectid = '$subjectid'";
-        $stidSubjectDate = oci_parse($con, $sqlSubjectDate);
+        $stidSubjectDate = oci_parse($conn, $sqlSubjectDate);
         oci_execute($stidSubjectDate);
 
         while ($rowSubjectDate = oci_fetch_array($stidSubjectDate, OCI_ASSOC+OCI_RETURN_NULLS))

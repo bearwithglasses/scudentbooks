@@ -120,7 +120,7 @@ if (isset($_REQUEST["submitted"]))
     <?php
         //Get message date
         $sqlMessageDate = "SELECT * FROM Message WHERE messageid = '$messageid'";
-        $stidMessageDate = oci_parse($con, $sqlMessageDate);
+        $stidMessageDate = oci_parse($conn, $sqlMessageDate);
         oci_execute($stidMessageDate);
 
         while ($rowMessageDate = oci_fetch_array($stidMessageDate, OCI_ASSOC+OCI_RETURN_NULLS))
